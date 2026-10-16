@@ -3,121 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#050d08">
+  <meta name="theme-color" content="#050d08" id="metaThemeColor">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Расписание БашГАУ">
   <title>Расписание 🌾 БашГАУ PRO</title>
   <style>
-    :root { 
+    :root, [data-theme="agro"] { 
       --bg: #050d08; 
-      --surface: rgba(18, 38, 27, 0.72); 
-      --surface-hover: rgba(25, 52, 38, 0.9);
-      --border: rgba(16, 185, 129, 0.18); 
-      --border-gold: rgba(245, 158, 11, 0.35);
+      --bg-grad-1: rgba(245, 158, 11, 0.14);
+      --bg-grad-2: rgba(16, 185, 129, 0.12);
+      --surface: rgba(18, 38, 27, 0.78); 
+      --surface-hover: rgba(25, 52, 38, 0.94);
+      --header-bg: linear-gradient(155deg, rgba(22, 46, 33, 0.9), rgba(8, 20, 14, 0.96));
+      --border: rgba(16, 185, 129, 0.22); 
+      --border-accent: rgba(245, 158, 11, 0.4);
       --text: #f8fafc; 
       --text-muted: #94a3b8; 
       --accent: #f59e0b; 
-      --accent-glow: rgba(245, 158, 11, 0.35);
+      --accent-glow: rgba(245, 158, 11, 0.38);
       --prac: #10b981; 
-      --prac-glow: rgba(16, 185, 129, 0.3);
+      --prac-glow: rgba(16, 185, 129, 0.38);
       --lec: #fbbf24;
+      --dock-bg: rgba(10, 24, 17, 0.9);
       --card-radius: 22px;
+      --input-bg: rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="cyber"] {
+      --bg: #070913; 
+      --bg-grad-1: rgba(56, 189, 248, 0.14);
+      --bg-grad-2: rgba(168, 85, 247, 0.14);
+      --surface: rgba(19, 25, 46, 0.78); 
+      --surface-hover: rgba(28, 37, 65, 0.94);
+      --header-bg: linear-gradient(155deg, rgba(25, 33, 60, 0.9), rgba(11, 15, 29, 0.96));
+      --border: rgba(56, 189, 248, 0.22); 
+      --border-accent: rgba(168, 85, 247, 0.45);
+      --text: #f1f5f9; 
+      --text-muted: #94a3b8; 
+      --accent: #38bdf8; 
+      --accent-glow: rgba(56, 189, 248, 0.38);
+      --prac: #a855f7; 
+      --prac-glow: rgba(168, 85, 247, 0.38);
+      --lec: #38bdf8;
+      --dock-bg: rgba(13, 18, 34, 0.9);
+      --input-bg: rgba(0, 0, 0, 0.42);
+    }
+
+    [data-theme="amoled"] {
+      --bg: #000000; 
+      --bg-grad-1: rgba(255, 255, 255, 0.04);
+      --bg-grad-2: rgba(245, 158, 11, 0.07);
+      --surface: rgba(18, 18, 20, 0.92); 
+      --surface-hover: rgba(28, 28, 32, 0.99);
+      --header-bg: linear-gradient(155deg, #141416, #08080a);
+      --border: rgba(255, 255, 255, 0.14); 
+      --border-accent: rgba(245, 158, 11, 0.45);
+      --text: #ffffff; 
+      --text-muted: #8e8e93; 
+      --accent: #f59e0b; 
+      --accent-glow: rgba(245, 158, 11, 0.32);
+      --prac: #10b981; 
+      --prac-glow: rgba(16, 185, 129, 0.32);
+      --lec: #fbbf24;
+      --dock-bg: rgba(14, 14, 16, 0.94);
+      --input-bg: #0a0a0c;
+    }
+
+    [data-theme="light"] {
+      --bg: #f1f5f9; 
+      --bg-grad-1: rgba(16, 185, 129, 0.1);
+      --bg-grad-2: rgba(245, 158, 11, 0.1);
+      --surface: rgba(255, 255, 255, 0.9); 
+      --surface-hover: #ffffff;
+      --header-bg: linear-gradient(155deg, #ffffff, #f8fafc);
+      --border: rgba(15, 23, 42, 0.1); 
+      --border-accent: rgba(245, 158, 11, 0.5);
+      --text: #0f172a; 
+      --text-muted: #64748b; 
+      --accent: #d97706; 
+      --accent-glow: rgba(217, 119, 6, 0.22);
+      --prac: #059669; 
+      --prac-glow: rgba(5, 150, 105, 0.28);
+      --lec: #d97706;
+      --dock-bg: rgba(255, 255, 255, 0.92);
+      --input-bg: rgba(15, 23, 42, 0.05);
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
     
     body { 
-      background: var(--bg); color: var(--text); padding-bottom: 110px; overflow-x: hidden; min-height: 100vh;
+      background: var(--bg); color: var(--text); padding-bottom: 120px; overflow-x: hidden; min-height: 100vh;
       background-image: 
-        radial-gradient(circle at 90% 5%, rgba(245, 158, 11, 0.14) 0%, transparent 45%), 
-        radial-gradient(circle at 10% 30%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 50% 90%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+        radial-gradient(circle at 90% 5%, var(--bg-grad-1) 0%, transparent 45%), 
+        radial-gradient(circle at 10% 35%, var(--bg-grad-2) 0%, transparent 50%);
       background-attachment: fixed;
+      transition: background-color 0.35s ease, color 0.35s ease;
     }
     
     .container { max-width: 560px; margin: 0 auto; padding: 14px 16px; }
     
-    /* Шапка с эффектом матового стекла */
+    /* Шапка */
     .header-card { 
-      background: linear-gradient(155deg, rgba(22, 46, 33, 0.85), rgba(8, 20, 14, 0.92)); 
+      background: var(--header-bg); 
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border); border-radius: 26px; padding: 22px 20px; margin-bottom: 18px; 
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08); 
+      border: 1px solid var(--border); border-radius: 26px; padding: 20px; margin-bottom: 16px; 
+      box-shadow: 0 16px 36px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.08); 
       position: relative; overflow: hidden;
+      transition: background 0.35s ease, border-color 0.35s ease;
     }
     
     .wheat-bg {
-      position: absolute; right: -15px; top: -15px; width: 140px; height: 140px; opacity: 0.07;
+      position: absolute; right: -12px; top: -12px; width: 135px; height: 135px; opacity: 0.07;
       pointer-events: none; transform: rotate(12deg);
+      animation: floatWheat 6s ease-in-out infinite alternate;
+    }
+    @keyframes floatWheat {
+      0% { transform: rotate(10deg) translateY(0); }
+      100% { transform: rotate(16deg) translateY(-6px); }
     }
     
-    .top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+    .top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; position: relative; z-index: 2; }
     .title-wrap { display: flex; flex-direction: column; }
-    .uni-tag { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--prac); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
-    .header-title { font-size: 1.85rem; font-weight: 900; background: linear-gradient(90deg, #fff, #fde68a, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; line-height: 1.1; }
-    .header-date { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin-top: 4px; }
+    .uni-tag { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--prac); margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
     
+    .header-title { 
+      font-size: 1.85rem; font-weight: 900; letter-spacing: -0.5px; line-height: 1.1;
+      background: linear-gradient(90deg, var(--text), var(--accent), var(--prac), var(--text));
+      background-size: 300% 100%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      animation: titleShimmer 8s ease infinite;
+    }
+    @keyframes titleShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .header-date { color: var(--text-muted); font-size: 0.84rem; font-weight: 600; margin-top: 4px; }
+    
+    .top-actions { display: flex; align-items: center; gap: 8px; }
+    .action-btn {
+      width: 36px; height: 36px; border-radius: 12px; border: 1px solid var(--border);
+      background: var(--input-bg); color: var(--text); font-size: 1rem;
+      display: flex; justify-content: center; align-items: center; cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s;
+      user-select: none;
+    }
+    .action-btn:active { transform: scale(0.85); }
+
     .week-badge-top {
-      background: rgba(245, 158, 11, 0.15); border: 1px solid var(--border-gold); color: #fde68a;
-      padding: 6px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; text-align: right;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+      background: var(--input-bg); border: 1px solid var(--border-accent); color: var(--accent);
+      padding: 7px 11px; border-radius: 12px; font-size: 0.74rem; font-weight: 800; text-align: right;
+      box-shadow: 0 4px 12px var(--accent-glow);
     }
     
+    /* Поисковая панель */
+    .search-box {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.3s;
+      margin-bottom: 0;
+    }
+    .search-box.open { max-height: 50px; margin-bottom: 12px; }
+    .search-input {
+      width: 100%; background: var(--input-bg); border: 1px solid var(--border-accent); border-radius: 12px;
+      padding: 10px 14px; color: var(--text); font-size: 0.88rem; outline: none; font-weight: 600;
+    }
+    .search-input::placeholder { color: var(--text-muted); opacity: 0.7; }
+
     /* Слайдеры переключателей */
     .segmented-control {
-      display: flex; position: relative; background: rgba(0,0,0,0.45); border-radius: 14px; padding: 4px; margin-bottom: 10px;
-      border: 1px solid rgba(255,255,255,0.06); box-shadow: inset 0 2px 5px rgba(0,0,0,0.4);
+      display: flex; position: relative; background: var(--input-bg); border-radius: 14px; padding: 4px; margin-bottom: 10px;
+      border: 1px solid var(--border);
     }
     .sc-slider {
       position: absolute; top: 4px; bottom: 4px; left: 4px;
       background: linear-gradient(135deg, #fcd34d, #f59e0b); border-radius: 10px; z-index: 1;
       transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1); box-shadow: 0 4px 14px var(--accent-glow);
     }
-    .sc-slider.group-color { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px var(--prac-glow); }
+    .sc-slider.group-color { background: linear-gradient(135deg, var(--prac), #059669); box-shadow: 0 4px 14px var(--prac-glow); }
     .sc-slider.sg-color { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35); }
     
     .sc-tab {
-      flex: 1; text-align: center; padding: 9px 0; font-weight: 700; font-size: 0.82rem; color: var(--text-muted);
+      flex: 1; text-align: center; padding: 8px 0; font-weight: 700; font-size: 0.81rem; color: var(--text-muted);
       cursor: pointer; z-index: 2; transition: color 0.25s; user-select: none;
     }
     .sc-tab.active-dark { color: #0f172a; font-weight: 800; }
-    .sc-tab.active-light { color: #ffffff; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+    .sc-tab.active-light { color: #ffffff; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
 
     /* Прогресс семестра */
     .semester-box {
-      background: rgba(0,0,0,0.35); border-radius: 14px; padding: 12px 14px; margin-top: 14px;
-      border: 1px solid rgba(255,255,255,0.04);
+      background: var(--input-bg); border-radius: 14px; padding: 11px 14px; margin-top: 12px;
+      border: 1px solid var(--border);
     }
-    .sp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; }
-    .sp-title { color: #e2e8f0; display: flex; align-items: center; gap: 6px; }
-    .sp-val { color: var(--lec); font-weight: 800; }
-    .progress-track { height: 7px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; position: relative; }
-    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #10b981, #f59e0b); border-radius: 99px; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.5); }
+    .sp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; font-size: 0.78rem; font-weight: 700; }
+    .sp-title { color: var(--text); display: flex; align-items: center; gap: 6px; }
+    .sp-val { color: var(--accent); font-weight: 800; }
+    .progress-track { height: 7px; background: rgba(148, 163, 184, 0.15); border-radius: 99px; overflow: hidden; position: relative; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--prac), var(--accent)); border-radius: 99px; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
     
     /* Дни недели */
     .days-grid { 
-      display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-bottom: 18px; 
-      background: rgba(10, 22, 16, 0.75); backdrop-filter: blur(12px); padding: 6px; 
-      border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-bottom: 14px; 
+      background: var(--surface); backdrop-filter: blur(12px); padding: 6px; 
+      border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
     .day-btn { 
       background: transparent; border-radius: 12px; padding: 10px 0; text-align: center; 
-      cursor: pointer; font-weight: 800; font-size: 0.85rem; color: var(--text-muted); 
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); position: relative; user-select: none;
+      cursor: pointer; font-weight: 800; font-size: 0.84rem; color: var(--text-muted); 
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; user-select: none;
     }
     .day-btn.today-dot::after {
       content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
-      width: 4px; height: 4px; border-radius: 50%; background: var(--accent);
+      width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
     }
     .day-btn.active { 
       background: linear-gradient(135deg, var(--prac), #059669); color: #fff; 
-      box-shadow: 0 4px 14px var(--prac-glow); transform: translateY(-1px);
+      box-shadow: 0 4px 14px var(--prac-glow); transform: translateY(-1px) scale(1.03);
     }
     .day-btn.active.today-dot::after { background: #fff; }
     
     /* Анимация карточек */
     @keyframes cardPop {
-      0% { opacity: 0; transform: translateY(18px) scale(0.97); }
+      0% { opacity: 0; transform: translateY(22px) scale(0.95); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
     
@@ -125,77 +230,89 @@
     
     .lesson-card { 
       background: var(--surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border); border-radius: var(--card-radius); padding: 16px; 
+      border: 1px solid var(--border); border-radius: var(--card-radius); padding: 15px 16px; 
       position: relative; overflow: hidden; cursor: pointer; 
-      opacity: 0; animation: cardPop 0.4s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
-      transition: background 0.25s, border-color 0.25s, transform 0.2s;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      opacity: 0; animation: cardPop 0.42s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
+      transition: background 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s, opacity 0.3s;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.16);
     }
+    .lesson-card:hover { background: var(--surface-hover); }
     .lesson-card:active { transform: scale(0.985); }
     .lesson-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--accent); }
     .lesson-card.type-lec::before { background: linear-gradient(180deg, #fde047, #f59e0b); box-shadow: 0 0 12px rgba(251, 191, 36, 0.5); }
     .lesson-card.type-prac::before { background: linear-gradient(180deg, #34d399, #059669); box-shadow: 0 0 12px rgba(16, 185, 129, 0.5); }
     
-    .card-main { display: grid; grid-template-columns: 62px 1fr; gap: 14px; align-items: center; }
+    /* Карточка текущей пары */
+    .lesson-card.current {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), var(--surface));
+      box-shadow: 0 12px 30px var(--accent-glow);
+    }
+    .lesson-card.current::before { background: var(--accent); box-shadow: 0 0 15px var(--accent); }
+
+    /* Прошедшая пара */
+    .lesson-card.passed { opacity: 0.55; }
+    
+    .card-main { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; }
     
     .time-col { 
-      text-align: center; background: rgba(0,0,0,0.3); padding: 8px 4px; border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.04);
+      text-align: center; background: var(--input-bg); padding: 8px 4px; border-radius: 14px;
+      border: 1px solid var(--border);
     }
-    .pair-num { font-size: 0.62rem; font-weight: 900; color: #fde68a; background: rgba(245, 158, 11, 0.18); padding: 2px 6px; border-radius: 6px; display: inline-block; margin-bottom: 4px; letter-spacing: 0.5px; }
-    .pair-time { font-size: 1.05rem; font-weight: 900; color: var(--text); letter-spacing: -0.5px; line-height: 1.1; }
+    .pair-num { font-size: 0.62rem; font-weight: 900; color: var(--accent); background: rgba(245, 158, 11, 0.15); padding: 2px 6px; border-radius: 6px; display: inline-block; margin-bottom: 4px; letter-spacing: 0.5px; }
+    .pair-time { font-size: 1.02rem; font-weight: 900; color: var(--text); letter-spacing: -0.5px; line-height: 1.1; }
     .pair-end { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
     
     .info-col { display: flex; flex-direction: column; width: 100%; }
     .subject-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
-    .subject-title { font-weight: 800; font-size: 1.02rem; line-height: 1.28; color: #fff; }
+    .subject-title { font-weight: 800; font-size: 1.01rem; line-height: 1.28; color: var(--text); }
     
     .badges-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-    .badge { font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 8px; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 4px; }
-    .b-lec { background: rgba(251, 191, 36, 0.15); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.3); text-transform: uppercase; }
-    .b-prac { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); text-transform: uppercase; }
-    .b-week { background: rgba(255,255,255,0.08); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.12); }
-    .b-sg1 { background: rgba(59, 130, 246, 0.18); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.35); }
-    .b-sg2 { background: rgba(168, 85, 247, 0.18); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.35); }
-    .b-note-ind { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge { font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 8px; letter-spacing: 0.2px; display: inline-flex; align-items: center; gap: 4px; }
+    .b-lec { background: rgba(245, 158, 11, 0.15); color: var(--lec); border: 1px solid rgba(245, 158, 11, 0.35); text-transform: uppercase; }
+    .b-prac { background: rgba(16, 185, 129, 0.15); color: var(--prac); border: 1px solid rgba(16, 185, 129, 0.35); text-transform: uppercase; }
+    .b-week { background: var(--input-bg); color: var(--text); border: 1px solid var(--border); }
+    .b-sg1 { background: rgba(59, 130, 246, 0.16); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.35); }
+    .b-sg2 { background: rgba(168, 85, 247, 0.16); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
+    .b-note-ind { background: rgba(245, 158, 11, 0.2); color: var(--accent); border: 1px solid rgba(245, 158, 11, 0.4); }
+    .b-live { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.5); animation: pulseLive 1.5s infinite; }
+    @keyframes pulseLive { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     
     .room-row { display: flex; justify-content: space-between; align-items: center; }
-    .room-badge { background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 5px 10px; border-radius: 10px; font-weight: 800; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px; color: #f1f5f9; }
+    .room-badge { background: var(--input-bg); border: 1px solid var(--border); padding: 5px 10px; border-radius: 10px; font-weight: 800; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px; color: var(--text); }
     
-    .chevron { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); font-size: 0.75rem; color: var(--text-muted); width: 26px; height: 26px; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.06); border-radius: 50%; flex-shrink: 0; }
-    .lesson-card.expanded .chevron { transform: rotate(180deg); color: #0f172a; background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+    .chevron { transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s; font-size: 0.72rem; color: var(--text-muted); width: 26px; height: 26px; display: flex; justify-content: center; align-items: center; background: var(--input-bg); border-radius: 50%; flex-shrink: 0; border: 1px solid var(--border); }
+    .lesson-card.expanded .chevron { transform: rotate(180deg); color: #0f172a; background: var(--accent); border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
     
-    /* Раскрывающаяся панель (Аккордеон) */
+    /* Аккордеон */
     .card-details { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 0.25s; opacity: 0; }
-    .lesson-card.expanded .card-details { grid-template-rows: 1fr; opacity: 1; margin-top: 14px; padding-top: 14px; border-top: 1px dashed rgba(255,255,255,0.12); }
+    .lesson-card.expanded .card-details { grid-template-rows: 1fr; opacity: 1; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
     .details-inner { overflow: hidden; display: flex; flex-direction: column; gap: 10px; }
     
     .detail-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-    .detail-item { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.25); padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04); }
-    .detail-icon { display: flex; justify-content: center; align-items: center; width: 32px; height: 32px; background: rgba(16, 185, 129, 0.12); color: #34d399; border-radius: 9px; font-size: 1rem; flex-shrink: 0; }
+    .detail-item { display: flex; align-items: center; gap: 10px; background: var(--input-bg); padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border); }
+    .detail-icon { display: flex; justify-content: center; align-items: center; width: 32px; height: 32px; background: rgba(16, 185, 129, 0.12); color: var(--prac); border-radius: 9px; font-size: 1rem; flex-shrink: 0; }
     .detail-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; }
-    .detail-val { font-weight: 700; color: #fff; font-size: 0.88rem; }
+    .detail-val { font-weight: 700; color: var(--text); font-size: 0.86rem; }
     
-    /* Поле для заметок */
     .note-box { margin-top: 2px; }
     .note-input {
-      width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-      padding: 10px 12px; color: #fff; font-size: 0.85rem; font-weight: 500; outline: none; transition: border-color 0.2s;
+      width: 100%; background: var(--input-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 10px 12px; color: var(--text); font-size: 0.85rem; font-weight: 500; outline: none; transition: border-color 0.2s;
     }
-    .note-input:focus { border-color: var(--accent); box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
-    .note-input::placeholder { color: rgba(148, 163, 184, 0.6); }
+    .note-input:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+    .note-input::placeholder { color: var(--text-muted); opacity: 0.7; }
 
-    /* Пустой день */
-    .empty-state { text-align: center; padding: 50px 20px; color: var(--text-muted); background: var(--surface); border-radius: var(--card-radius); border: 1px dashed var(--border); animation: cardPop 0.4s both; }
-    .emoji-lg { font-size: 3.2rem; margin-bottom: 12px; display: block; filter: drop-shadow(0 0 18px rgba(245, 158, 11, 0.3)); }
+    .empty-state { text-align: center; padding: 48px 20px; color: var(--text-muted); background: var(--surface); border-radius: var(--card-radius); border: 1px dashed var(--border); animation: cardPop 0.4s both; }
+    .emoji-lg { font-size: 3.2rem; margin-bottom: 10px; display: block; filter: drop-shadow(0 0 18px var(--accent-glow)); }
     
     /* Нижний плавающий док */
     .bottom-dock {
-      position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
       width: calc(100% - 32px); max-width: 528px;
-      background: rgba(12, 28, 20, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 20px; padding: 8px;
-      display: flex; gap: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.7); z-index: 900;
+      background: var(--dock-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 20px; padding: 8px;
+      display: flex; gap: 8px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); z-index: 900;
     }
     .dock-btn {
       flex: 1; padding: 12px 10px; border-radius: 14px; font-weight: 800; font-size: 0.85rem;
@@ -203,15 +320,24 @@
       transition: all 0.2s; user-select: none; border: none; color: #fff;
     }
     .dock-btn:active { transform: scale(0.95); }
-    .btn-today { background: rgba(255,255,255,0.08); color: #e2e8f0; flex: 0.45; border: 1px solid rgba(255,255,255,0.08); }
-    .btn-copy { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px var(--prac-glow); flex: 1; }
+    .btn-today { background: var(--input-bg); color: var(--text); flex: 0.45; border: 1px solid var(--border); }
+    .btn-copy { background: linear-gradient(135deg, var(--prac), #059669); box-shadow: 0 4px 15px var(--prac-glow); flex: 1; }
+    .btn-share { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35); flex: 0.55; }
     
+    /* Водяной знак by Csenchis */
+    .watermark {
+      position: fixed; bottom: 3px; right: 10px;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px;
+      color: var(--text-muted); opacity: 0.4;
+      pointer-events: none; z-index: 950; user-select: none;
+    }
+
     #toast { 
       position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); 
       background: linear-gradient(135deg, #065f46, #047857); color: #fff; padding: 12px 24px; 
-      border-radius: 99px; font-weight: 800; font-size: 0.9rem; box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+      border-radius: 99px; font-weight: 800; font-size: 0.88rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
       border: 1px solid #34d399; transition: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 1000; 
-      display: flex; align-items: center; gap: 8px;
+      display: flex; align-items: center; gap: 8px; white-space: nowrap;
     }
     #toast.show { transform: translateX(-50%) translateY(0); }
 
@@ -222,8 +348,7 @@
 
 <div class="container" id="touchArea">
   <div class="header-card">
-    <!-- Золотой колос БашГАУ на фоне -->
-    <svg class="wheat-bg" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5">
+    <svg class="wheat-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
       <path d="M12 2v20M17 5c0 3-5 5-5 5s-5-2-5-5c0-2 5-3 5-3s5 1 5 3zM19 10c0 3-7 5-7 5s-7-2-7-5c0-2 7-3 7-3s7 1 7 3zM19 15c0 3-7 5-7 5s-7-2-7-5c0-2 7-3 7-3s7 1 7 3z"/>
     </svg>
 
@@ -233,10 +358,18 @@
         <div class="header-title" id="appTitle">АИП 101</div>
         <div class="header-date" id="curDate">Загрузка...</div>
       </div>
-      <div class="week-badge-top" id="actualWeekBadge">7 неделя</div>
+      <div class="top-actions">
+        <button class="action-btn" onclick="toggleSearch()" title="Поиск">🔍</button>
+        <button class="action-btn" id="themeBtn" onclick="cycleTheme()" title="Сменить тему">🌾</button>
+        <div class="week-badge-top" id="actualWeekBadge">7 нед.</div>
+      </div>
     </div>
     
-    <!-- 1. ПОЛЗУНОК ГРУППЫ -->
+    <!-- ПОИСКОВАЯ СТРОКА -->
+    <div class="search-box" id="searchBox">
+      <input type="text" class="search-input" id="searchInput" placeholder="🔎 Поиск по преподавателю или аудитории..." oninput="render()">
+    </div>
+
     <div class="segmented-control">
       <div class="sc-slider group-color" id="grpSlider" style="width: calc(33.333% - 2.6px);"></div>
       <div class="sc-tab active-light" id="tabGrp0" onclick="setGroup('AIP101')">АИП 101</div>
@@ -244,14 +377,12 @@
       <div class="sc-tab" id="tabGrp2" onclick="setGroup('TOP102')">ТОП 102</div>
     </div>
     
-    <!-- 2. ПОЛЗУНОК НЕДЕЛИ -->
     <div class="segmented-control">
       <div class="sc-slider" id="wSlider" style="width: calc(50% - 4px);"></div>
       <div class="sc-tab active-dark" id="tabW1" onclick="setW(1)">Нечетная (1)</div>
       <div class="sc-tab" id="tabW2" onclick="setW(2)">Четная (2)</div>
     </div>
     
-    <!-- 3. ПОЛЗУНОК ПОДГРУППЫ -->
     <div class="segmented-control">
       <div class="sc-slider sg-color" id="sgSlider" style="width: calc(33.333% - 2.6px);"></div>
       <div class="sc-tab active-light" id="tabSg0" onclick="setSg(0)">Все</div>
@@ -259,7 +390,6 @@
       <div class="sc-tab" id="tabSg2" onclick="setSg(2)">2 Подгруппа</div>
     </div>
 
-    <!-- ПРОГРЕСС СЕМЕСТРА -->
     <div class="semester-box">
       <div class="sp-header">
         <span class="sp-title">🚜 Экватор семестра</span>
@@ -273,24 +403,25 @@
   <div class="lessons-list" id="lesCont"></div>
 </div>
 
-<!-- Нижний плавающий док -->
 <div class="bottom-dock">
   <button class="dock-btn btn-today" onclick="goToday()">🎯 Сегодня</button>
-  <button class="dock-btn btn-copy" onclick="copySchedule()">📋 Скопировать день</button>
+  <button class="dock-btn btn-share" onclick="shareSchedule()">📤 Поделиться</button>
+  <button class="dock-btn btn-copy" onclick="copySchedule()">📋 Копировать</button>
 </div>
 
+<div class="watermark">by Csenchis</div>
+
 <textarea id="clipboardFix"></textarea>
-<div id="toast">✅ Расписание скопировано!</div>
+<div id="toast">✅ Готово!</div>
 
 <script>
-  // ПОЛНАЯ БАЗА ДАННЫХ: АИП 101, ТОП 101, ТОП 102
   const ALL_DATA = {
     AIP101: [
-      {d: 1, p: 1, t: "prac", s: "Иностранный язык", r: "251/1", tech: "доц. Гарипова Г.Р.", n: "2-13 нед.", sg: 2, ws: [2,3,4,5,6,7,8,9,10,11,12,13]}, 
+      {d: 1, p: 1, t: "prac", s: "Иностранный язык", r: "251/1", tech: "доц. Гарипова Г.Р.", n: "2-13 нед. (кр. 7)", sg: 2, ws: [2,3,4,5,6,8,9,10,11,12,13]}, 
       {d: 1, p: 2, t: "lec", s: "Математика", r: "252/1", tech: "доц. Дик Е.Н.", n: "2-8 четн.", sg: 0, ws: [2,4,6,8]}, 
-      {d: 1, p: 2, t: "lec", s: "Физика", r: "252/1", tech: "доц. Гурьянова В.Р.", n: "3-11 нечет.", sg: 0, ws: [3,5,7,9,11]}, 
-      {d: 1, p: 3, t: "prac", s: "История России", r: "357/1", tech: "доц. Биккузина А.Х.", n: "3-15 нед.", sg: 0, ws: [3,4,5,6,7,8,9,10,11,12,13,14,15]}, 
-      {d: 1, p: 4, t: "prac", s: "Безопасность жизнедеятельности", r: "213/6", tech: "ст.преп. Минибаев В.Р.", n: "3-10 нед.", sg: 0, ws: [3,4,5,6,7,8,9,10]}, 
+      {d: 1, p: 2, t: "lec", s: "Физика", r: "252/1", tech: "доц. Гурьянова В.Р.", n: "3-11 нечет. (кр. 7)", sg: 0, ws: [3,5,9,11]}, 
+      {d: 1, p: 3, t: "prac", s: "История России", r: "357/1", tech: "доц. Биккузина А.Х.", n: "3-15 нед. (кр. 7)", sg: 0, ws: [3,4,5,6,8,9,10,11,12,13,14,15]}, 
+      {d: 1, p: 4, t: "prac", s: "Безопасность жизнедеятельности", r: "213/6", tech: "ст.преп. Минибаев В.Р.", n: "3-10 нед. (кр. 7)", sg: 0, ws: [3,4,5,6,8,9,10]}, 
       {d: 1, p: 4, t: "prac", s: "Безопасность жизнедеятельности", r: "213/6", tech: "ст.преп. Минибаев В.Р.", n: "11-15 нечет.", sg: 1, ws: [11,13,15]}, 
       {d: 1, p: 4, t: "prac", s: "Безопасность жизнедеятельности", r: "213/6", tech: "ст.преп. Минибаев В.Р.", n: "12-16 четн.", sg: 2, ws: [12,14,16]}, 
       {d: 2, p: 1, t: "prac", s: "Основы российской государственности", r: "213/1", tech: "доц. Валиева Г.Р.", n: "2-16 нед.", sg: 0, ws: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]}, 
@@ -300,12 +431,12 @@
       {d: 2, p: 3, t: "prac", s: "Основы российской государственности", r: "401/6", tech: "доц. Валиева Г.Р.", n: "10-12 нед.", sg: 0, ws: [10,11,12]}, 
       {d: 2, p: 4, t: "lec", s: "Инженерная и компьютерная графика", r: "2/2", tech: "доц. Урманов В.Г.", n: "2,4,6,8 четн.", sg: 0, ws: [2,4,6,8]}, 
       {d: 2, p: 4, t: "prac", s: "Введение в проф. деятельность", r: "Выезд", tech: "доц. Газеев И.Р.", n: "3,5,7 нечет.", sg: 0, ws: [3,5,7]}, 
-      {d: 3, p: 2, t: "prac", s: "Иностранный язык", r: "404/1", tech: "доц. Гарипова Г.Р.", n: "3-14 нед.", sg: 1, ws: [3,4,5,6,7,8,9,10,11,12,13,14]}, 
+      {d: 3, p: 2, t: "prac", s: "Иностранный язык", r: "404/1", tech: "доц. Гарипова Г.Р.", n: "3-14 нед. (кр. 10)", sg: 1, ws: [3,4,5,6,7,8,9,11,12,13,14]}, 
       {d: 3, p: 2, t: "prac", s: "Инженерная и комп. графика", r: "367/1", tech: "доц. Загиров И.И.", n: "3-9 нед.", sg: 2, ws: [3,4,5,6,7,8,9]}, 
-      {d: 3, p: 3, t: "prac", s: "Системный анализ", r: "301/6", tech: "ст.преп. Валишина Н.Р.", n: "2-16 четн.", sg: 0, ws: [2,4,6,8,10,12,14,16]}, 
+      {d: 3, p: 3, t: "prac", s: "Системный анализ", r: "301/6", tech: "ст.преп. Валишина Н.Р.", n: "2-16 четн. (кр. 10)", sg: 0, ws: [2,4,6,8,12,14,16]}, 
       {d: 3, p: 3, t: "prac", s: "Математика", r: "214/6", tech: "доц. Дик Е.Н.", n: "7-15 нечет.", sg: 1, ws: [7,9,11,13,15]}, 
       {d: 3, p: 3, t: "prac", s: "Химия", r: "462/2", tech: "Преподаватель кафедры", n: "3-15 нечет.", sg: 2, ws: [3,5,7,9,11,13,15]}, 
-      {d: 3, p: 4, t: "prac", s: "Химия", r: "453/2", tech: "Преподаватель кафедры", n: "4-16 четн.", sg: 0, ws: [4,6,8,10,12,14,16]}, 
+      {d: 3, p: 4, t: "prac", s: "Химия", r: "453/2", tech: "Преподаватель кафедры", n: "4-16 четн. (кр. 10)", sg: 0, ws: [4,6,8,12,14,16]}, 
       {d: 3, p: 4, t: "prac", s: "Химия", r: "462/2", tech: "Преподаватель кафедры", n: "3-15 нечет.", sg: 1, ws: [3,5,7,9,11,13,15]}, 
       {d: 3, p: 4, t: "prac", s: "Математика", r: "214/6", tech: "доц. Дик Е.Н.", n: "7-15 нечет.", sg: 2, ws: [7,9,11,13,15]}, 
       {d: 4, p: 1, t: "lec", s: "Физкультура и спорт", r: "106/6", tech: "доц. Роженцев А.А.", n: "1 нед.", sg: 0, ws: [1]}, 
@@ -321,7 +452,7 @@
       {d: 5, p: 1, t: "prac", s: "Физика", r: "114/2", tech: "асс. Исламгулов Р.Д.", n: "6-14 четн.", sg: 2, ws: [6,8,10,12,14]}, 
       {d: 5, p: 2, t: "lec", s: "Системный анализ", r: "1/2", tech: "ст.преп. Валишина Н.Р.", n: "1-7 нечет.", sg: 0, ws: [1,3,5,7]}, 
       {d: 5, p: 2, t: "lec", s: "Химия", r: "1/2", tech: "доц. Зарипов Р.Р.", n: "2-12 четн, 9, 11, 13", sg: 0, ws: [2,4,6,8,9,10,11,12,13]}, 
-      {d: 5, p: 3, t: "prac", s: "Инженерная и комп. графика", r: "165/2", tech: "доц. Загиров И.И.", n: "3-9 нед.", sg: 1, ws: [3,4,5,6,7,8,9]}, 
+      {d: 5, p: 3, t: "prac", s: "Инженерная и комп. графика", r: "165/2", tech: "доц. Загиров И.И.", n: "3-9 нед.", sg: 1, ws: [3,4,5,6,7,8,9], customEnd: "13:45"}, 
       {d: 5, p: 4, t: "lec", s: "Введение в проф. деятельность", r: "2/2", tech: "проф. Габитов И.И.", n: "1 нед.", sg: 0, ws: [1]}, 
       {d: 6, p: 1, t: "lec", s: "Физкультура и спорт", r: "106/6", tech: "доц. Роженцев А.А.", n: "1 нед.", sg: 0, ws: [1]}, 
       {d: 6, p: 1, t: "prac", s: "Физкультура и спорт", r: "с/зал", tech: "доц. Роженцев А.А.", n: "2,3 нед.", sg: 0, ws: [2,3]}, 
@@ -330,8 +461,8 @@
       {d: 6, p: 2, t: "prac", s: "Право", r: "301/6", tech: "ст.преп. Иксанов Р.А.", n: "9-15 нед.", sg: 0, ws: [9,10,11,12,13,14,15]}
     ],
     TOP101: [
-      {d: 1, p: 1, t: "prac", s: "История России", r: "502/1", tech: "доц. Биккузина А.Х.", n: "3-14 нед.", sg: 0, ws: [3,4,5,6,7,8,9,10,11,12,13,14]},
-      {d: 1, p: 2, t: "prac", s: "Основы российской государственности", r: "502/1", tech: "доц. Мингазова З.Р.", n: "2-16 нед.", sg: 0, ws: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]},
+      {d: 1, p: 1, t: "prac", s: "История России", r: "502/1", tech: "доц. Биккузина А.Х.", n: "3-14 нед. (кр. 7)", sg: 0, ws: [3,4,5,6,8,9,10,11,12,13,14]},
+      {d: 1, p: 2, t: "prac", s: "Основы российской государственности", r: "502/1", tech: "доц. Мингазова З.Р.", n: "2-16 нед. (кр. 7)", sg: 0, ws: [2,3,4,5,6,8,9,10,11,12,13,14,15,16]},
       {d: 1, p: 3, t: "prac", s: "Основы информационных технологий", r: "129/1", tech: "асс. Фазлыева Р.Ф.", n: "2,3 нед.", sg: 0, ws: [2,3]},
       {d: 2, p: 1, t: "lec", s: "История России", r: "302/6", tech: "доц. Биккузина А.Х.", n: "2-12 четн.", sg: 0, ws: [2,4,6,8,10,12]},
       {d: 2, p: 2, t: "prac", s: "Кураторский час (Соц. адаптация)", r: "Кафедра", tech: "Куратор", n: "Каждую неделю", sg: 0, ws: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]},
@@ -340,15 +471,15 @@
       {d: 2, p: 3, t: "prac", s: "Основы российской государственности", r: "502/1", tech: "доц. Мингазова З.Р.", n: "10-12 нед.", sg: 0, ws: [10,11,12]},
       {d: 2, p: 4, t: "lec", s: "Экология", r: "106/6", tech: "доц. Латыпова Г.Ф.", n: "2-8 четн, 9-12 нед.", sg: 0, ws: [2,4,6,8,9,10,11,12]},
       {d: 2, p: 4, t: "prac", s: "Введение в проф. деятельность", r: "Выезд", tech: "доц. Газеев И.Р.", n: "3,5,7 нед.", sg: 0, ws: [3,5,7]},
-      {d: 3, p: 1, t: "prac", s: "Неорганическая химия", r: "456/2", tech: "ст.преп. Василюк К.С.", n: "3-14 нед.", sg: 1, ws: [3,4,5,6,7,8,9,10,11,12,13,14]},
-      {d: 3, p: 1, t: "prac", s: "Иностранный язык", r: "404/1", tech: "доц. Гарипова Г.Р.", n: "3-14 нед.", sg: 2, ws: [3,4,5,6,7,8,9,10,11,12,13,14]},
-      {d: 3, p: 2, t: "prac", s: "Неорганическая химия", r: "456/2", tech: "ст.преп. Василюк К.С.", n: "2-14 нед.", sg: 1, ws: [2,3,4,5,6,7,8,9,10,11,12,13,14]},
-      {d: 3, p: 2, t: "prac", s: "Физика", r: "114/2", tech: "асс. Исламгулов Р.Д.", n: "3-14 нед.", sg: 2, ws: [3,4,5,6,7,8,9,10,11,12,13,14]},
+      {d: 3, p: 1, t: "prac", s: "Неорганическая химия", r: "456/2", tech: "ст.преп. Василюк К.С.", n: "3-14 нед. (кр. 10)", sg: 1, ws: [3,4,5,6,7,8,9,11,12,13,14]},
+      {d: 3, p: 1, t: "prac", s: "Иностранный язык", r: "404/1", tech: "доц. Гарипова Г.Р.", n: "3-14 нед. (кр. 10)", sg: 2, ws: [3,4,5,6,7,8,9,11,12,13,14]},
+      {d: 3, p: 2, t: "prac", s: "Неорганическая химия", r: "456/2", tech: "ст.преп. Василюк К.С.", n: "2-14 нед. (кр. 10)", sg: 1, ws: [2,3,4,5,6,7,8,9,11,12,13,14]},
+      {d: 3, p: 2, t: "prac", s: "Физика", r: "114/2", tech: "асс. Исламгулов Р.Д.", n: "3-14 нед. (кр. 10)", sg: 2, ws: [3,4,5,6,7,8,9,11,12,13,14]},
       {d: 3, p: 3, t: "lec", s: "Неорганическая химия", r: "106/6", tech: "ст.преп. Василюк К.С.", n: "1 нед.", sg: 0, ws: [1]},
-      {d: 3, p: 3, t: "prac", s: "Иностранный язык", r: "251/1", tech: "доц. Гарипова Г.Р.", n: "3-14 нед.", sg: 1, ws: [3,4,5,6,7,8,9,10,11,12,13,14]},
-      {d: 3, p: 3, t: "prac", s: "Неорганическая химия", r: "456/2", tech: "ст.преп. Василюк К.С.", n: "2-14 нед.", sg: 2, ws: [2,3,4,5,6,7,8,9,10,11,12,13,14]},
-      {d: 3, p: 4, t: "prac", s: "Основы информ. технологий", r: "165/2", tech: "асс. Фазлыева Р.Ф.", n: "4-14 четн.", sg: 1, ws: [4,6,8,10,12,14]},
-      {d: 3, p: 4, t: "prac", s: "Неорганическая химия", r: "456/2", tech: "ст.преп. Василюк К.С.", n: "3-14 нед.", sg: 2, ws: [3,4,5,6,7,8,9,10,11,12,13,14]},
+      {d: 3, p: 3, t: "prac", s: "Иностранный язык", r: "251/1", tech: "доц. Гарипова Г.Р.", n: "3-14 нед. (кр. 10)", sg: 1, ws: [3,4,5,6,7,8,9,11,12,13,14]},
+      {d: 3, p: 3, t: "prac", s: "Неорганическая химия", r: "456/2", tech: "ст.преп. Василюк К.С.", n: "2-14 нед. (кр. 10)", sg: 2, ws: [2,3,4,5,6,7,8,9,11,12,13,14]},
+      {d: 3, p: 4, t: "prac", s: "Основы информ. технологий", r: "165/2", tech: "асс. Фазлыева Р.Ф.", n: "4-14 четн. (кр. 10)", sg: 1, ws: [4,6,8,12,14]},
+      {d: 3, p: 4, t: "prac", s: "Неорганическая химия", r: "456/2", tech: "ст.преп. Василюк К.С.", n: "3-14 нед. (кр. 10)", sg: 2, ws: [3,4,5,6,7,8,9,11,12,13,14]},
       {d: 4, p: 1, t: "lec", s: "Физкультура и спорт", r: "106/6", tech: "доц. Роженцев А.А.", n: "1 нед.", sg: 0, ws: [1]},
       {d: 4, p: 1, t: "prac", s: "Физкультура и спорт", r: "с/зал", tech: "доц. Роженцев А.А.", n: "2,3 нед.", sg: 0, ws: [2,3]},
       {d: 4, p: 1, t: "prac", s: "Элективные дисциплины по ФК и С", r: "с/зал", tech: "доц. Роженцев А.А.", n: "4-12 нед.", sg: 0, ws: [4,5,6,7,8,9,10,11,12]},
@@ -373,8 +504,8 @@
       {d: 6, p: 2, t: "lec", s: "Неорганическая химия", r: "106/6", tech: "ст.преп. Василюк К.С.", n: "1-14 нед.", sg: 0, ws: [1,2,3,4,5,6,7,8,9,10,11,12,13,14]}
     ],
     TOP102: [
-      {d: 1, p: 2, t: "prac", s: "Экология", r: "203/6", tech: "доц. Латыпова Г.Ф.", n: "3-17 нед.", sg: 0, ws: [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]},
-      {d: 1, p: 3, t: "prac", s: "Основы российской государственности", r: "502/1", tech: "доц. Мингазова З.Р.", n: "2-16 нед.", sg: 0, ws: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]},
+      {d: 1, p: 2, t: "prac", s: "Экология", r: "203/6", tech: "доц. Латыпова Г.Ф.", n: "3-17 нед. (кр. 7)", sg: 0, ws: [3,4,5,6,8,9,10,11,12,13,14,15,16,17]},
+      {d: 1, p: 3, t: "prac", s: "Основы российской государственности", r: "502/1", tech: "доц. Мингазова З.Р.", n: "2-16 нед. (кр. 7)", sg: 0, ws: [2,3,4,5,6,8,9,10,11,12,13,14,15,16]},
       {d: 2, p: 1, t: "lec", s: "История России", r: "302/6", tech: "доц. Биккузина А.Х.", n: "2-12 четн.", sg: 0, ws: [2,4,6,8,10,12]},
       {d: 2, p: 2, t: "prac", s: "Кураторский час (Соц. адаптация)", r: "Кафедра", tech: "Куратор", n: "Каждую неделю", sg: 0, ws: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]},
       {d: 2, p: 3, t: "lec", s: "Введение в проф. деятельность", r: "106/6", tech: "доц. Газеев И.Р.", n: "2,4,6 нед.", sg: 0, ws: [2,4,6]},
@@ -382,8 +513,8 @@
       {d: 2, p: 3, t: "prac", s: "Основы информационных технологий", r: "129/1", tech: "асс. Фазлыева Р.Ф.", n: "10-16 нед.", sg: 0, ws: [10,11,12,13,14,15,16]},
       {d: 2, p: 4, t: "lec", s: "Экология", r: "106/6", tech: "доц. Латыпова Г.Ф.", n: "2-8 четн, 9-12 нед.", sg: 0, ws: [2,4,6,8,9,10,11,12]},
       {d: 2, p: 4, t: "prac", s: "Введение в проф. деятельность", r: "Выезд", tech: "доц. Газеев И.Р.", n: "3,5,7 нед.", sg: 0, ws: [3,5,7]},
-      {d: 3, p: 1, t: "prac", s: "Неорганическая химия", r: "453/2", tech: "доц. Ярмухамедова Э.И.", n: "3-14 нед.", sg: 0, ws: [3,4,5,6,7,8,9,10,11,12,13,14]},
-      {d: 3, p: 2, t: "prac", s: "Неорганическая химия", r: "453/2", tech: "доц. Ярмухамедова Э.И.", n: "2-14 нед.", sg: 0, ws: [2,3,4,5,6,7,8,9,10,11,12,13,14]},
+      {d: 3, p: 1, t: "prac", s: "Неорганическая химия", r: "453/2", tech: "доц. Ярмухамедова Э.И.", n: "3-14 нед. (кр. 10)", sg: 0, ws: [3,4,5,6,7,8,9,11,12,13,14]},
+      {d: 3, p: 2, t: "prac", s: "Неорганическая химия", r: "453/2", tech: "доц. Ярмухамедова Э.И.", n: "2-14 нед. (кр. 10)", sg: 0, ws: [2,3,4,5,6,7,8,9,11,12,13,14]},
       {d: 3, p: 3, t: "lec", s: "Неорганическая химия", r: "106/6", tech: "ст.преп. Василюк К.С.", n: "1 нед.", sg: 0, ws: [1]},
       {d: 4, p: 1, t: "lec", s: "Физкультура и спорт", r: "106/6", tech: "доц. Роженцев А.А.", n: "1 нед.", sg: 0, ws: [1]},
       {d: 4, p: 1, t: "prac", s: "Физкультура и спорт", r: "с/зал", tech: "доц. Роженцев А.А.", n: "2,3 нед.", sg: 0, ws: [2,3]},
@@ -413,20 +544,62 @@
     4:{s:'14:45',e:'16:20'}, 5:{s:'16:35',e:'18:10'}, 6:{s:'18:25',e:'20:00'}
   };
 
+  const THEMES = [
+    { id: 'agro', icon: '🌾', name: 'БашГАУ Изумруд', color: '#050d08' },
+    { id: 'cyber', icon: '🌌', name: 'Киберпанк Неон', color: '#070913' },
+    { id: 'amoled', icon: '🖤', name: 'AMOLED Черная', color: '#000000' },
+    { id: 'light', icon: '☀️', name: 'Дневная Светлая', color: '#f1f5f9' }
+  ];
+
   function vib() { if(navigator.vibrate) navigator.vibrate(12); }
 
-  // Расшифровка корпуса БашГАУ по номеру аудитории
+  function showToast(msg) {
+    let toast = document.getElementById('toast');
+    toast.innerHTML = msg;
+    toast.classList.add('show');
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  function applyTheme(themeId, notify = false) {
+    const tObj = THEMES.find(x => x.id === themeId) || THEMES[0];
+    document.documentElement.setAttribute('data-theme', tObj.id);
+    document.getElementById('themeBtn').innerText = tObj.icon;
+    document.getElementById('metaThemeColor').setAttribute('content', tObj.color);
+    localStorage.setItem('bash_theme', tObj.id);
+    if (notify) showToast(`${tObj.icon} Тема: ${tObj.name}`);
+  }
+
+  function cycleTheme() {
+    vib();
+    let cur = localStorage.getItem('bash_theme') || 'agro';
+    let idx = THEMES.findIndex(x => x.id === cur);
+    let next = THEMES[(idx + 1) % THEMES.length];
+    applyTheme(next.id, true);
+  }
+
+  function toggleSearch() {
+    vib();
+    let box = document.getElementById('searchBox');
+    box.classList.toggle('open');
+    if(box.classList.contains('open')) {
+      document.getElementById('searchInput').focus();
+    } else {
+      document.getElementById('searchInput').value = '';
+      render();
+    }
+  }
+
   function getBuildingInfo(r) {
     if (!r) return 'Уточняется';
-    if (r.includes('/1')) return 'Главный корпус (1), ул. 50-летия Октября, 34';
+    if (r.includes('/1')) return '1-й (Главный) корпус, ул. 50-летия Октября, 34';
     if (r.includes('/2')) return '2-й корпус (ФПТ / Биотех)';
-    if (r.includes('/6')) return '6-й корпус (Энерго / Мехфак)';
+    if (r.includes('/6')) return '6-й корпус (Мехфак / Энергофак)';
     if (r.includes('с/зал')) return 'Спортивный комплекс БашГАУ';
     if (r.includes('Выезд')) return 'Выездное практическое занятие';
     return 'Кафедра / По расписанию';
   }
   
-  // Вычисление фактической недели с 1 сентября 2026
   function getActualWeekNum() {
     const start = new Date(2026, 8, 1);
     let now = new Date();
@@ -497,6 +670,7 @@
     let actW = currentActualWeek % 2 === 0 ? 2 : 1;
     setW(actW);
     setD(todayDayIdx);
+    showToast('🎯 Открыто расписание на сегодня');
   }
   
   function toggleCard(elem, e) {
@@ -513,14 +687,37 @@
   
   function getFilteredLessons() {
     let curGroupData = ALL_DATA[st.grp] || ALL_DATA.AIP101;
+    let query = document.getElementById('searchInput') ? document.getElementById('searchInput').value.toLowerCase().trim() : '';
+    
     return curGroupData.filter(x => {
-      if (x.d !== st.d) return false;
-      if (st.sg !== 0 && x.sg !== 0 && x.sg !== st.sg) return false;
+      if (!query) {
+        if (x.d !== st.d) return false;
+        if (st.sg !== 0 && x.sg !== 0 && x.sg !== st.sg) return false;
+      }
       let activeFutureWeeks = x.ws.filter(w => w >= currentActualWeek && (w % 2 === 0 ? 2 : 1) === st.w);
-      return activeFutureWeeks.length > 0;
-    }).sort((a,b)=>a.p-b.p);
+      if (activeFutureWeeks.length === 0) return false;
+
+      if (query) {
+        let matchText = (x.s + ' ' + x.tech + ' ' + x.r).toLowerCase();
+        if (!matchText.includes(query)) return false;
+      }
+      return true;
+    }).sort((a,b) => query ? 0 : (a.d - b.d || a.p - b.p));
   }
   
+  function toM(s) { let p=s.split(':'); return p[0]*60 + +p[1]; }
+
+  function checkLessonStatus(x, dayIdx) {
+    if (dayIdx !== todayDayIdx) return { isCurrent: false, isPassed: false };
+    let n = new Date();
+    let nm = n.getHours()*60 + n.getMinutes();
+    let sm = toM(BELLS[x.p].s);
+    let em = toM(x.customEnd || BELLS[x.p].e);
+    if (nm >= sm && nm <= em) return { isCurrent: true, isPassed: false };
+    if (nm > em) return { isCurrent: false, isPassed: true };
+    return { isCurrent: false, isPassed: false };
+  }
+
   function copySchedule() {
     vib();
     let l = getFilteredLessons();
@@ -531,7 +728,8 @@
     l.forEach(x => {
       let ttype = x.t === 'lec' ? 'Лекция' : 'Практика';
       let sgTxt = x.sg ? ` (${x.sg} ПГ)` : '';
-      text += `⏳ ${x.p} пара (${BELLS[x.p].s}–${BELLS[x.p].e})\n📚 ${x.s} [${ttype}]${sgTxt}\n🚪 Ауд: ${x.r}\n👤 ${x.tech || 'Не указан'}\n\n`;
+      let endT = x.customEnd || BELLS[x.p].e;
+      text += `⏳ ${x.p} пара (${BELLS[x.p].s}–${endT})\n📚 ${x.s} [${ttype}]${sgTxt}\n🚪 Ауд: ${x.r}\n👤 ${x.tech || 'Не указан'}\n\n`;
     });
     
     let tf = document.getElementById("clipboardFix");
@@ -540,17 +738,34 @@
     tf.setSelectionRange(0, 99999);
     try {
       document.execCommand("copy");
-      let toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2400);
+      showToast('📋 Расписание скопировано!');
     } catch (e) {}
+  }
+
+  function shareSchedule() {
+    vib();
+    let l = getFilteredLessons();
+    let grpName = st.grp === 'AIP101' ? 'АИП 101' : (st.grp === 'TOP101' ? 'ТОП 101' : 'ТОП 102');
+    let text = `🌾 Расписание ${grpName} на ${DAYS[st.d-1]} (${st.w === 1 ? 'Нечетная' : 'Четная'} нед.):\n\n`;
+    if(!l.length) text += "Пар нет! Отдыхаем 🎉\n";
+    
+    l.forEach(x => {
+      let endT = x.customEnd || BELLS[x.p].e;
+      text += `• ${x.p} пара (${BELLS[x.p].s}–${endT}) — *${x.s}* (ауд. ${x.r})\n`;
+    });
+
+    if (navigator.share) {
+      navigator.share({ title: `Расписание ${grpName}`, text: text }).catch(() => {});
+    } else {
+      copySchedule();
+    }
   }
   
   function initHeader() {
     let n = new Date();
     let dateStr = n.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' });
     document.getElementById('curDate').innerText = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-    document.getElementById('actualWeekBadge').innerText = `${currentActualWeek} уч. неделя`;
+    document.getElementById('actualWeekBadge').innerText = `${currentActualWeek} нед.`;
 
     let totalW = 17; 
     let pct = Math.min(100, Math.round((currentActualWeek / totalW) * 100));
@@ -568,13 +783,20 @@
     document.getElementById('lesCont').innerHTML = l.length ? l.map((x, idx) => {
       let noteKey = `${st.grp}_${x.s}`;
       let savedNote = localStorage.getItem('note_' + noteKey) || '';
+      let endTime = x.customEnd || BELLS[x.p].e;
+      let status = checkLessonStatus(x, st.d);
+      
+      let cardClasses = `lesson-card ${x.t==='lec'?'type-lec':'type-prac'}`;
+      if (status.isCurrent) cardClasses += ' current';
+      if (status.isPassed) cardClasses += ' passed';
+
       return `
-      <div class="lesson-card ${x.t==='lec'?'type-lec':'type-prac'}" onclick="toggleCard(this, event)" style="animation-delay: ${idx * 0.05}s">
+      <div class="${cardClasses}" onclick="toggleCard(this, event)" style="animation-delay: ${idx * 0.04}s">
         <div class="card-main">
           <div class="time-col">
             <div class="pair-num">${x.p} ПАРА</div>
             <div class="pair-time">${BELLS[x.p].s}</div>
-            <div class="pair-end">${BELLS[x.p].e}</div>
+            <div class="pair-end">${endTime}</div>
           </div>
           <div class="info-col">
             <div class="subject-row">
@@ -584,6 +806,7 @@
             <div class="badges-row">
               <span class="badge ${x.t==='lec'?'b-lec':'b-prac'}">${x.t==='lec'?'Лекция':'Практика'}</span>
               <span class="badge b-week">🗓 ${x.n}</span>
+              ${status.isCurrent ? `<span class="badge b-live">🔴 ИДЕТ СЕЙЧАС</span>` : ''}
               ${x.sg===1?`<span class="badge b-sg1">1 ПГ</span>`:''}
               ${x.sg===2?`<span class="badge b-sg2">2 ПГ</span>`:''}
               ${savedNote?`<span class="badge b-note-ind">📌 Заметка</span>`:''}
@@ -620,13 +843,13 @@
     `}).join('') : `
       <div class="empty-state">
         <span class="emoji-lg">🌾</span>
-        <h3 style="color: var(--text); margin-bottom: 6px; font-weight: 800;">В этот день пар нет!</h3>
-        <p style="font-size: 0.9rem;">Время выспаться или спокойно закрыть долги.</p>
+        <h3 style="color: var(--text); margin-bottom: 6px; font-weight: 800;">Ничего не найдено!</h3>
+        <p style="font-size: 0.9rem;">В этот день пар нет или поиск ничего не дал.</p>
       </div>
     `;
   }
 
-  // Свайпы влево/вправо для переключения дней
+  // Свайпы влево/вправо
   let touchStartX = 0;
   let touchEndX = 0;
   const touchArea = document.getElementById('touchArea');
@@ -637,10 +860,12 @@
     if (touchEndX - touchStartX > 75 && st.d > 1) setD(st.d - 1);
   }, {passive: true});
   
+  applyTheme(localStorage.getItem('bash_theme') || 'agro', false);
   initHeader();
   setGroup(st.grp);
   setW(st.w);
   setSg(st.sg);
+  setInterval(() => { if (st.d === todayDayIdx) render(); }, 30000);
 </script>
 </body>
 </html>
