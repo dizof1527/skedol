@@ -15,7 +15,7 @@
       --bg-grad-2: rgba(16, 185, 129, 0.12);
       --surface: rgba(18, 38, 27, 0.78); 
       --surface-hover: rgba(25, 52, 38, 0.94);
-      --header-bg: linear-gradient(155deg, rgba(22, 46, 33, 0.9), rgba(8, 20, 14, 0.96));
+      --header-bg: linear-gradient(155deg, rgba(22, 46, 33, 0.92), rgba(8, 20, 14, 0.98));
       --border: rgba(16, 185, 129, 0.22); 
       --border-accent: rgba(245, 158, 11, 0.4);
       --text: #f8fafc; 
@@ -25,7 +25,7 @@
       --prac: #10b981; 
       --prac-glow: rgba(16, 185, 129, 0.38);
       --lec: #fbbf24;
-      --dock-bg: rgba(10, 24, 17, 0.9);
+      --dock-bg: rgba(10, 24, 17, 0.92);
       --card-radius: 22px;
       --input-bg: rgba(0, 0, 0, 0.4);
     }
@@ -36,7 +36,7 @@
       --bg-grad-2: rgba(168, 85, 247, 0.14);
       --surface: rgba(19, 25, 46, 0.78); 
       --surface-hover: rgba(28, 37, 65, 0.94);
-      --header-bg: linear-gradient(155deg, rgba(25, 33, 60, 0.9), rgba(11, 15, 29, 0.96));
+      --header-bg: linear-gradient(155deg, rgba(25, 33, 60, 0.92), rgba(11, 15, 29, 0.98));
       --border: rgba(56, 189, 248, 0.22); 
       --border-accent: rgba(168, 85, 247, 0.45);
       --text: #f1f5f9; 
@@ -46,7 +46,7 @@
       --prac: #a855f7; 
       --prac-glow: rgba(168, 85, 247, 0.38);
       --lec: #38bdf8;
-      --dock-bg: rgba(13, 18, 34, 0.9);
+      --dock-bg: rgba(13, 18, 34, 0.92);
       --input-bg: rgba(0, 0, 0, 0.42);
     }
 
@@ -74,10 +74,10 @@
       --bg: #f1f5f9; 
       --bg-grad-1: rgba(16, 185, 129, 0.1);
       --bg-grad-2: rgba(245, 158, 11, 0.1);
-      --surface: rgba(255, 255, 255, 0.9); 
+      --surface: rgba(255, 255, 255, 0.92); 
       --surface-hover: #ffffff;
       --header-bg: linear-gradient(155deg, #ffffff, #f8fafc);
-      --border: rgba(15, 23, 42, 0.1); 
+      --border: rgba(15, 23, 42, 0.12); 
       --border-accent: rgba(245, 158, 11, 0.5);
       --text: #0f172a; 
       --text-muted: #64748b; 
@@ -86,8 +86,8 @@
       --prac: #059669; 
       --prac-glow: rgba(5, 150, 105, 0.28);
       --lec: #d97706;
-      --dock-bg: rgba(255, 255, 255, 0.92);
-      --input-bg: rgba(15, 23, 42, 0.05);
+      --dock-bg: rgba(255, 255, 255, 0.94);
+      --input-bg: rgba(15, 23, 42, 0.06);
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -107,7 +107,7 @@
     .header-card { 
       background: var(--header-bg); 
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border); border-radius: 26px; padding: 20px; margin-bottom: 16px; 
+      border: 1px solid var(--border); border-radius: 26px; padding: 20px; margin-bottom: 14px; 
       box-shadow: 0 16px 36px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.08); 
       position: relative; overflow: hidden;
       transition: background 0.35s ease, border-color 0.35s ease;
@@ -123,12 +123,13 @@
       100% { transform: rotate(16deg) translateY(-6px); }
     }
     
-    .top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; position: relative; z-index: 2; }
+    .top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; position: relative; z-index: 2; }
+    .title-left { display: flex; align-items: center; gap: 10px; }
     .title-wrap { display: flex; flex-direction: column; }
-    .uni-tag { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--prac); margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+    .uni-tag { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: var(--prac); margin-bottom: 2px; display: flex; align-items: center; gap: 5px; user-select: none; }
     
     .header-title { 
-      font-size: 1.85rem; font-weight: 900; letter-spacing: -0.5px; line-height: 1.1;
+      font-size: 1.75rem; font-weight: 900; letter-spacing: -0.5px; line-height: 1.1;
       background: linear-gradient(90deg, var(--text), var(--accent), var(--prac), var(--text));
       background-size: 300% 100%;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -138,23 +139,33 @@
       0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
     }
-    .header-date { color: var(--text-muted); font-size: 0.84rem; font-weight: 600; margin-top: 4px; }
+    .header-date { color: var(--text-muted); font-size: 0.82rem; font-weight: 600; margin-top: 3px; }
     
     .top-actions { display: flex; align-items: center; gap: 8px; }
     .action-btn {
-      width: 36px; height: 36px; border-radius: 12px; border: 1px solid var(--border);
-      background: var(--input-bg); color: var(--text); font-size: 1rem;
+      width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border);
+      background: var(--input-bg); color: var(--text); font-size: 1.1rem; font-weight: 800;
       display: flex; justify-content: center; align-items: center; cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s;
-      user-select: none;
+      transition: transform 0.2s, border-color 0.2s; user-select: none; flex-shrink: 0;
     }
-    .action-btn:active { transform: scale(0.85); }
+    .action-btn:active { transform: scale(0.88); }
 
     .week-badge-top {
       background: var(--input-bg); border: 1px solid var(--border-accent); color: var(--accent);
       padding: 7px 11px; border-radius: 12px; font-size: 0.74rem; font-weight: 800; text-align: right;
-      box-shadow: 0 4px 12px var(--accent-glow);
+      box-shadow: 0 4px 12px var(--accent-glow); cursor: pointer; user-select: none;
     }
+    .week-badge-top:active { transform: scale(0.92); }
+
+    /* Живой статус-бар звонков */
+    .live-bell-bar {
+      background: var(--input-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 8px 12px; margin-bottom: 12px; display: flex; justify-content: space-between;
+      align-items: center; font-size: 0.78rem; font-weight: 700; cursor: pointer;
+    }
+    .live-bell-bar:active { transform: scale(0.99); }
+    .lbb-left { display: flex; align-items: center; gap: 6px; color: var(--text); }
+    .lbb-right { color: var(--accent); font-weight: 800; }
     
     /* Поисковая панель */
     .search-box {
@@ -222,17 +233,17 @@
     
     /* Анимация карточек */
     @keyframes cardPop {
-      0% { opacity: 0; transform: translateY(22px) scale(0.95); }
+      0% { opacity: 0; transform: translateY(18px) scale(0.97); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
     
-    .lessons-list { display: flex; flex-direction: column; gap: 12px; min-height: 240px; }
+    .lessons-list { display: flex; flex-direction: column; gap: 12px; min-height: 220px; }
     
     .lesson-card { 
       background: var(--surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--border); border-radius: var(--card-radius); padding: 15px 16px; 
       position: relative; overflow: hidden; cursor: pointer; 
-      opacity: 0; animation: cardPop 0.42s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
+      opacity: 0; animation: cardPop 0.38s cubic-bezier(0.34, 1.45, 0.64, 1) forwards;
       transition: background 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s, opacity 0.3s;
       box-shadow: 0 8px 22px rgba(0,0,0,0.16);
     }
@@ -242,16 +253,13 @@
     .lesson-card.type-lec::before { background: linear-gradient(180deg, #fde047, #f59e0b); box-shadow: 0 0 12px rgba(251, 191, 36, 0.5); }
     .lesson-card.type-prac::before { background: linear-gradient(180deg, #34d399, #059669); box-shadow: 0 0 12px rgba(16, 185, 129, 0.5); }
     
-    /* Карточка текущей пары */
     .lesson-card.current {
       border-color: var(--accent);
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), var(--surface));
       box-shadow: 0 12px 30px var(--accent-glow);
     }
     .lesson-card.current::before { background: var(--accent); box-shadow: 0 0 15px var(--accent); }
-
-    /* Прошедшая пара */
-    .lesson-card.passed { opacity: 0.55; }
+    .lesson-card.passed { opacity: 0.58; }
     
     .card-main { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; }
     
@@ -289,7 +297,6 @@
     .lesson-card.expanded .card-details { grid-template-rows: 1fr; opacity: 1; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
     .details-inner { overflow: hidden; display: flex; flex-direction: column; gap: 10px; }
     
-    .detail-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
     .detail-item { display: flex; align-items: center; gap: 10px; background: var(--input-bg); padding: 8px 12px; border-radius: 12px; border: 1px solid var(--border); }
     .detail-icon { display: flex; justify-content: center; align-items: center; width: 32px; height: 32px; background: rgba(16, 185, 129, 0.12); color: var(--prac); border-radius: 9px; font-size: 1rem; flex-shrink: 0; }
     .detail-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; }
@@ -305,6 +312,20 @@
 
     .empty-state { text-align: center; padding: 48px 20px; color: var(--text-muted); background: var(--surface); border-radius: var(--card-radius); border: 1px dashed var(--border); animation: cardPop 0.4s both; }
     .emoji-lg { font-size: 3.2rem; margin-bottom: 10px; display: block; filter: drop-shadow(0 0 18px var(--accent-glow)); }
+
+    /* Секретная маленькая кнопка Менделеева в самом низу */
+    .secret-chem-wrap {
+      display: flex; justify-content: center; margin-top: 22px; margin-bottom: 6px;
+    }
+    .secret-chem-btn {
+      background: var(--input-bg); border: 1px dashed var(--border); color: var(--text-muted);
+      padding: 5px 12px; border-radius: 99px; font-size: 0.68rem; font-weight: 700;
+      opacity: 0.45; cursor: pointer; transition: all 0.25s; user-select: none;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .secret-chem-btn:hover, .secret-chem-btn:active {
+      opacity: 1; color: var(--prac); border-color: var(--prac); transform: scale(1.05);
+    }
     
     /* Нижний плавающий док */
     .bottom-dock {
@@ -328,15 +349,147 @@
     .watermark {
       position: fixed; bottom: 3px; right: 10px;
       font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px;
-      color: var(--text-muted); opacity: 0.4;
+      color: var(--text-muted); opacity: 0.45;
       pointer-events: none; z-index: 950; user-select: none;
     }
+
+    /* БОКОВОЕ МЕНЮ (Шторка слева) */
+    .sidebar-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+    
+    .sidebar {
+      position: fixed; top: 0; left: 0; bottom: 0; width: 300px; max-width: 85vw;
+      background: var(--header-bg); border-right: 1px solid var(--border);
+      z-index: 2001; transform: translateX(-100%); transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+      padding: 20px 18px; display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 15px 0 40px rgba(0,0,0,0.6); overflow-y: auto;
+    }
+    .sidebar.open { transform: translateX(0); }
+    
+    .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border); padding-bottom: 14px; }
+    .sidebar-title { font-size: 1.15rem; font-weight: 900; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .close-btn { background: var(--input-bg); border: 1px solid var(--border); color: var(--text); width: 32px; height: 32px; border-radius: 50%; font-size: 0.95rem; font-weight: 800; display: flex; justify-content: center; align-items: center; cursor: pointer; flex-shrink: 0; }
+    .close-btn:active { transform: scale(0.9); }
+    
+    .sidebar-content { display: flex; flex-direction: column; gap: 9px; flex: 1; }
+    .sidebar-section-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800; letter-spacing: 0.6px; margin-top: 6px; padding-left: 4px; }
+    
+    .sidebar-item {
+      background: var(--input-bg); border: 1px solid var(--border); border-radius: 14px;
+      padding: 11px 14px; color: var(--text); font-weight: 700; font-size: 0.86rem;
+      display: flex; align-items: center; gap: 11px; text-decoration: none; cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s; user-select: none;
+    }
+    .sidebar-item:hover { background: var(--surface-hover); border-color: var(--accent); }
+    .sidebar-item:active { transform: scale(0.97); }
+    .sidebar-item.tg-link { border-color: rgba(0, 136, 204, 0.45); background: rgba(0, 136, 204, 0.12); }
+    .sidebar-item.max-link { border-color: rgba(168, 85, 247, 0.45); background: rgba(168, 85, 247, 0.12); }
+    
+    .sidebar-footer { font-size: 0.72rem; color: var(--text-muted); text-align: center; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 16px; line-height: 1.4; }
+
+    /* МОДАЛЬНЫЕ ОКНА */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      z-index: 3000; display: none; justify-content: center; align-items: center; padding: 12px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      width: 100%; max-width: 520px; max-height: 88vh; background: var(--header-bg);
+      border: 1px solid var(--border); border-radius: 24px; padding: 18px;
+      display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+      overflow: hidden;
+    }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .modal-title { font-size: 1.05rem; font-weight: 900; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .modal-body { overflow-y: auto; flex: 1; padding-right: 2px; display: flex; flex-direction: column; gap: 12px; }
+
+    /* Таблица Менделеева и Калькулятор Эквивалента */
+    .molar-calc-box {
+      background: var(--input-bg); border: 1px solid var(--border-accent); border-radius: 14px; padding: 12px; flex-shrink: 0;
+    }
+    .molar-calc-title { font-size: 0.74rem; font-weight: 800; color: var(--accent); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .molar-row { display: flex; gap: 6px; align-items: center; }
+    .molar-input {
+      flex: 1; background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 10px;
+      padding: 8px 12px; color: var(--text); font-size: 0.88rem; font-weight: 700; outline: none;
+    }
+    .z-pills { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; align-items: center; }
+    .z-pill {
+      padding: 4px 8px; border-radius: 8px; font-size: 0.7rem; font-weight: 800;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text-muted); cursor: pointer;
+    }
+    .z-pill.active { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+    .molar-res { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-top: 8px; line-height: 1.45; background: rgba(0,0,0,0.25); padding: 8px 10px; border-radius: 10px; }
+
+    .chem-table-wrap { overflow-y: auto; border: 1px solid var(--border); border-radius: 14px; background: var(--input-bg); }
+    .chem-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; text-align: left; }
+    .chem-table th {
+      position: sticky; top: 0; background: #0f2218; color: var(--accent); font-weight: 800;
+      padding: 9px 10px; font-size: 0.72rem; text-transform: uppercase; border-bottom: 1px solid var(--border); z-index: 2;
+    }
+    [data-theme="light"] .chem-table th { background: #e2e8f0; color: #0f172a; }
+    [data-theme="cyber"] .chem-table th { background: #13192e; }
+    [data-theme="amoled"] .chem-table th { background: #141416; }
+
+    .chem-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text); font-weight: 600; }
+    .el-num { font-weight: 800; color: var(--text-muted); width: 38px; }
+    .el-sym { font-weight: 900; font-size: 0.98rem; color: var(--prac); width: 48px; }
+    .el-name { font-weight: 700; }
+    .el-mass { font-weight: 800; color: var(--accent); text-align: right; white-space: nowrap; }
+
+    /* Расписание перемен и пар */
+    .bells-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .bells-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-weight: 700; }
+    .break-row td { background: rgba(245, 158, 11, 0.08); color: var(--accent); font-size: 0.76rem; text-align: center; padding: 6px; }
+
+    /* Трекер лаб и зачётки */
+    .tracker-card {
+      background: var(--input-bg); border: 1px solid var(--border); border-radius: 14px;
+      padding: 12px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .tracker-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .tracker-subj { font-weight: 800; font-size: 0.9rem; color: var(--text); line-height: 1.25; }
+    .tracker-status-btn {
+      font-size: 0.7rem; font-weight: 800; padding: 4px 8px; border-radius: 8px; cursor: pointer;
+      border: 1px solid var(--border); user-select: none; white-space: nowrap; flex-shrink: 0;
+    }
+    .st-proc { background: rgba(148, 163, 184, 0.15); color: var(--text-muted); }
+    .st-debt { background: rgba(239, 68, 68, 0.2); color: #f87171; border-color: rgba(239, 68, 68, 0.45); }
+    .st-done { background: rgba(16, 185, 129, 0.2); color: #34d399; border-color: rgba(16, 185, 129, 0.45); }
+    .tracker-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+    .counter-box { display: flex; align-items: center; gap: 8px; }
+    .cnt-btn {
+      width: 26px; height: 26px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text); font-weight: 900; cursor: pointer;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .cnt-btn:active { transform: scale(0.9); }
+    .cnt-val { font-weight: 800; color: var(--accent); min-width: 55px; text-align: center; }
+
+    /* Сетка выбора недели 1-17 */
+    .weeks-picker { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+    .wp-btn {
+      padding: 8px 4px; border-radius: 10px; text-align: center; font-size: 0.78rem; font-weight: 800;
+      background: var(--input-bg); border: 1px solid var(--border); color: var(--text-muted); cursor: pointer;
+    }
+    .wp-btn.active { background: var(--prac); color: #fff; border-color: var(--prac); }
+    .wp-btn.real-wk { border-color: var(--accent); }
+
+    .fullweek-day {
+      background: var(--input-bg); border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px;
+    }
+    .fwd-title { font-size: 0.82rem; font-weight: 900; color: var(--accent); margin-bottom: 6px; text-transform: uppercase; display: flex; justify-content: space-between; }
+    .fwd-item { font-size: 0.78rem; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.06); display: flex; justify-content: space-between; gap: 8px; }
+    .fwd-item:last-child { border-bottom: none; }
 
     #toast { 
       position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); 
       background: linear-gradient(135deg, #065f46, #047857); color: #fff; padding: 12px 24px; 
       border-radius: 99px; font-weight: 800; font-size: 0.88rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-      border: 1px solid #34d399; transition: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 1000; 
+      border: 1px solid #34d399; transition: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 4000; 
       display: flex; align-items: center; gap: 8px; white-space: nowrap;
     }
     #toast.show { transform: translateX(-50%) translateY(0); }
@@ -346,6 +499,181 @@
 </head>
 <body>
 
+<!-- ЛЕВОЕ БОКОВОЕ МЕНЮ (Шторка по нажатию на ⋮) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div>
+    <div class="sidebar-header">
+      <div class="sidebar-title">🌾 Меню БашГАУ</div>
+      <button class="close-btn" onclick="closeSidebar()">✕</button>
+    </div>
+    <div class="sidebar-content">
+      <div class="sidebar-section-label">Полезные функции</div>
+      <div class="sidebar-item" onclick="closeSidebar(); openTrackerModal();">
+        <span>✅</span> <span>Зачётка (Трекер лаб и сдачи)</span>
+      </div>
+      <div class="sidebar-item" onclick="closeSidebar(); openTeachersModal();">
+        <span>👨‍🏫</span> <span>Преподаватели (Для титульников)</span>
+      </div>
+      <div class="sidebar-item" onclick="closeSidebar(); openWeekOverviewModal();">
+        <span>🗓</span> <span>Вся неделя и выбор нед. (1–17)</span>
+      </div>
+      <div class="sidebar-item" onclick="closeSidebar(); openNotesModal();">
+        <span>📌</span> <span>Все мои заметки и ДЗ</span>
+      </div>
+      <div class="sidebar-item" onclick="closeSidebar(); openModal('bellsModal');">
+        <span>🔔</span> <span>Расписание пар и перемен</span>
+      </div>
+      <div class="sidebar-item" onclick="cycleTheme()">
+        <span id="menuThemeIcon">🌾</span> <span>Поменять тему</span>
+      </div>
+
+      <div class="sidebar-section-label" style="margin-top: 10px;">Сообщить об ошибке</div>
+      <a href="https://t.me/csenchis" target="_blank" class="sidebar-item tg-link">
+        <span>✈️</span> <span>Написать в Telegram (@csenchis)</span>
+      </a>
+      <a href="https://max.ru/u/f9LHodD0cOLBig0ncSmZu-eTLwPD-Hm-RjLt9f2f7IFpYJJtNziGpqJPshc" target="_blank" class="sidebar-item max-link">
+        <span>🟣</span> <span>Написать в MAX</span>
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    Расписание БашГАУ • ФПТ PRO<br>by Csenchis (@csenchis)
+  </div>
+</div>
+
+<!-- 1. МОДАЛЬНОЕ ОКНО: ТРЕКЕР ЛАБ И ЗАЧЁТОВ (ЭЛЕКТРОННАЯ ЗАЧЁТКА) -->
+<div class="modal-overlay" id="trackerModal" onclick="if(event.target===this) closeModal('trackerModal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">✅ Зачётка и Трекер лаб</div>
+      <button class="close-btn" onclick="closeModal('trackerModal')">✕</button>
+    </div>
+    <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:8px;font-weight:600;">
+      Отмечай сданные лабораторные/практики и меняй статус каждого предмета (сохраняется автоматически):
+    </div>
+    <div class="modal-body" id="trackerBody"></div>
+  </div>
+</div>
+
+<!-- 2. МОДАЛЬНОЕ ОКНО: БАЗА ПРЕПОДАВАТЕЛЕЙ (ДЛЯ ТИТУЛЬНИКОВ) -->
+<div class="modal-overlay" id="teachersModal" onclick="if(event.target===this) closeModal('teachersModal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">👨‍🏫 Преподаватели группы</div>
+      <button class="close-btn" onclick="closeModal('teachersModal')">✕</button>
+    </div>
+    <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:8px;font-weight:600;">
+      Нажми на любого преподавателя, чтобы скопировать его должность и ФИО для титульного листа:
+    </div>
+    <div class="modal-body" id="teachersBody"></div>
+  </div>
+</div>
+
+<!-- 3. МОДАЛЬНОЕ ОКНО: ОБЗОР ВСЕЙ НЕДЕЛИ И ВЫБОР НЕДЕЛИ (1–17) -->
+<div class="modal-overlay" id="weekOverviewModal" onclick="if(event.target===this) closeModal('weekOverviewModal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">🗓 Машина времени (1–17 нед.)</div>
+      <button class="close-btn" onclick="closeModal('weekOverviewModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:0.76rem;color:var(--text-muted);font-weight:700;">
+        Выбери любую учебную неделю, чтобы проверить, какие пары будут идти на ней с учётом фильтра дат:
+      </div>
+      <div class="weeks-picker" id="weeksPickerGrid"></div>
+      <button class="dock-btn btn-today" style="width:100%;flex:none;padding:9px;" onclick="resetToRealWeek()">🔄 Вернуть реальную текущую неделю</button>
+      <div style="font-size:0.78rem;font-weight:800;color:var(--prac);margin-top:4px;" id="fullWeekHeaderTitle">Обзор всей недели:</div>
+      <div id="fullWeekList" style="display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО: РАСПИСАНИЕ ПАР И ПЕРЕМЕН -->
+<div class="modal-overlay" id="bellsModal" onclick="if(event.target===this) closeModal('bellsModal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">🔔 Расписание пар и перемен</div>
+      <button class="close-btn" onclick="closeModal('bellsModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="chem-table-wrap">
+        <table class="bells-table">
+          <tbody>
+            <tr><td>1 пара</td><td style="text-align:right;color:var(--prac);">08:30 – 10:05</td></tr>
+            <tr class="break-row"><td colspan="2">☕ Перемена: 15 минут (10:05 – 10:20)</td></tr>
+            <tr><td>2 пара</td><td style="text-align:right;color:var(--prac);">10:20 – 11:55</td></tr>
+            <tr class="break-row"><td colspan="2">🍽 Большая перемена: 60 минут (11:55 – 12:55)</td></tr>
+            <tr><td>3 пара</td><td style="text-align:right;color:var(--prac);">12:55 – 14:30</td></tr>
+            <tr class="break-row"><td colspan="2">☕ Перемена: 15 минут (14:30 – 14:45)</td></tr>
+            <tr><td>4 пара</td><td style="text-align:right;color:var(--prac);">14:45 – 16:20</td></tr>
+            <tr class="break-row"><td colspan="2">☕ Перемена: 15 минут (16:20 – 16:35)</td></tr>
+            <tr><td>5 пара</td><td style="text-align:right;color:var(--prac);">16:35 – 18:10</td></tr>
+            <tr class="break-row"><td colspan="2">☕ Перемена: 15 минут (18:10 – 18:25)</td></tr>
+            <tr><td>6 пара</td><td style="text-align:right;color:var(--prac);">18:25 – 20:00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО: ВСЕ ЗАМЕТКИ И ДЗ -->
+<div class="modal-overlay" id="notesModal" onclick="if(event.target===this) closeModal('notesModal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">📌 Все мои заметки и ДЗ</div>
+      <button class="close-btn" onclick="closeModal('notesModal')">✕</button>
+    </div>
+    <div class="modal-body" id="allNotesBody"></div>
+  </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО: ТАБЛИЦА МЕНДЕЛЕЕВА + ЭКВИВАЛЕНТ (Пасхалка внизу) -->
+<div class="modal-overlay" id="chemModal" onclick="if(event.target===this) closeModal('chemModal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">🧪 Менделеев и Эквивалент</div>
+      <button class="close-btn" onclick="closeModal('chemModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="molar-calc-box">
+        <div class="molar-calc-title">⚖️ Молярная масса и Эквивалент соединений</div>
+        <div class="molar-row">
+          <input type="text" class="molar-input" id="molarInput" placeholder="Формула: H2SO4, Ca(OH)2, Al2(SO4)3, Fe2O3..." oninput="calcEquivalent()">
+        </div>
+        <div class="z-pills" id="zPills">
+          <span style="font-size:0.7rem;color:var(--text-muted);font-weight:700;">Число z:</span>
+          <span class="z-pill active" onclick="setCustomZ(0)">Авто</span>
+          <span class="z-pill" onclick="setCustomZ(1)">z=1</span>
+          <span class="z-pill" onclick="setCustomZ(2)">z=2</span>
+          <span class="z-pill" onclick="setCustomZ(3)">z=3</span>
+          <span class="z-pill" onclick="setCustomZ(4)">z=4</span>
+          <span class="z-pill" onclick="setCustomZ(6)">z=6</span>
+        </div>
+        <div class="molar-res" id="molarRes">Введи формулу (например: <b>H2SO4</b>, <b>Ca(OH)2</b>, <b>Al2O3</b>) — расчёт появится мгновенно.</div>
+      </div>
+
+      <input type="text" class="search-input" id="chemSearch" placeholder="🔎 Поиск элемента (Fe, Железо, 26)..." oninput="renderChemTable()">
+
+      <div class="chem-table-wrap">
+        <table class="chem-table">
+          <thead>
+            <tr>
+              <th>№</th>
+              <th>Симв.</th>
+              <th>Название</th>
+              <th style="text-align:right;">Масса</th>
+            </tr>
+          </thead>
+          <tbody id="chemTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ОСНОВНОЙ ЭКРАН РАСПИСАНИЯ -->
 <div class="container" id="touchArea">
   <div class="header-card">
     <svg class="wheat-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -353,16 +681,26 @@
     </svg>
 
     <div class="top-bar">
-      <div class="title-wrap">
-        <div class="uni-tag">🌾 БашГАУ • ФПТ</div>
-        <div class="header-title" id="appTitle">АИП 101</div>
-        <div class="header-date" id="curDate">Загрузка...</div>
+      <div class="title-left">
+        <!-- КНОПКА ТРИ ТОЧКИ СЛЕВА -->
+        <button class="action-btn" onclick="openSidebar()" title="Меню">⋮</button>
+        <div class="title-wrap">
+          <div class="uni-tag">🌾 БашГАУ • ФПТ</div>
+          <div class="header-title" id="appTitle">АИП 101</div>
+          <div class="header-date" id="curDate">Загрузка...</div>
+        </div>
       </div>
       <div class="top-actions">
         <button class="action-btn" onclick="toggleSearch()" title="Поиск">🔍</button>
         <button class="action-btn" id="themeBtn" onclick="cycleTheme()" title="Сменить тему">🌾</button>
-        <div class="week-badge-top" id="actualWeekBadge">7 нед.</div>
+        <div class="week-badge-top" id="actualWeekBadge" onclick="openWeekOverviewModal()" title="Выбрать неделю">7 нед.</div>
       </div>
+    </div>
+
+    <!-- ЖИВОЙ ТАЙМЕР ЗВОНКОВ И ПЕРЕМЕН -->
+    <div class="live-bell-bar" onclick="openModal('bellsModal')">
+      <span class="lbb-left" id="liveBellStatus">🔔 Расписание звонков и перемен</span>
+      <span class="lbb-right" id="liveBellTimer">Открыть ➔</span>
     </div>
     
     <!-- ПОИСКОВАЯ СТРОКА -->
@@ -401,6 +739,11 @@
   
   <div class="days-grid" id="daysNav"></div>
   <div class="lessons-list" id="lesCont"></div>
+
+  <!-- МАЛЕНЬКАЯ КНОПКА-ПАСХАЛКА В САМОМ НИЗУ ДЛЯ ТАБЛИЦЫ МЕНДЕЛЕЕВА -->
+  <div class="secret-chem-wrap">
+    <button class="secret-chem-btn" onclick="openModal('chemModal')">🧪 H₂O • Таблица Менделеева</button>
+  </div>
 </div>
 
 <div class="bottom-dock">
@@ -415,6 +758,7 @@
 <div id="toast">✅ Готово!</div>
 
 <script>
+  // 1. БАЗА РАСПИСАНИЯ
   const ALL_DATA = {
     AIP101: [
       {d: 1, p: 1, t: "prac", s: "Иностранный язык", r: "251/1", tech: "доц. Гарипова Г.Р.", n: "2-13 нед. (кр. 7)", sg: 2, ws: [2,3,4,5,6,8,9,10,11,12,13]}, 
@@ -551,20 +895,504 @@
     { id: 'light', icon: '☀️', name: 'Дневная Светлая', color: '#f1f5f9' }
   ];
 
+  // 2. ПОЛНАЯ БАЗА ТАБЛИЦЫ МЕНДЕЛЕЕВА (1-118)
+  const ELEMENTS = [
+    [1,"H","Водород",1.008],[2,"He","Гелий",4.003],[3,"Li","Литий",6.94],[4,"Be","Бериллий",9.012],
+    [5,"B","Бор",10.81],[6,"C","Углерод",12.011],[7,"N","Азот",14.007],[8,"O","Кислород",15.999],
+    [9,"F","Фтор",18.998],[10,"Ne","Неон",20.18],[11,"Na","Натрий",22.99],[12,"Mg","Магний",24.305],
+    [13,"Al","Алюминий",26.982],[14,"Si","Кремний",28.085],[15,"P","Фосфор",30.974],[16,"S","Сера",32.06],
+    [17,"Cl","Хлор",35.45],[18,"Ar","Аргон",39.948],[19,"K","Калий",39.098],[20,"Ca","Кальций",40.078],
+    [21,"Sc","Скандий",44.956],[22,"Ti","Титан",47.867],[23,"V","Ванадий",50.942],[24,"Cr","Хром",51.996],
+    [25,"Mn","Марганец",54.938],[26,"Fe","Железо",55.845],[27,"Co","Кобальт",58.933],[28,"Ni","Никель",58.693],
+    [29,"Cu","Медь",63.546],[30,"Zn","Цинк",65.38],[31,"Ga","Галлий",69.723],[32,"Ge","Германий",72.63],
+    [33,"As","Мышьяк",74.922],[34,"Se","Селен",78.971],[35,"Br","Бром",79.904],[36,"Kr","Криптон",83.798],
+    [37,"Rb","Рубидий",85.468],[38,"Sr","Стронций",87.62],[39,"Y","Иттрий",88.906],[40,"Zr","Цирконий",91.224],
+    [41,"Nb","Ниобий",92.906],[42,"Mo","Молибден",95.95],[43,"Tc","Технеций",98],[44,"Ru","Рутений",101.07],
+    [45,"Rh","Родий",102.91],[46,"Pd","Палладий",106.42],[47,"Ag","Серебро",107.87],[48,"Cd","Кадмий",112.41],
+    [49,"In","Индий",114.82],[50,"Sn","Олово",118.71],[51,"Sb","Сурьма",121.76],[52,"Te","Теллур",127.6],
+    [53,"I","Иод",126.9],[54,"Xe","Ксенон",131.29],[55,"Cs","Цезий",132.91],[56,"Ba","Барий",137.33],
+    [57,"La","Лантан",138.91],[58,"Ce","Церий",140.12],[59,"Pr","Празеодим",140.91],[60,"Nd","Неодим",144.24],
+    [61,"Pm","Прометий",145],[62,"Sm","Самарий",150.36],[63,"Eu","Европий",151.96],[64,"Gd","Гадолиний",157.25],
+    [65,"Tb","Тербий",158.93],[66,"Dy","Диспрозий",162.5],[67,"Ho","Гольмий",164.93],[68,"Er","Эрбий",167.26],
+    [69,"Tm","Тулий",168.93],[70,"Yb","Иттербий",173.05],[71,"Lu","Лютеций",174.97],[72,"Hf","Гафний",178.49],
+    [73,"Ta","Тантал",180.95],[74,"W","Вольфрам",183.84],[75,"Re","Рений",186.21],[76,"Os","Осмий",190.23],
+    [77,"Ir","Иридий",192.22],[78,"Pt","Платина",195.08],[79,"Au","Золото",196.97],[80,"Hg","Ртуть",200.59],
+    [81,"Tl","Таллий",204.38],[82,"Pb","Свинец",207.2],[83,"Bi","Висмут",208.98],[84,"Po","Полоний",209],
+    [85,"At","Астат",210],[86,"Rn","Радон",222],[87,"Fr","Франций",223],[88,"Ra","Радий",226],
+    [89,"Ac","Актиний",227],[90,"Th","Торий",232.04],[91,"Pa","Протактиний",231.04],[92,"U","Уран",238.03],
+    [93,"Np","Нептуний",237],[94,"Pu","Плутоний",244],[95,"Am","Америций",243],[96,"Cm","Кюрий",247],
+    [97,"Bk","Берклий",247],[98,"Cf","Калифорний",251],[99,"Es","Эйнштейний",252],[100,"Fm","Фермий",257],
+    [101,"Md","Менделевий",258],[102,"No","Нобелий",259],[103,"Lr","Лоуренсий",266],[104,"Rf","Резерфордий",267],
+    [105,"Db","Дубний",268],[106,"Sg","Сиборгий",269],[107,"Bh","Борий",270],[108,"Hs","Хассий",277],
+    [109,"Mt","Мейтнерий",278],[110,"Ds","Дармштадтий",281],[111,"Rg","Рентгений",282],[112,"Cn","Коперниций",285],
+    [113,"Nh","Нихоний",286],[114,"Fl","Флеровий",289],[115,"Mc","Московий",290],[116,"Lv","Ливерморий",293],
+    [117,"Ts","Теннессин",294],[118,"Og","Оганесон",294]
+  ];
+
+  const VALENCES = {
+    H:1, Li:1, Na:1, K:1, Rb:1, Cs:1, Ag:1, F:1,
+    Be:2, Mg:2, Ca:2, Sr:2, Ba:2, Zn:2, Cd:2, Hg:2, Cu:2, Fe:2, Co:2, Ni:2, Mn:2, Pb:2, Sn:2, O:2,
+    B:3, Al:3, Sc:3, Ga:3, In:3, Bi:3, Cr:3, Au:3,
+    C:4, Si:4, Ti:4, Zr:4, Pt:4,
+    N:3, P:5, S:2, Cl:1, Br:1, I:1
+  };
+
   function vib() { if(navigator.vibrate) navigator.vibrate(12); }
 
   function showToast(msg) {
     let toast = document.getElementById('toast');
+    if(!toast) return;
     toast.innerHTML = msg;
     toast.classList.add('show');
     clearTimeout(window.toastTimer);
     window.toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
   }
 
+  function copyRawText(txt, toastMsg) {
+    vib();
+    let tf = document.getElementById("clipboardFix");
+    tf.value = txt;
+    tf.select();
+    tf.setSelectionRange(0, 99999);
+    try {
+      document.execCommand("copy");
+      showToast(toastMsg || '📋 Скопировано!');
+    } catch (e) {}
+  }
+
+  // УПРАВЛЕНИЕ БОКОВЫМ МЕНЮ И МОДАЛКАМИ
+  function openSidebar() {
+    vib();
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('sidebarOverlay').classList.add('open');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+  }
+  function openModal(id) {
+    vib();
+    document.getElementById(id).classList.add('open');
+    if(id === 'chemModal') renderChemTable();
+  }
+  function closeModal(id) {
+    vib();
+    document.getElementById(id).classList.remove('open');
+  }
+
+  // НОВАЯ ФУНКЦИЯ 1: ЗАЧЁТКА (ТРЕКЕР СДАЧИ ЛАБ И ПРАКТИК)
+  const STATUS_LIST = [
+    { id: 0, text: '⏳ В процессе', cls: 'st-proc' },
+    { id: 1, text: '🔥 Долг / Сдать', cls: 'st-debt' },
+    { id: 2, text: '✅ Сдано / Зачёт', cls: 'st-done' }
+  ];
+
+  function getUniqueSubjectsForGroup(grp) {
+    let list = ALL_DATA[grp] || ALL_DATA.AIP101;
+    let map = new Map();
+    list.forEach(item => {
+      if(item.s.includes('Кураторский') || item.s.includes('Единое время')) return;
+      if(!map.has(item.s)) {
+        map.set(item.s, { s: item.s, tech: item.tech });
+      }
+    });
+    return Array.from(map.values());
+  }
+
+  function openTrackerModal() {
+    vib();
+    renderTracker();
+    document.getElementById('trackerModal').classList.add('open');
+  }
+
+  function renderTracker() {
+    let subjects = getUniqueSubjectsForGroup(st.grp);
+    const box = document.getElementById('trackerBody');
+    box.innerHTML = subjects.map((item, idx) => {
+      let key = `trk_${st.grp}_${item.s}`;
+      let saved = JSON.parse(localStorage.getItem(key) || '{"cnt":0,"st":0}');
+      let stObj = STATUS_LIST[saved.st] || STATUS_LIST[0];
+      return `
+        <div class="tracker-card">
+          <div class="tracker-top">
+            <div>
+              <div class="tracker-subj">${item.s}</div>
+              <div style="font-size:0.72rem;color:var(--text-muted);margin-top:2px;">👨‍🏫 ${item.tech}</div>
+            </div>
+            <div class="tracker-status-btn ${stObj.cls}" onclick="cycleSubjectStatus(${idx})">${stObj.text}</div>
+          </div>
+          <div class="tracker-bottom">
+            <span>Сдано лаб / работ:</span>
+            <div class="counter-box">
+              <button class="cnt-btn" onclick="changeLabCount(${idx}, -1)">−</button>
+              <span class="cnt-val">${saved.cnt} шт.</span>
+              <button class="cnt-btn" onclick="changeLabCount(${idx}, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function changeLabCount(idx, delta) {
+    vib();
+    let subjects = getUniqueSubjectsForGroup(st.grp);
+    let subj = subjects[idx];
+    if(!subj) return;
+    let key = `trk_${st.grp}_${subj.s}`;
+    let saved = JSON.parse(localStorage.getItem(key) || '{"cnt":0,"st":0}');
+    saved.cnt = Math.max(0, saved.cnt + delta);
+    localStorage.setItem(key, JSON.stringify(saved));
+    renderTracker();
+  }
+
+  function cycleSubjectStatus(idx) {
+    vib();
+    let subjects = getUniqueSubjectsForGroup(st.grp);
+    let subj = subjects[idx];
+    if(!subj) return;
+    let key = `trk_${st.grp}_${subj.s}`;
+    let saved = JSON.parse(localStorage.getItem(key) || '{"cnt":0,"st":0}');
+    saved.st = (saved.st + 1) % STATUS_LIST.length;
+    localStorage.setItem(key, JSON.stringify(saved));
+    renderTracker();
+  }
+
+  // НОВАЯ ФУНКЦИЯ 2: СПРАВОЧНИК ПРЕПОДАВАТЕЛЕЙ (КОПИРОВАНИЕ ДЛЯ ТИТУЛЬНИКОВ)
+  function openTeachersModal() {
+    vib();
+    let list = ALL_DATA[st.grp] || ALL_DATA.AIP101;
+    let tMap = new Map();
+    list.forEach(x => {
+      if(!x.tech || x.tech === 'Куратор' || x.tech === 'Преподаватели') return;
+      if(!tMap.has(x.tech)) {
+        tMap.set(x.tech, { tech: x.tech, subjects: new Set(), rooms: new Set() });
+      }
+      tMap.get(x.tech).subjects.add(`${x.s} (${x.t === 'lec' ? 'Лек' : 'Прак'})`);
+      if(x.r) tMap.get(x.tech).rooms.add(x.r);
+    });
+
+    const box = document.getElementById('teachersBody');
+    box.innerHTML = Array.from(tMap.values()).map(item => {
+      let safeTech = item.tech.replace(/'/g, "\\'");
+      return `
+        <div class="detail-item" style="cursor:pointer;justify-content:space-between;" onclick="copyRawText('${safeTech}', '📋 Скопировано: ${safeTech}')">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="detail-icon">👨‍🏫</div>
+            <div>
+              <div class="detail-val">${item.tech}</div>
+              <div class="detail-label" style="margin-top:2px;">📚 ${Array.from(item.subjects).join(', ')}</div>
+              <div class="detail-label" style="color:var(--accent);">🚪 Ауд: ${Array.from(item.rooms).join(', ')}</div>
+            </div>
+          </div>
+          <span style="font-size:0.85rem;color:var(--prac);font-weight:800;padding-left:6px;">📋</span>
+        </div>
+      `;
+    }).join('');
+    document.getElementById('teachersModal').classList.add('open');
+  }
+
+  // НОВАЯ ФУНКЦИЯ 3: ОБЗОР ВСЕЙ НЕДЕЛИ И ПРОСМОТР ЛЮБОЙ НЕДЕЛИ (1–17)
+  function openWeekOverviewModal() {
+    vib();
+    renderWeekOverview();
+    document.getElementById('weekOverviewModal').classList.add('open');
+  }
+
+  function selectCustomWeek(wNum) {
+    vib();
+    currentActualWeek = wNum;
+    let parity = wNum % 2 === 0 ? 2 : 1;
+    setW(parity);
+    initHeader();
+    renderWeekOverview();
+    showToast(`🗓 Включен просмотр ${wNum}-й недели`);
+  }
+
+  function resetToRealWeek() {
+    vib();
+    currentActualWeek = getActualWeekNum();
+    let parity = currentActualWeek % 2 === 0 ? 2 : 1;
+    setW(parity);
+    initHeader();
+    renderWeekOverview();
+    showToast(`🎯 Возвращена текущая (${currentActualWeek}-я) неделя`);
+  }
+
+  function renderWeekOverview() {
+    let realW = getActualWeekNum();
+    let pickerHtml = '';
+    for(let w = 1; w <= 17; w++) {
+      let cls = 'wp-btn';
+      if(w === currentActualWeek) cls += ' active';
+      else if(w === realW) cls += ' real-wk';
+      pickerHtml += `<div class="${cls}" onclick="selectCustomWeek(${w})">${w} нед</div>`;
+    }
+    document.getElementById('weeksPickerGrid').innerHTML = pickerHtml;
+
+    let parity = currentActualWeek % 2 === 0 ? 2 : 1;
+    document.getElementById('fullWeekHeaderTitle').innerText = `Расписание на всю ${currentActualWeek}-ю неделю (${parity === 1 ? 'Нечетная' : 'Четная'}):`;
+
+    let curGroupData = ALL_DATA[st.grp] || ALL_DATA.AIP101;
+    let dayNamesFull = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+    let fullHtml = '';
+
+    for(let d = 1; d <= 6; d++) {
+      let dayLessons = curGroupData.filter(x => {
+        if(x.d !== d) return false;
+        if(st.sg !== 0 && x.sg !== 0 && x.sg !== st.sg) return false;
+        return x.ws.includes(currentActualWeek);
+      }).sort((a,b) => a.p - b.p);
+
+      fullHtml += `<div class="fullweek-day">
+        <div class="fwd-title"><span>${dayNamesFull[d-1]}</span><span>${dayLessons.length} пар(ы)</span></div>
+        ${dayLessons.length ? dayLessons.map(x => `
+          <div class="fwd-item">
+            <span><b>${x.p}) ${BELLS[x.p].s}</b> — ${x.s} ${x.sg ? `(${x.sg} ПГ)` : ''}</span>
+            <span style="color:var(--prac);font-weight:800;white-space:nowrap;">${x.r}</span>
+          </div>
+        `).join('') : `<div style="font-size:0.75rem;color:var(--text-muted);">Пар нет 🎉</div>`}
+      </div>`;
+    }
+    document.getElementById('fullWeekList').innerHTML = fullHtml;
+  }
+
+  // СВОДКА ВСЕХ ЗАМЕТОК И ДЗ
+  function openNotesModal() {
+    vib();
+    const box = document.getElementById('allNotesBody');
+    let items = [];
+    for(let i = 0; i < localStorage.length; i++) {
+      let k = localStorage.key(i);
+      if(k && k.startsWith('note_')) {
+        let val = localStorage.getItem(k);
+        if(val && val.trim()) {
+          let raw = k.replace('note_', '');
+          let parts = raw.split('_');
+          let grp = parts[0] === 'AIP101' ? 'АИП 101' : (parts[0] === 'TOP101' ? 'ТОП 101' : 'ТОП 102');
+          let subj = parts.slice(1).join('_');
+          items.push({ key: raw, grp, subj, val });
+        }
+      }
+    }
+    if(items.length === 0) {
+      box.innerHTML = `<div style="text-align:center;padding:30px 10px;color:var(--text-muted);font-weight:600;">У тебя пока нет сохранённых заметок.<br><span style="font-size:0.78rem;">Нажми на любую пару в расписании, чтобы записать ДЗ!</span></div>`;
+    } else {
+      box.innerHTML = items.map(it => `
+        <div class="detail-item" style="justify-content:space-between;">
+          <div>
+            <div class="detail-label">${it.grp} • ${it.subj}</div>
+            <div class="detail-val" style="margin-top:2px;">📌 ${it.val}</div>
+          </div>
+          <button class="close-btn" style="color:#f87171;" onclick="deleteNoteFromModal('${it.key}')" title="Удалить">✕</button>
+        </div>
+      `).join('');
+    }
+    document.getElementById('notesModal').classList.add('open');
+  }
+
+  function deleteNoteFromModal(key) {
+    localStorage.removeItem('note_' + key);
+    openNotesModal();
+    render();
+    showToast('🗑 Заметка удалена');
+  }
+
+  // ТАБЛИЦА МЕНДЕЛЕЕВА И КАЛЬКУЛЯТОР ЭКВИВАЛЕНТА ВЕЩЕСТВ
+  let customZ = 0;
+  function setCustomZ(z) {
+    vib();
+    customZ = z;
+    const pills = document.querySelectorAll('#zPills .z-pill');
+    const zVals = [0, 1, 2, 3, 4, 6];
+    pills.forEach((p, idx) => p.classList.toggle('active', zVals[idx] === z));
+    calcEquivalent();
+  }
+
+  function renderChemTable() {
+    let q = (document.getElementById('chemSearch').value || '').toLowerCase().trim();
+    let filtered = ELEMENTS.filter(el => {
+      if(!q) return true;
+      return String(el[0]) === q || el[1].toLowerCase().includes(q) || el[2].toLowerCase().includes(q);
+    });
+    document.getElementById('chemTableBody').innerHTML = filtered.map(el => {
+      let roundMass = el[1] === 'Cl' ? '35.5' : Math.round(el[3]);
+      return `<tr>
+        <td class="el-num">${el[0]}</td>
+        <td class="el-sym">${el[1]}</td>
+        <td class="el-name">${el[2]}</td>
+        <td class="el-mass">${roundMass} <span style="font-size:0.7rem;color:var(--text-muted);font-weight:500;">(${el[3]})</span></td>
+      </tr>`;
+    }).join('');
+  }
+
+  function calcEquivalent() {
+    let formula = document.getElementById('molarInput').value.trim();
+    let resBox = document.getElementById('molarRes');
+    if(!formula) {
+      resBox.innerHTML = 'Введи формулу (например: <b>H2SO4</b>, <b>Ca(OH)2</b>, <b>Al2O3</b>) — расчёт появится мгновенно.';
+      return;
+    }
+
+    try {
+      const massMap = {};
+      ELEMENTS.forEach(e => massMap[e[1]] = e[3]);
+
+      function parseGroup(str) {
+        let stack = [{}];
+        let i = 0;
+        while(i < str.length) {
+          if(str[i] === '(') {
+            stack.push({}); i++;
+          } else if(str[i] === ')') {
+            i++;
+            let numStr = '';
+            while(i < str.length && /\d/.test(str[i])) { numStr += str[i]; i++; }
+            let mult = numStr ? parseInt(numStr, 10) : 1;
+            let top = stack.pop();
+            let curr = stack[stack.length - 1];
+            for(let k in top) curr[k] = (curr[k] || 0) + top[k] * mult;
+          } else if(/[A-Z]/.test(str[i])) {
+            let sym = str[i]; i++;
+            while(i < str.length && /[a-z]/.test(str[i])) { sym += str[i]; i++; }
+            let numStr = '';
+            while(i < str.length && /\d/.test(str[i])) { numStr += str[i]; i++; }
+            let count = numStr ? parseInt(numStr, 10) : 1;
+            let curr = stack[stack.length - 1];
+            curr[sym] = (curr[sym] || 0) + count;
+          } else { i++; }
+        }
+        return stack[0];
+      }
+
+      let counts = parseGroup(formula);
+      let keys = Object.keys(counts);
+      if(keys.length === 0) { resBox.innerText = 'Введи корректную формулу (заглавными буквами)'; return; }
+
+      let totalM = 0;
+      for(let sym of keys) {
+        if(!massMap[sym]) { resBox.innerHTML = `❌ Неизвестный элемент: <b>${sym}</b>`; return; }
+        totalM += massMap[sym] * counts[sym];
+      }
+
+      let z = 1;
+      let typeDesc = 'Вещество';
+
+      if(customZ > 0) {
+        z = customZ;
+        typeDesc = `Ручной выбор (z = ${z})`;
+      } else if(keys.length === 1) {
+        let sym = keys[0];
+        let v = VALENCES[sym] || 1;
+        z = v * counts[sym];
+        typeDesc = `Простое в-во / Элемент (валентность ≈ ${v})`;
+      } else if(formula === 'H2O' || formula === 'H2O2') {
+        z = 2;
+        typeDesc = 'Оксид водорода (z = 2)';
+      } else if(formula.includes('OH')) {
+        let m = formula.match(/\(OH\)(\d+)/);
+        z = m ? parseInt(m[1], 10) : 1;
+        typeDesc = `Основание / Гидроксид (групп OH⁻: ${z})`;
+      } else if(formula.startsWith('H') && counts['H']) {
+        z = counts['H'];
+        typeDesc = `Кислота (основность H⁺: ${z})`;
+      } else if(keys.length === 2 && counts['O']) {
+        z = counts['O'] * 2;
+        typeDesc = `Оксид (суммарный заряд O²⁻: ${z})`;
+      } else {
+        let firstEl = keys[0];
+        if(formula.includes('SO4') || formula.includes('SO3') || formula.includes('CO3') || formula.includes('SiO3')) {
+          let m = formula.match(/\((SO4\vert{}SO3\vert{}CO3\vert{}SiO3)\)(\d+)/);
+          let nRad = m ? parseInt(m[2], 10) : 1;
+          z = nRad * 2;
+        } else if(formula.includes('PO4')) {
+          let m = formula.match(/\(PO4\)(\d+)/);
+          let nRad = m ? parseInt(m[1], 10) : 1;
+          z = nRad * 3;
+        } else {
+          let v = VALENCES[firstEl] || 1;
+          z = counts[firstEl] * v;
+        }
+        typeDesc = `Соль / Соединение (z = ${z})`;
+      }
+
+      let mEq = totalM / z;
+      let fEq = z === 1 ? '1' : `1/${z} (${(1/z).toFixed(2)})`;
+
+      resBox.innerHTML = `
+        <div>🧪 <b>Тип:</b> ${typeDesc}</div>
+        <div>⚖️ <b>Молярная масса (M):</b> <span style="color:var(--prac);">${totalM.toFixed(2)} г/моль</span></div>
+        <div>🔢 <b>Фактор эквивалентности (f<sub>экв</sub>):</b> ${fEq}</div>
+        <div>🎯 <b>Масса эквивалента (M<sub>экв</sub>):</b> <span style="color:var(--accent);font-size:0.95rem;">${mEq.toFixed(2)} г/моль</span></div>
+      `;
+    } catch(e) {
+      resBox.innerText = 'Проверь правильность написания скобок и индексов';
+    }
+  }
+
+  // ЖИВОЙ ТАЙМЕР ЗВОНКОВ И ПЕРЕМЕН
+  function toM(s) { let p=s.split(':'); return p[0]*60 + +p[1]; }
+
+  function updateLiveBellBar() {
+    let statusEl = document.getElementById('liveBellStatus');
+    let timerEl = document.getElementById('liveBellTimer');
+    if(!statusEl || !timerEl) return;
+
+    let n = new Date();
+    let day = n.getDay();
+    if(day === 0) {
+      statusEl.innerText = "🎉 Воскресенье — выходной!";
+      timerEl.innerText = "Звонки ➔";
+      return;
+    }
+
+    let nm = n.getHours() * 60 + n.getMinutes();
+    let firstStart = toM(BELLS[1].s);
+    let lastEnd = toM(BELLS[6].e);
+
+    if(nm < firstStart) {
+      let diff = firstStart - nm;
+      let h = Math.floor(diff / 60), m = diff % 60;
+      statusEl.innerText = "☀️ До начала 1-й пары:";
+      timerEl.innerText = (h > 0 ? `${h} ч ` : '') + `${m} мин`;
+      return;
+    }
+
+    if(nm >= lastEnd) {
+      statusEl.innerText = "🌙 Учебный день завершён";
+      timerEl.innerText = "Звонки ➔";
+      return;
+    }
+
+    for(let p = 1; p <= 6; p++) {
+      let sm = toM(BELLS[p].s);
+      let em = toM(BELLS[p].e);
+      if(nm >= sm && nm < em) {
+        let left = em - nm;
+        statusEl.innerText = `🔴 Идёт ${p} пара (${BELLS[p].s}–${BELLS[p].e})`;
+        timerEl.innerText = `До перемены: ${left} мин`;
+        return;
+      }
+      if(p < 6) {
+        let nextSm = toM(BELLS[p+1].s);
+        if(nm >= em && nm < nextSm) {
+          let left = nextSm - nm;
+          statusEl.innerText = `☕ Перемена перед ${p+1}-й парой`;
+          timerEl.innerText = `Ещё ${left} мин`;
+          return;
+        }
+      }
+    }
+  }
+
+  // ТЕМЫ И ОСНОВНАЯ ЛОГИКА РАСПИСАНИЯ
   function applyTheme(themeId, notify = false) {
     const tObj = THEMES.find(x => x.id === themeId) || THEMES[0];
     document.documentElement.setAttribute('data-theme', tObj.id);
-    document.getElementById('themeBtn').innerText = tObj.icon;
+    const tb = document.getElementById('themeBtn');
+    if(tb) tb.innerText = tObj.icon;
+    const mb = document.getElementById('menuThemeIcon');
+    if(mb) mb.innerText = tObj.icon;
     document.getElementById('metaThemeColor').setAttribute('content', tObj.color);
     localStorage.setItem('bash_theme', tObj.id);
     if (notify) showToast(`${tObj.icon} Тема: ${tObj.name}`);
@@ -588,16 +1416,6 @@
       document.getElementById('searchInput').value = '';
       render();
     }
-  }
-
-  function getBuildingInfo(r) {
-    if (!r) return 'Уточняется';
-    if (r.includes('/1')) return '1-й (Главный) корпус, ул. 50-летия Октября, 34';
-    if (r.includes('/2')) return '2-й корпус (ФПТ / Биотех)';
-    if (r.includes('/6')) return '6-й корпус (Мехфак / Энергофак)';
-    if (r.includes('с/зал')) return 'Спортивный комплекс БашГАУ';
-    if (r.includes('Выезд')) return 'Выездное практическое занятие';
-    return 'Кафедра / По расписанию';
   }
   
   function getActualWeekNum() {
@@ -667,6 +1485,8 @@
 
   function goToday() {
     vib();
+    currentActualWeek = getActualWeekNum();
+    initHeader();
     let actW = currentActualWeek % 2 === 0 ? 2 : 1;
     setW(actW);
     setD(todayDayIdx);
@@ -685,6 +1505,7 @@
     render();
   }
   
+  // ФИЛЬТР С УЧЕТОМ АКТУАЛЬНОЙ НЕДЕЛИ (скрывает пары, которые уже закончились, например 2-5 нед. на 7-й неделе)
   function getFilteredLessons() {
     let curGroupData = ALL_DATA[st.grp] || ALL_DATA.AIP101;
     let query = document.getElementById('searchInput') ? document.getElementById('searchInput').value.toLowerCase().trim() : '';
@@ -704,8 +1525,6 @@
       return true;
     }).sort((a,b) => query ? 0 : (a.d - b.d || a.p - b.p));
   }
-  
-  function toM(s) { let p=s.split(':'); return p[0]*60 + +p[1]; }
 
   function checkLessonStatus(x, dayIdx) {
     if (dayIdx !== todayDayIdx) return { isCurrent: false, isPassed: false };
@@ -732,14 +1551,7 @@
       text += `⏳ ${x.p} пара (${BELLS[x.p].s}–${endT})\n📚 ${x.s} [${ttype}]${sgTxt}\n🚪 Ауд: ${x.r}\n👤 ${x.tech || 'Не указан'}\n\n`;
     });
     
-    let tf = document.getElementById("clipboardFix");
-    tf.value = text;
-    tf.select();
-    tf.setSelectionRange(0, 99999);
-    try {
-      document.execCommand("copy");
-      showToast('📋 Расписание скопировано!');
-    } catch (e) {}
+    copyRawText(text, '📋 Расписание скопировано!');
   }
 
   function shareSchedule() {
@@ -765,7 +1577,7 @@
     let n = new Date();
     let dateStr = n.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' });
     document.getElementById('curDate').innerText = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-    document.getElementById('actualWeekBadge').innerText = `${currentActualWeek} нед.`;
+    document.getElementById('actualWeekBadge').innerText = `${currentActualWeek} нед. ▾`;
 
     let totalW = 17; 
     let pct = Math.min(100, Math.round((currentActualWeek / totalW) * 100));
@@ -818,20 +1630,11 @@
         </div>
         <div class="card-details">
           <div class="details-inner">
-            <div class="detail-grid">
-              <div class="detail-item">
-                <div class="detail-icon">👨‍🏫</div>
-                <div>
-                  <div class="detail-label">Преподаватель</div>
-                  <div class="detail-val">${x.tech || 'Не назначен'}</div>
-                </div>
-              </div>
-              <div class="detail-item">
-                <div class="detail-icon">📍</div>
-                <div>
-                  <div class="detail-label">Расположение</div>
-                  <div class="detail-val">${getBuildingInfo(x.r)}</div>
-                </div>
+            <div class="detail-item">
+              <div class="detail-icon">👨‍🏫</div>
+              <div>
+                <div class="detail-label">Преподаватель</div>
+                <div class="detail-val">${x.tech || 'Не назначен'}</div>
               </div>
             </div>
             <div class="note-box">
@@ -862,10 +1665,14 @@
   
   applyTheme(localStorage.getItem('bash_theme') || 'agro', false);
   initHeader();
+  updateLiveBellBar();
   setGroup(st.grp);
   setW(st.w);
   setSg(st.sg);
-  setInterval(() => { if (st.d === todayDayIdx) render(); }, 30000);
+  setInterval(() => {
+    updateLiveBellBar();
+    if (st.d === todayDayIdx) render();
+  }, 20000);
 </script>
 </body>
 </html>
