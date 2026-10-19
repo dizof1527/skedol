@@ -14,8 +14,6 @@
 [data-theme="cyber"]{--bg:#070913;--bg-grad-1:rgba(56,189,248,0.14);--bg-grad-2:rgba(168,85,247,0.14);--surface:rgba(19,25,46,0.78);--surface-hover:rgba(28,37,65,0.94);--header-bg:linear-gradient(155deg,rgba(25,33,60,0.92),rgba(11,15,29,0.98));--border:rgba(56,189,248,0.22);--border-accent:rgba(168,85,247,0.45);--text:#f1f5f9;--text-muted:#94a3b8;--accent:#38bdf8;--accent-glow:rgba(56,189,248,0.38);--prac:#a855f7;--prac-glow:rgba(168,85,247,0.38);--lec:#38bdf8;--dock-bg:rgba(13,18,34,0.92);--card-radius:22px;--hdr-radius:26px;--btn-radius:12px;--input-bg:rgba(0,0,0,0.42)}
 [data-theme="amoled"]{--bg:#000;--bg-grad-1:rgba(255,255,255,0.04);--bg-grad-2:rgba(245,158,11,0.07);--surface:rgba(18,18,20,0.92);--surface-hover:rgba(28,28,32,0.99);--header-bg:linear-gradient(155deg,#141416,#08080a);--border:rgba(255,255,255,0.14);--border-accent:rgba(245,158,11,0.45);--text:#fff;--text-muted:#8e8e93;--accent:#f59e0b;--accent-glow:rgba(245,158,11,0.32);--prac:#10b981;--prac-glow:rgba(16,185,129,0.32);--lec:#fbbf24;--dock-bg:rgba(14,14,16,0.94);--card-radius:22px;--hdr-radius:26px;--btn-radius:12px;--input-bg:#0a0a0c}
 [data-theme="light"]{--bg:#f1f5f9;--bg-grad-1:rgba(16,185,129,0.1);--bg-grad-2:rgba(245,158,11,0.1);--surface:rgba(255,255,255,0.92);--surface-hover:#fff;--header-bg:linear-gradient(155deg,#fff,#f8fafc);--border:rgba(15,23,42,0.12);--border-accent:rgba(245,158,11,0.5);--text:#0f172a;--text-muted:#64748b;--accent:#d97706;--accent-glow:rgba(217,119,6,0.22);--prac:#059669;--prac-glow:rgba(5,150,105,0.28);--lec:#d97706;--dock-bg:rgba(255,255,255,0.94);--card-radius:22px;--hdr-radius:26px;--btn-radius:12px;--input-bg:rgba(15,23,42,0.06)}
-
-/* НОВЫЕ ТЕМЫ С КАСТОМНЫМ ДИЗАЙНОМ И ФОРМАМИ */
 [data-theme="tactical"]{--bg:#0a0e0a;--bg-grad-1:rgba(132,204,22,0.12);--bg-grad-2:rgba(234,179,8,0.1);--surface:rgba(20,28,19,0.88);--surface-hover:rgba(28,39,26,0.96);--header-bg:linear-gradient(160deg,#141d12,#0b100a);--border:rgba(132,204,22,0.32);--border-accent:rgba(234,179,8,0.55);--text:#ecfccb;--text-muted:#84a98c;--accent:#eab308;--accent-glow:rgba(234,179,8,0.35);--prac:#84cc16;--prac-glow:rgba(132,204,22,0.35);--lec:#facc15;--dock-bg:rgba(12,18,11,0.95);--card-radius:6px;--hdr-radius:8px;--btn-radius:4px;--input-bg:rgba(0,0,0,0.55);--font-main:'Courier New',Consolas,monospace}
 [data-theme="sakura"]{--bg:#120817;--bg-grad-1:rgba(244,114,182,0.18);--bg-grad-2:rgba(192,132,252,0.15);--surface:rgba(36,17,46,0.8);--surface-hover:rgba(50,24,64,0.94);--header-bg:linear-gradient(155deg,rgba(48,21,61,0.92),rgba(21,9,28,0.98));--border:rgba(244,114,182,0.3);--border-accent:rgba(251,113,133,0.55);--text:#fdf2f8;--text-muted:#d8b4fe;--accent:#fb7185;--accent-glow:rgba(251,113,133,0.42);--prac:#f472b6;--prac-glow:rgba(244,114,182,0.42);--lec:#fda4af;--dock-bg:rgba(26,11,33,0.92);--card-radius:30px;--hdr-radius:34px;--btn-radius:20px;--input-bg:rgba(15,4,20,0.48)}
 [data-theme="royal"]{--bg:#090807;--bg-grad-1:rgba(212,175,55,0.16);--bg-grad-2:rgba(180,83,9,0.12);--surface:rgba(24,20,17,0.88);--surface-hover:rgba(36,30,25,0.96);--header-bg:linear-gradient(150deg,#1f1a14,#0d0b09);--border:rgba(212,175,55,0.35);--border-accent:rgba(251,191,36,0.6);--text:#fef3c7;--text-muted:#a8a29e;--accent:#fbbf24;--accent-glow:rgba(251,191,36,0.35);--prac:#d97706;--prac-glow:rgba(217,119,6,0.38);--lec:#fde68a;--dock-bg:rgba(18,15,12,0.95);--card-radius:12px;--hdr-radius:16px;--btn-radius:8px;--input-bg:rgba(0,0,0,0.55)}
@@ -221,13 +219,28 @@ body{background:var(--bg);color:var(--text);padding-bottom:120px;overflow-x:hidd
       <div class="sidebar-item" onclick="closeSidebar();openNotesModal()"><span>📌</span><span>Все мои заметки и ДЗ</span></div>
       <div class="sidebar-item" onclick="closeSidebar();openModal('bellsModal')"><span>🔔</span><span>Расписание пар и перемен</span></div>
       <div class="sidebar-item" onclick="cycleTheme()"><span id="menuThemeIcon">🌾</span><span id="menuThemeName">Поменять тему (8 стилей)</span></div>
-      <div class="sidebar-item" onclick="refreshOfflineCache()"><span id="offlineStatusIcon">📡</span><span id="offlineStatusText">Оффлайн-память: Активна</span></div>
+      <div class="sidebar-item" onclick="closeSidebar();openModal('offlineModal')"><span id="offlineStatusIcon">📡</span><span id="offlineStatusText">Офлайн-режим (Скачать)</span></div>
       <div class="sidebar-section-label" style="margin-top:8px">Сообщить об ошибке</div>
       <a href="https://t.me/csenchis" target="_blank" class="sidebar-item tg-link"><span>✈️</span><span>Написать в Telegram (@csenchis)</span></a>
       <a href="https://max.ru/u/f9LHodD0cOLBig0ncSmZu-eTLwPD-Hm-RjLt9f2f7IFpYJJtNziGpqJPshc" target="_blank" class="sidebar-item max-link"><span>🟣</span><span>Написать в MAX</span></a>
     </div>
   </div>
   <div class="sidebar-footer">Расписание БашГАУ • ФПТ PRO<br>by Csenchis (@csenchis)</div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО: АВТОНОМНЫЙ ОФЛАЙН-РЕЖИМ -->
+<div class="modal-overlay" id="offlineModal" onclick="if(event.target===this)closeModal('offlineModal')">
+  <div class="modal-box">
+    <div class="modal-header"><div class="modal-title">📡 Работа без интернета</div><button class="close-btn" onclick="closeModal('offlineModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="fullweek-day">
+        <div class="fwd-title"><span>Автономный файл (100% надежно)</span></div>
+        <div style="font-size:.78rem;color:var(--text-muted);line-height:1.45;margin-bottom:10px">Скачай расписание одним файлом прямо в память телефона («Загрузки» / «Файлы»). Оно откроется в любом корпусе и подвале вообще без интернета и мобильной сети:</div>
+        <button class="dock-btn btn-copy" style="width:100%;flex:none;padding:12px" onclick="downloadOfflineHTML()">📥 Скачать автономный файл (.html)</button>
+        <div style="font-size:.75rem;color:var(--accent);margin-top:10px;text-align:center;font-weight:700;line-height:1.35">⚠️ Только для Андроид, но возможно у кого-то на Айфоне будет работать</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="modal-overlay" id="titleGenModal" onclick="if(event.target===this)closeModal('titleGenModal')">
@@ -391,7 +404,7 @@ body{background:var(--bg);color:var(--text);padding-bottom:120px;overflow-x:hidd
 
 <div class="bottom-dock">
   <button class="dock-btn btn-today" onclick="goToday()">🎯 Сегодня</button>
-  <button class="dock-btn btn-share" onclick="shareSchedule()">?? Поделиться</button>
+  <button class="dock-btn btn-share" onclick="shareSchedule()">📤 Поделиться</button>
   <button class="dock-btn btn-copy" onclick="copySchedule()">📋 Копировать</button>
 </div>
 <div class="watermark">by Csenchis</div>
@@ -423,7 +436,7 @@ TOP102:[
 [2,1,1,3,"302/6",3,"2-12 четн.",0,[2,4,6,8,10,12]],[2,2,0,6,"Кафедра",6,"Каждую неделю",0,[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]],[2,3,1,7,"106/6",7,"2,4,6 нед.",0,[2,4,6]],[2,3,0,7,"Выезд",7,"3,5,7,9 нед.",0,[3,5,7,9]],[2,3,0,16,"129/1",18,"10-16 нед.",0,[10,11,12,13,14,15,16]],[2,4,1,17,"106/6",19,"2-8 четн, 9-12 нед.",0,[2,4,6,8,9,10,11,12]],[2,4,0,7,"Выезд",7,"3,5,7 нед.",0,[3,5,7]],
 [3,1,0,18,"453/2",24,"3-14 нед. (кр. 10)",0,[3,4,5,6,7,8,9,11,12,13,14]],[3,2,0,18,"453/2",24,"2-14 нед. (кр. 10)",0,[2,3,4,5,6,7,8,9,11,12,13,14]],[3,3,1,18,"106/6",20,"1 нед.",0,[1]],
 [4,1,1,12,"106/6",12,"1 нед.",0,[1]],[4,1,0,12,"с/зал",12,"2,3 нед.",0,[2,3]],[4,1,0,13,"с/зал",12,"4-12 нед.",0,[4,5,6,7,8,9,10,11,12]],[4,2,1,5,"106/6",13,"1-15 нечет.",0,[1,3,5,7,9,11,13,15]],[4,2,1,2,"402/6",2,"2-14 четн.",0,[2,4,6,8,10,12,14]],[4,3,1,8,"402/6",21,"1-7 нечет.",0,[1,3,5,7]],[4,3,0,0,"401/6",25,"2-8 четн, 9-15 нед.",0,[2,4,6,8,9,10,11,12,13,14,15]],[4,4,0,14,"Кафедры",14,"Каждую неделю",0,[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]],
-[5,1,1,16,"402/6",22,"1, 2-6 четн.",0,[1,2,4,6]],[5,1,1,2,"402/6",2,"3-9 нечет.",0,[3,5,7,9]],[5,1,0,5,"251/1",13,"8-12 четн.",0,[8,10,12]],[5,2,0,2,"114/2",15,"3-13 нед.",0,[3,4,5,6,7,8,9,10,11,12,13]],[5,3,0,3,"502/1",3,"2-13 нед.",0,[2,3,4,5,6,7,8,9,10,11,12,13]],[5,4,1,7,"2/2",16,"1 нед.",0,[1]],[5,4,0,9,"446/1",21,"3-12 нед.",0,[3,4,5,6,7,8,9,10,11,12]],
+[5,1,1,16,"402/6",22,"1, 2-6 четн.",0,[1,2,4,6]],[5,1,1,2,"402/6",2,"3-9 нечет.",0,[3,5,7,9]],[5,1,0,5,"251/1",13,"8-12 четн.",0,[8,10,12]],[5,2,0,2,"114/2",15,"3-13 нед.",0,[3,4,5,6,7,8,9,10,11,12,13]],[5,3,0,3,"502/1",3,"2-13 нед.",0,[2,3,4,5,6,7,8,9,10,11,12,13]],[5,4,1,7,"2/2",16,"1 нед.",0,[1]],[5,4,0,9,"446/1",21,"3-12 нед.",0,[3,4,5,6,7,8,9,10,11,12,13]],
 [6,1,1,12,"106/6",12,"1 нед.",0,[1]],[6,1,0,12,"с/зал",12,"2,3 нед.",0,[2,3]],[6,1,0,13,"с/зал",12,"4-12 нед.",0,[4,5,6,7,8,9,10,11,12]],[6,2,1,18,"106/6",20,"1-14 нед.",0,[1,2,3,4,5,6,7,8,9,10,11,12,13,14]]
 ]};
 const ALL_DATA={};
@@ -457,25 +470,39 @@ function closeModal(id){vib();document.getElementById(id).classList.remove('open
 function initOfflinePWA(){
   try{
     const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="42" fill="#050d08"/><rect x="6" y="6" width="180" height="180" rx="38" fill="none" stroke="#10b981" stroke-width="4"/><text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" font-size="105">🌾</text></svg>`;
-    const manifest={name:"Расписание БашГАУ PRO",short_name:"БашГАУ",start_url:".",display:"standalone",background_color:"#050d08",theme_color:"#050d08",icons:[{src:'data:image/svg+xml;utf8,'+encodeURIComponent(svg),sizes:"192x192",type:"image/svg+xml"}]};
+    const manifest={name:"Расписание БашГАУ PRO",short_name:"БашГАУ",start_url:"./",display:"standalone",background_color:"#050d08",theme_color:"#050d08",icons:[{src:'data:image/svg+xml;utf8,'+encodeURIComponent(svg),sizes:"192x192",type:"image/svg+xml"}]};
     document.getElementById('pwaManifest').setAttribute('href',URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:'application/json'})));
-    if('caches' in window&&location.protocol.startsWith('http')){
-      caches.open('bashgau-offline-v2').then(c=>c.put(location.href,new Response(document.documentElement.outerHTML,{headers:{'Content-Type':'text/html;charset=utf-8'}}))).catch(()=>{});
+    if('serviceWorker' in navigator&&location.protocol.startsWith('http')){
+      navigator.serviceWorker.register('./sw.js').then(()=>{
+        localStorage.setItem('bash_sw_active','1');updateNetworkStatusUI();
+      }).catch(()=>{});
     }
-    localStorage.setItem('bash_offline_ready','1');updateNetworkStatusUI();
+    if('caches' in window&&location.protocol.startsWith('http')){
+      caches.open('bashgau-pro-v3').then(c=>c.put(location.href,new Response('<!DOCTYPE html>\n'+document.documentElement.outerHTML,{headers:{'Content-Type':'text/html;charset=utf-8'}}))).catch(()=>{});
+    }
+    updateNetworkStatusUI();
   }catch(e){}
 }
 function updateNetworkStatusUI(){
   const ic=document.getElementById('offlineStatusIcon'),tx=document.getElementById('offlineStatusText');
   if(!ic||!tx)return;
-  if(navigator.onLine){ic.innerText='📡';tx.innerText='Оффлайн-кэш: Сохранён ✅';}
-  else{ic.innerText='✈️';tx.innerText='Режим без сети (Оффлайн)';}
+  if(!navigator.onLine){ic.innerText='✈️';tx.innerText='Работаем без сети (Офлайн)';}
+  else if(location.protocol==='file:'||localStorage.getItem('bash_sw_active')==='1'){ic.innerText='📡';tx.innerText='Офлайн-режим: Активен ✅';}
+  else{ic.innerText='📥';tx.innerText='Офлайн-режим (Скачать)';}
 }
-function refreshOfflineCache(){vib();initOfflinePWA();showToast('📡 Расписание сохранено для работы без сети!');}
+function downloadOfflineHTML(){
+  vib();
+  const htmlContent='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const blob=new Blob([htmlContent],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Расписание_БашГАУ_Офлайн.html';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  showToast('📥 Автономный файл сохранён в Загрузки!');
+}
 window.addEventListener('online',()=>{updateNetworkStatusUI();showToast('🌐 Сеть восстановлена');});
-window.addEventListener('offline',()=>{updateNetworkStatusUI();showToast('✈️ Работаем в оффлайн-режиме');});
+window.addEventListener('offline',()=>{updateNetworkStatusUI();showToast('✈️ Работаем в офлайн-режиме');});
 
-// ТОЧНЫЙ ОТСЧЕТ НЕДЕЛЬ ПО ПОНЕДЕЛЬНИКАМ (С 31 АВГУСТА 2026 -> 19 ОКТЯБРЯ = 8 НЕДЕЛЯ)
 function getActualWeekNum(){
   const startMonday=new Date(2026,7,31,0,0,0);
   let now=new Date();
@@ -490,7 +517,6 @@ let curThemeObj=THEMES[0];
 let st={grp:localStorage.getItem('bash_grp')||'AIP101',w:currentActualWeek%2===0?2:1,sg:Number(localStorage.getItem('aip_sg'))||0,d:todayDayIdx};
 let sgLock=Number(localStorage.getItem('bash_sg_lock'))||0;
 
-// КАКАЯ ИМЕННО НЕДЕЛЯ СЕЙЧАС СМОТРИТСЯ ПОЛЬЗОВАТЕЛЕМ
 function getTargetWeek(){
   let baseParity=currentActualWeek%2===0?2:1;
   if(st.w===baseParity)return currentActualWeek;
@@ -657,7 +683,6 @@ function calcEquivalent(){
 
 function toM(s){let p=s.split(':');return p[0]*60+ +p[1];}
 function updateLiveBellBar(){
-  // Авто-проверка смены дня и недели в реальном времени
   let newRealW=getActualWeekNum(),newDay=new Date().getDay()||1;if(newDay>6)newDay=1;
   if(!isCustomWeek&&newRealW!==realWeek){
     realWeek=newRealW;currentActualWeek=newRealW;st.w=currentActualWeek%2===0?2:1;initHeader();setW(st.w);
@@ -729,7 +754,6 @@ function goToday(){vib();isCustomWeek=false;realWeek=getActualWeekNum();currentA
 function toggleCard(elem,e){if(e.target.tagName==='INPUT')return;vib();elem.classList.toggle('expanded');}
 function saveNote(key,val){if(val.trim())localStorage.setItem('note_'+key,val.trim());else localStorage.removeItem('note_'+key);render();}
 
-// УЛУЧШЕННЫЙ ФИЛЬТР: Показывает пары строго для просматриваемой недели (например, на 8-й неделе не показывает пары 11-15 нед.)
 function getFilteredLessons(){
   let curGroupData=ALL_DATA[st.grp]||ALL_DATA.AIP101;
   let q=document.getElementById('searchInput')?document.getElementById('searchInput').value.toLowerCase().trim():'';
@@ -798,7 +822,7 @@ function render(){
 
 let touchStartX=0,touchEndX=0;const touchArea=document.getElementById('touchArea');
 touchArea.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX;},{passive:true});
-touchArea.addEventListener('touchend',e=>{touchEndX=e.changedTouches[0].screenX;if(touchStartX-touchEndX>75&&st.d<6)setD(st.d+1);if(touchEndX-touchStartX>75&&st.d>1)setD(st.d-1);},{passive:true});
+touchArea.addEventListener('touchend',e=>{touchEndX=e.changedTouches[0].screenX;if(touchStartX-touchEndX>75&&st.d<6)setD(st.d+1);if(touchEndX-touchStartX>75&&st.d>1)setD(st.d - 1);},{passive:true});
 
 applyTheme(localStorage.getItem('bash_theme')||'agro',false);
 setGroup(st.grp);setW(st.w);setSg(st.sg);setSgLock(sgLock,false);initHeader();updateLiveBellBar();initOfflinePWA();
