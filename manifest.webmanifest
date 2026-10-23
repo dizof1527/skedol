@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "Расписание БашГАУ",
+  "short_name": "БашГАУ",
+  "description": "Расписание всех групп БашГАУ с офлайн-доступом",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e0c09",
+  "theme_color": "#0e0c09",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
