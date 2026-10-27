@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#171a1f">
-<meta name="app-version" content="2026-10-25.6">
+<meta name="app-version" content="2026-10-26.1">
 <meta name="schedule-version" content="2026-10-25">
 <meta name="description" content="Расписание БашГАУ: все группы, подгруппы, актуальные недели и офлайн-доступ.">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -566,6 +566,131 @@ html[data-shadows=on] .theme-sample{box-shadow:0 5px 18px #00000015}
 .teacher-source-note{margin-top:18px!important}
 @media(max-width:760px){.teacher-schedule-modal .panel{max-height:calc(100dvh - env(safe-area-inset-top) - 12px)}.teacher-pick-list{grid-template-columns:1fr}.teacher-profile{flex-direction:column;gap:10px}.teacher-profile>.teacher-small-button{align-self:flex-start}.teacher-lesson{grid-template-columns:calc(65px * var(--text-scale)) minmax(0,1fr);gap:12px;padding:16px 13px}.teacher-time>b{font-size:calc(18px * var(--text-scale))}.teacher-lesson-copy>strong{font-size:calc(16px * var(--text-scale))}}
 @media(max-width:360px){.teacher-shortcut{padding:9px 10px;font-size:calc(12px * var(--text-scale))}.teacher-lesson{grid-template-columns:calc(60px * var(--text-scale)) minmax(0,1fr);gap:10px;padding:15px 10px}.teacher-time{padding-right:7px}.teacher-time>b{font-size:calc(16px * var(--text-scale))}.teacher-time>span{font-size:calc(12px * var(--text-scale))}.teacher-time>small{font-size:calc(10px * var(--text-scale))}.teacher-lesson-copy>strong{font-size:calc(15px * var(--text-scale))}.teacher-room{font-size:calc(13px * var(--text-scale))}.teacher-profile-name>strong{font-size:calc(20px * var(--text-scale))}}
+/* Mobile reading, restrained motion and the appearance editor. */
+:root{--ease:cubic-bezier(.16,1,.3,1)}
+.card{overflow:hidden;transition:background-color .35s,border-color .35s,box-shadow .35s,transform .35s var(--ease)}
+.cards.is-changing .card{animation:agenda-enter .48s var(--ease) both;animation-delay:var(--stagger,0ms)}
+.card-button{transition:background-color .25s,transform .25s}
+.card-button:active{transform:scale(.992)}
+.detail{animation:detail-enter .32s var(--ease) both}
+.day-nav button{transition:background-color .3s,color .3s,border-color .3s,transform .35s var(--ease)}
+.day-nav button.on{box-shadow:0 6px 18px -10px var(--calendar-active)}
+.day-nav button:active{transform:scale(.93)}
+.day-summary{display:flex;gap:6px;flex-wrap:wrap;color:var(--m);font-size:calc(12px * var(--text-scale));margin-top:8px;font-variant-numeric:tabular-nums}
+.day-summary span{border:1px solid var(--l);background:var(--s);border-radius:7px;padding:3px 8px}
+.lesson-gap{display:flex;gap:10px;align-items:center;justify-content:center;padding:1px 10px;color:var(--m);font-size:calc(12px * var(--text-scale));font-variant-numeric:tabular-nums}
+.lesson-gap:before,.lesson-gap:after{content:'';height:1px;background:var(--l);flex:1;max-width:44px}
+.lesson-gap.long{color:var(--t)}
+.lesson-gap .ui-icon{width:14px;height:14px;color:inherit}
+.lesson-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.lesson-tools button{min-height:44px;display:flex;align-items:center;gap:8px;border:1px solid var(--l);border-radius:9px;background:var(--s2);padding:9px 12px;font-size:calc(13px * var(--text-scale));text-align:left}
+.lesson-tools .ui-icon{width:17px;height:17px}
+.jump-current{position:fixed;z-index:22;right:22px;bottom:24px;display:flex;align-items:center;gap:9px;min-height:48px;padding:11px 16px;border:1px solid var(--indicator-color);border-radius:28px;background:var(--s);color:var(--t);box-shadow:0 8px 28px #0003;font-size:calc(13px * var(--text-scale));max-width:calc(100vw - 32px);animation:detail-enter .3s var(--ease)}
+.jump-current:before{content:'';width:7px;height:7px;background:var(--indicator-color);border-radius:50%;box-shadow:0 0 0 4px color-mix(in srgb,var(--indicator-color) 16%,transparent)}
+.week-choice-range{display:block;font-size:12px;color:var(--m);margin-top:4px}
+.theme-tabbar{position:sticky;top:-2px;z-index:4;background:var(--bg);box-shadow:0 0 0 5px var(--bg)}
+.theme-control{border-radius:16px}
+.panel-body{grid-template-columns:minmax(0,1fr)}
+.menu-item{min-width:0;gap:10px}
+.menu-item>span,.menu-item>small{min-width:0;overflow-wrap:anywhere}
+.menu-item>span:not(.menu-copy):first-child{display:block}
+.menu-item>span:not(.menu-copy):first-child>.ui-icon{display:inline-block;vertical-align:middle;margin-right:8px}
+.theme-control-title{text-transform:none!important;letter-spacing:0!important;margin:0 0 12px!important;color:var(--t)!important}
+.appearance-range{height:40px;cursor:pointer;touch-action:pan-y;accent-color:var(--icon-color)}
+.appearance-toggle input{width:46px;height:26px;appearance:none;-webkit-appearance:none;border:1px solid var(--l);border-radius:20px;background:var(--bg);position:relative;cursor:pointer;flex:none;transition:background .2s}
+.appearance-toggle input:after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;background:var(--m);border-radius:50%;transition:transform .28s var(--ease),background .2s}
+.appearance-toggle input:checked{background:var(--a);border-color:var(--a)}
+.appearance-toggle input:checked:after{transform:translateX(20px);background:var(--ao)}
+.appearance-toggle input:focus-visible{outline:2px solid var(--a);outline-offset:4px}
+.density-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.density-options button{min-height:48px;padding:10px;border-radius:10px;border:1px solid var(--l);background:var(--bg);font-size:calc(13px * var(--text-scale))}
+.density-options button[aria-pressed=true]{background:var(--s2);border-color:var(--a);box-shadow:inset 0 0 0 1px var(--a)}
+.effect-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.effect-choice{position:relative;overflow:hidden;min-height:108px;align-items:stretch;padding:0;text-align:left;border-radius:12px;gap:0}
+.effect-choice>span:last-child{padding:9px 11px;display:flex;align-items:center;gap:6px;font-size:calc(13px * var(--text-scale));line-height:1.4}
+.effect-choice[aria-pressed=true]>span:last-child:after{content:'✓';margin-left:auto;color:var(--a);font-weight:700}
+.effect-choice[aria-pressed=true]{box-shadow:inset 0 0 0 1px var(--a);background:var(--s)}
+.effect-art{display:block;height:64px;position:relative;overflow:hidden;background:#151d2b;color:#bcd5ee;isolation:isolate}
+.effect-art:after,.effect-art:before{content:'';position:absolute;pointer-events:none}
+.effect-art.aurora{background:radial-gradient(ellipse at 0% 95%,#427386,transparent 65%),radial-gradient(ellipse at 90% 0%,#52608c,transparent 65%),#122235}
+.effect-art.aurora:after{width:140%;height:120%;left:-30%;top:5%;border-radius:50%;border-top:16px solid #75cdbb55;transform:rotate(-25deg);filter:blur(8px)}
+.effect-art.waves{background:linear-gradient(150deg,#101c2a,#304f68)}
+.effect-art.waves:after{inset:15px -15px -60px;border:1px solid #9bbfe0;border-radius:50%;box-shadow:0 -6px 0 -1px #456b91,0 -12px 0 -1px #567fa4,0 -18px 0 -1px #294661;transform:rotate(-12deg)}
+.effect-art.stars{background:radial-gradient(circle at 24% 35%,#b9dfff 1px,transparent 2px),radial-gradient(circle at 55% 70%,#c9dfff 1px,transparent 2px),radial-gradient(circle at 78% 25%,#b9dfff 1px,transparent 2px),#172332}
+.effect-art.stars:after{width:34%;height:1px;background:#8bb6d666;top:50%;left:23%;transform:rotate(20deg)}
+.effect-art.snow{background:radial-gradient(circle,#cde8ff 1px,transparent 2px) 8px 8px/24px 22px,#203345}
+.effect-art.wheat{display:grid;place-items:center;background:linear-gradient(135deg,#3b3526,#1b2728);color:#dabc80}
+.effect-art.wheat svg{height:44px;width:44px;stroke:currentColor}
+.effect-art.none{background:var(--s2);display:grid;place-items:center;color:var(--m)}
+.effect-art.none .ui-icon{width:25px;height:25px}
+.theme-preview-pause{display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;border:1px solid var(--l);border-radius:10px;background:var(--s);margin-top:12px;width:100%;font-size:calc(12px * var(--text-scale));position:relative;z-index:1}
+.appearance-modal[data-appearance-tab=effects] .theme-demo-top{margin-bottom:55px}
+html[data-background-motion=animated] .effect-choice[aria-pressed=true] .effect-art.aurora:after{animation:aurora-thumb 6s ease-in-out infinite alternate}
+html[data-background-motion=animated] .effect-choice[aria-pressed=true] .effect-art.waves:after{animation:wave-thumb 5s ease-in-out infinite alternate}
+html[data-background-motion=animated] .effect-choice[aria-pressed=true] .effect-art.snow{animation:snow-thumb 5s linear infinite}
+@keyframes aurora-thumb{to{transform:translateX(22%) rotate(-5deg)}}
+@keyframes wave-thumb{to{transform:translateY(8px) rotate(4deg)}}
+@keyframes snow-thumb{to{background-position:32px 52px}}
+.theme-editor-buttons{grid-template-columns:auto auto minmax(0,1fr);gap:7px}
+.theme-editor-buttons .theme-reset{font-size:calc(12px * var(--text-scale));padding-inline:10px;white-space:normal}
+.theme-color-card:focus-within{border-color:var(--a)}
+.theme-hex:focus{border-color:var(--a);background:var(--s2)}
+html[data-density=compact] .card-button{padding-block:15px;min-height:0}
+html[data-density=compact] .lesson-body{gap:7px}
+html[data-density=compact] .cards{gap:10px}
+html[data-density=compact] .lesson-gap{padding-block:0}
+@keyframes agenda-enter{from{opacity:0;transform:translate3d(0,14px,0) scale(.99)}to{opacity:1;transform:none}}
+@keyframes detail-enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(hover:hover) and (pointer:fine){.card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--a) 55%,var(--l));box-shadow:0 12px 28px #0002}.effect-choice:hover .effect-art{filter:brightness(1.13)}}
+@media(max-width:760px){
+ .workspace{padding-top:18px;padding-inline:16px}
+ .header{margin-bottom:18px}.header h1{font-size:30px}
+ .utility-strip{gap:8px;margin:0 0 18px}
+ .freshness-shortcut{padding:8px 10px;min-height:44px;flex-basis:100%}
+ .freshness-shortcut>span:nth-child(2){display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px}
+ .freshness-shortcut small{font-size:10px}
+ .utility-actions{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+ #quickToday{display:none}
+ #offlineShortcut{flex:1;justify-content:center;font-size:11px;padding:8px;min-height:44px;max-width:none}
+ #teacherShortcut{flex:1;justify-content:center;font-size:12px;padding:8px;min-height:44px}
+ .toolbar-top{margin-bottom:14px;gap:12px}.group-copy small{font-size:calc(12px * var(--text-scale))}
+ .group-monogram{width:44px;height:44px}.group-copy strong{font-size:calc(20px * var(--text-scale))}
+ .day-nav{padding-bottom:14px;gap:6px}.day-nav button{min-height:80px;padding-block:9px;gap:3px}.day-nav small{font-size:26px}
+ .insights{margin-top:14px}.current-panel{padding:14px 16px}.status.idle .status-clock{font-size:28px}
+ .agenda{padding-top:18px}.agenda-heading{gap:12px;margin-bottom:8px}.summary h2{font-size:calc(21px * var(--text-scale));margin-bottom:4px}
+ .summary{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 9px}.summary h2{width:100%;margin-bottom:0}.summary #summaryCount{flex:none}
+ .summary .day-summary{margin:0;gap:8px}.summary .day-summary span{border:0;background:none;padding:0}
+ .current-panel:has(.status.idle){padding-block:10px}
+ .filter-summary{margin:0 1px 14px;font-size:calc(12px * var(--text-scale));line-height:1.45}
+ .day-summary{margin-top:5px;font-size:calc(11px * var(--text-scale))}
+ .subgroups button{min-height:44px}.remember-filter{height:50px}
+ .cards{gap:12px}.card{border-radius:18px}
+ .footer{padding-top:7px;padding-bottom:calc(19px + env(safe-area-inset-bottom));background:var(--bg)}
+ .footer button{min-height:48px}.footer .credit{bottom:calc(4px + env(safe-area-inset-bottom))}
+ .jump-current{bottom:calc(97px + env(safe-area-inset-bottom));right:16px;min-height:44px;padding:9px 13px}
+ .panel-head{margin-bottom:12px}.panel-head h2{font-size:calc(23px * var(--text-scale))}
+ .appearance-modal .panel{padding-inline:14px;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+ .appearance-editor{gap:14px}.appearance-editor>.theme-tabbar{grid-row:1}.appearance-editor>.theme-demo{grid-row:2}
+ .theme-demo{padding:13px;min-height:165px}.theme-demo-calendar{margin-bottom:28px}
+ .theme-editor-footer{padding-top:10px}.theme-save-state{font-size:10px}.theme-editor-buttons>*{min-height:46px}
+ .theme-color-picker{width:58px;height:52px}.theme-swatch{min-width:36px;min-height:38px}
+ .theme-control{padding:14px}.theme-control .appearance-label{font-size:calc(14px * var(--text-scale))}
+}
+@media(max-width:480px){
+ .card-button{display:grid;grid-template-columns:minmax(0,1fr) 16px;gap:12px 7px;padding:16px 17px;min-height:0}
+ .card-button:before{top:17px;bottom:17px;width:var(--indicator-width)}
+ .time-block{grid-column:1/-1;grid-row:1;display:flex;flex-direction:row;align-items:baseline;gap:8px;border-right:0;border-bottom:1px solid var(--l);padding:0 0 10px;flex-wrap:wrap}
+ .time-block b{font-size:calc(19px * var(--text-scale));line-height:1.25}.time-block b:after{content:'–';color:var(--m);font-size:14px;margin-left:8px}
+ .time-block small{font-size:calc(14px * var(--text-scale))}.pair-no{margin:0 0 0 auto;padding:0;font-size:calc(11px * var(--text-scale))}
+ .lesson-body{grid-column:1;grid-row:2;gap:9px}.card-chevron{grid-column:2;grid-row:2}
+ .title{font-size:calc(18px * var(--text-scale));line-height:1.38}.lesson-meta{font-size:calc(13px * var(--text-scale));line-height:1.5}
+ .detail{margin:0 17px;padding:0 0 17px}.lesson-tools{display:grid;grid-template-columns:1fr}
+ html[data-density=compact] .time-block{padding-bottom:8px}html[data-density=compact] .card-button{gap:9px 7px;padding-inline:15px}
+}
+@media(max-width:360px){.workspace{padding-inline:12px}.header h1{font-size:28px}.day-nav{gap:4px}.day-nav button{border-radius:11px}.day-nav small{font-size:23px}.lesson-meta{font-size:calc(12px * var(--text-scale))}.effect-choice>span:last-child{padding-inline:8px;font-size:calc(12px * var(--text-scale))}.theme-editor-buttons .theme-reset{padding-inline:6px}.theme-editor-buttons .primary{padding-inline:8px}.footer button{font-size:11px}}
+html[data-motion=off] .card,html[data-motion=off] .detail,html[data-motion=off] .jump-current{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){.card,.detail,.jump-current,.day-nav button{animation:none!important;transition:none!important}.card:hover{transform:none}}
+
 </style>
 </head>
 <body>
@@ -589,6 +714,7 @@ html[data-shadows=on] .theme-sample{box-shadow:0 5px 18px #00000015}
   </main>
 </div>
 <footer class="footer" id="footer"></footer>
+<button class="jump-current" id="jumpCurrent" data-action="jumpCurrent" hidden></button>
 <div class="overlay" id="modal" hidden><div class="panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="sheet-grip" aria-hidden="true"><span></span></div><div class="panel-head"><h2 id="modalTitle" tabindex="-1"></h2><button class="icon" id="closeModalButton" data-action="close" aria-label="Close">✕</button></div><div class="panel-body" id="modalBody"></div></div></div>
 <div class="overlay" id="onboard" hidden><div class="panel" role="dialog" aria-modal="true" aria-labelledby="onboardTitle"><div class="welcome-mark" data-icon="globe"></div><div class="panel-head"><h2 id="onboardTitle">Привет. Hello.</h2></div><p class="muted">Выберите язык расписания. Изменить его можно в меню.<br>Choose your language. You can change it anytime in the menu.</p><div class="lang-grid" id="onboardLanguages"></div></div></div>
 <div class="toast" id="toast" role="status"></div>
@@ -660,6 +786,8 @@ for(const [lang,dict] of Object.entries(THEME_EDITOR_I18N))Object.assign(I18N[la
 const TEACHER_SCHEDULE_I18N={"ru":{"forTeachers":"Преподавателям","teacherTimetable":"Расписание преподавателя","teacherIntro":"Найдите себя по фамилии — покажем занятия, группы и аудитории.","teacherScope":"По расписанию групп, добавленных на сайт. Занятия других групп здесь не учитываются.","findTeacher":"Фамилия или инициалы преподавателя","changeTeacher":"Другой преподаватель","teacherRemembered":"Выбор сохранён на этом устройстве","teacherAllWeek":"Вся неделя","teacherWeekCount":"Занятий за неделю: {n}","teacherDayCount":"Занятий в этот день: {n}","teacherNoClasses":"В выбранный день занятий нет","teacherNoWeekClasses":"На этой неделе занятий нет","teacherEmptyHint":"Можно выбрать другую неделю или показать всю неделю.","teacherOpen":"Открыть расписание","teacherSharedStaff":"В исходной ячейке несколько преподавателей. Распределение занятий между ними не уточнено.","teacherOverlap":"Есть одновременные записи","teacherOverlapHint":"В расписании есть другое занятие с пересекающимся временем. Сверьте записи с исходной таблицей.","teacherRoomMissing":"Аудитория не указана","teacherSearchHint":"Можно искать по русскому написанию или латиницей.","teacherDateRange":"{start} — {end}","teacherCurrentWeek":"Текущая неделя и день","teacherChooseHint":"Выберите преподавателя из списка","teacherSourceNote":"Занятия собраны из расписаний групп. Общие занятия с одинаковыми предметом, временем и аудиторией объединены.","teacherMixedSubgroups":"Подгруппы: {n}","teacherScopeShort":"Занятия групп, добавленных на сайт"},"en":{"forTeachers":"For instructors","teacherTimetable":"Instructor timetable","teacherIntro":"Find your name to see your classes, groups and rooms.","teacherScope":"Based on the groups included on this site. Classes with other groups are not included.","findTeacher":"Instructor surname or initials","changeTeacher":"Choose another instructor","teacherRemembered":"Selection saved on this device","teacherAllWeek":"Full week","teacherWeekCount":"Classes this week: {n}","teacherDayCount":"Classes on this day: {n}","teacherNoClasses":"No classes on the selected day","teacherNoWeekClasses":"No classes this week","teacherEmptyHint":"Choose another week or display the full week.","teacherOpen":"Open timetable","teacherSharedStaff":"The source cell names several instructors. It does not specify how classes are assigned to them.","teacherOverlap":"Overlapping entries","teacherOverlapHint":"Another timetable entry overlaps this class. Check the source spreadsheet.","teacherRoomMissing":"Room not specified","teacherSearchHint":"Search in Russian or using Latin letters.","teacherDateRange":"{start} – {end}","teacherCurrentWeek":"Current week and day","teacherChooseHint":"Choose an instructor from the list","teacherSourceNote":"Compiled from group timetables. Shared classes with the same subject, time and room are combined.","teacherMixedSubgroups":"Subgroups: {n}","teacherScopeShort":"Classes for the groups on this site"},"es":{"forTeachers":"Para docentes","teacherTimetable":"Horario del docente","teacherIntro":"Busca tu nombre para ver tus clases, grupos y aulas.","teacherScope":"Según los grupos incluidos en este sitio. No incluye clases con otros grupos.","findTeacher":"Apellido o iniciales del docente","changeTeacher":"Elegir otro docente","teacherRemembered":"Selección guardada en este dispositivo","teacherAllWeek":"Toda la semana","teacherWeekCount":"Clases esta semana: {n}","teacherDayCount":"Clases este día: {n}","teacherNoClasses":"No hay clases el día seleccionado","teacherNoWeekClasses":"No hay clases esta semana","teacherEmptyHint":"Elige otra semana o muestra toda la semana.","teacherOpen":"Ver horario","teacherSharedStaff":"La celda original menciona a varios docentes sin especificar el reparto de las clases.","teacherOverlap":"Entradas simultáneas","teacherOverlapHint":"Otra clase coincide en horario. Comprueba la hoja de cálculo original.","teacherRoomMissing":"Aula no indicada","teacherSearchHint":"Busca en ruso o con letras latinas.","teacherDateRange":"{start} – {end}","teacherCurrentWeek":"Semana y día actuales","teacherChooseHint":"Elige un docente de la lista","teacherSourceNote":"Recopilado de los horarios de los grupos. Las clases compartidas con la misma asignatura, horario y aula se agrupan.","teacherMixedSubgroups":"Subgrupos: {n}","teacherScopeShort":"Clases de los grupos del sitio"},"fr":{"forTeachers":"Pour les enseignants","teacherTimetable":"Planning de l’enseignant","teacherIntro":"Recherchez votre nom pour voir vos cours, groupes et salles.","teacherScope":"Selon les groupes présents sur ce site. Les cours avec d’autres groupes ne sont pas inclus.","findTeacher":"Nom ou initiales de l’enseignant","changeTeacher":"Choisir un autre enseignant","teacherRemembered":"Choix enregistré sur cet appareil","teacherAllWeek":"Toute la semaine","teacherWeekCount":"Cours cette semaine : {n}","teacherDayCount":"Cours ce jour : {n}","teacherNoClasses":"Aucun cours le jour choisi","teacherNoWeekClasses":"Aucun cours cette semaine","teacherEmptyHint":"Choisissez une autre semaine ou affichez toute la semaine.","teacherOpen":"Voir le planning","teacherSharedStaff":"La cellule source mentionne plusieurs enseignants sans préciser la répartition des cours.","teacherOverlap":"Créneaux simultanés","teacherOverlapHint":"Un autre cours chevauche ce créneau. Vérifiez le tableau source.","teacherRoomMissing":"Salle non précisée","teacherSearchHint":"Recherchez en russe ou en caractères latins.","teacherDateRange":"{start} – {end}","teacherCurrentWeek":"Semaine et jour actuels","teacherChooseHint":"Choisissez un enseignant dans la liste","teacherSourceNote":"Créé à partir des plannings des groupes. Les cours communs ayant la même matière, les mêmes horaires et la même salle sont regroupés.","teacherMixedSubgroups":"Sous-groupes : {n}","teacherScopeShort":"Cours des groupes présents sur ce site"},"pt":{"forTeachers":"Para docentes","teacherTimetable":"Horário do docente","teacherIntro":"Procura o teu nome para veres aulas, turmas e salas.","teacherScope":"Segundo as turmas incluídas neste site. As aulas com outras turmas não estão incluídas.","findTeacher":"Apelido ou iniciais do docente","changeTeacher":"Escolher outro docente","teacherRemembered":"Escolha guardada neste dispositivo","teacherAllWeek":"Semana completa","teacherWeekCount":"Aulas esta semana: {n}","teacherDayCount":"Aulas neste dia: {n}","teacherNoClasses":"Sem aulas no dia selecionado","teacherNoWeekClasses":"Sem aulas esta semana","teacherEmptyHint":"Escolhe outra semana ou mostra a semana completa.","teacherOpen":"Ver horário","teacherSharedStaff":"A célula original indica vários docentes sem especificar a distribuição das aulas.","teacherOverlap":"Entradas simultâneas","teacherOverlapHint":"Outra aula coincide com este horário. Verifica a folha de cálculo original.","teacherRoomMissing":"Sala não indicada","teacherSearchHint":"Pesquisa em russo ou com letras latinas.","teacherDateRange":"{start} – {end}","teacherCurrentWeek":"Semana e dia atuais","teacherChooseHint":"Escolhe um docente da lista","teacherSourceNote":"Reunido a partir dos horários das turmas. As aulas partilhadas com a mesma disciplina, horário e sala são agrupadas.","teacherMixedSubgroups":"Subgrupos: {n}","teacherScopeShort":"Aulas das turmas deste site"}};
 for(const [lang,dict] of Object.entries(TEACHER_SCHEDULE_I18N))Object.assign(I18N[lang],dict);
 const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const UPGRADE_I18N={"ru":{"effectAurora":"Сияние","effectWaves":"Волны","effectStars":"Созвездия","effectIntensity":"Интенсивность фона","paletteSaturation":"Насыщенность акцентов","paletteSaturationHint":"Меняет цвет иконок и календаря. Индикатор текущей пары настраивается отдельно.","cardDensity":"Плотность карточек","densityComfort":"Удобно","densityCompact":"Компактно","appearanceUndo":"Отменить","appearanceUndone":"Настройки при открытии восстановлены","pauseBackground":"Приостановить фон","resumeBackground":"Оживить фон","classMinutes":"{n} мин занятий","classBreak":"Перерыв · {n} мин","freeWindow":"Окно · {n} мин","jumpCurrent":"К текущей паре","nextTeachingDay":"Ближайший учебный день","noFurtherLessons":"Дальше в этом семестре занятий нет","copyLesson":"Скопировать пару","teacherLessons":"Пары преподавателя","commonLessons":"Общие пары для всей группы","selectedFilter":"{filter} + общие пары","effectHint":"Фон остаётся за текстом и кнопками. В скрытой вкладке анимация приостанавливается.","motionLabel":"Плавные переходы","motionDescription":"Открытие меню, переключение дней и карточек. Движение фона настраивается отдельно.","indicatorSaturationHint":"0% — серый, 100% — выбранный цвет. Если индикатор сливается с иконками, его оттенок автоматически меняется.","sourceConflictShort":"Пересечение в источнике","checkAhead":"Этот файл новее опубликованного сайта"},"en":{"effectAurora":"Aurora","effectWaves":"Waves","effectStars":"Constellations","effectIntensity":"Background intensity","paletteSaturation":"Accent saturation","paletteSaturationHint":"Adjusts icons and calendar colours. The current-class indicator has separate controls.","cardDensity":"Card spacing","densityComfort":"Comfortable","densityCompact":"Compact","appearanceUndo":"Undo","appearanceUndone":"Settings restored to when you opened this panel","pauseBackground":"Pause background","resumeBackground":"Animate background","classMinutes":"{n} min of classes","classBreak":"Break · {n} min","freeWindow":"Free period · {n} min","jumpCurrent":"Current class","nextTeachingDay":"Next teaching day","noFurtherLessons":"No later classes in this semester","copyLesson":"Copy class","teacherLessons":"Teacher’s classes","commonLessons":"Classes for the whole group","selectedFilter":"{filter} + shared classes","effectHint":"The background stays behind text and buttons. Animation pauses in hidden tabs.","motionLabel":"Smooth transitions","motionDescription":"Menu, day and card transitions. Background motion is controlled separately.","indicatorSaturationHint":"0% is grey; 100% uses your chosen colour. If it blends into the icons, the indicator hue adjusts automatically.","sourceConflictShort":"Source overlap","checkAhead":"This file is newer than the published site"},"es":{"effectAurora":"Aurora","effectWaves":"Ondas","effectStars":"Constelaciones","effectIntensity":"Intensidad del fondo","paletteSaturation":"Saturación de los acentos","paletteSaturationHint":"Ajusta los colores de los iconos y del calendario. El indicador de la clase actual se configura por separado.","cardDensity":"Espaciado de tarjetas","densityComfort":"Cómodo","densityCompact":"Compacto","appearanceUndo":"Deshacer","appearanceUndone":"Se restauró la configuración al abrir este panel","pauseBackground":"Pausar fondo","resumeBackground":"Animar fondo","classMinutes":"{n} min de clases","classBreak":"Descanso · {n} min","freeWindow":"Hora libre · {n} min","jumpCurrent":"Clase actual","nextTeachingDay":"Próximo día de clases","noFurtherLessons":"No hay más clases este semestre","copyLesson":"Copiar clase","teacherLessons":"Clases del docente","commonLessons":"Clases para todo el grupo","selectedFilter":"{filter} + clases comunes","effectHint":"El fondo permanece detrás del texto y los botones. La animación se pausa en pestañas ocultas.","motionLabel":"Transiciones suaves","motionDescription":"Transiciones de menús, días y tarjetas. El movimiento del fondo se controla por separado.","indicatorSaturationHint":"0% es gris; 100% usa el color elegido. Si se confunde con los iconos, el tono del indicador se ajusta automáticamente.","sourceConflictShort":"Solapamiento en la fuente","checkAhead":"Este archivo es más reciente que el sitio publicado"},"fr":{"effectAurora":"Aurore","effectWaves":"Vagues","effectStars":"Constellations","effectIntensity":"Intensité du fond","paletteSaturation":"Saturation des accents","paletteSaturationHint":"Règle les couleurs des icônes et du calendrier. L’indicateur du cours actuel se règle séparément.","cardDensity":"Espacement des cartes","densityComfort":"Confortable","densityCompact":"Compact","appearanceUndo":"Annuler","appearanceUndone":"Réglages restaurés à l’ouverture de ce panneau","pauseBackground":"Mettre le fond en pause","resumeBackground":"Animer le fond","classMinutes":"{n} min de cours","classBreak":"Pause · {n} min","freeWindow":"Créneau libre · {n} min","jumpCurrent":"Cours actuel","nextTeachingDay":"Prochain jour de cours","noFurtherLessons":"Aucun autre cours ce semestre","copyLesson":"Copier le cours","teacherLessons":"Cours de l’enseignant","commonLessons":"Cours pour tout le groupe","selectedFilter":"{filter} + cours communs","effectHint":"Le fond reste derrière le texte et les boutons. L’animation s’arrête dans les onglets masqués.","motionLabel":"Transitions fluides","motionDescription":"Transitions des menus, jours et cartes. Le mouvement du fond se règle séparément.","indicatorSaturationHint":"0 % est gris ; 100 % utilise la couleur choisie. Si elle se confond avec les icônes, la teinte de l’indicateur s’ajuste automatiquement.","sourceConflictShort":"Chevauchement dans la source","checkAhead":"Ce fichier est plus récent que le site publié"},"pt":{"effectAurora":"Aurora","effectWaves":"Ondas","effectStars":"Constelações","effectIntensity":"Intensidade do fundo","paletteSaturation":"Saturação dos destaques","paletteSaturationHint":"Ajusta as cores dos ícones e do calendário. O indicador da aula atual é configurado separadamente.","cardDensity":"Espaçamento dos cartões","densityComfort":"Confortável","densityCompact":"Compacto","appearanceUndo":"Desfazer","appearanceUndone":"Configurações restauradas ao abrir este painel","pauseBackground":"Pausar fundo","resumeBackground":"Animar fundo","classMinutes":"{n} min de aulas","classBreak":"Intervalo · {n} min","freeWindow":"Horário livre · {n} min","jumpCurrent":"Aula atual","nextTeachingDay":"Próximo dia de aulas","noFurtherLessons":"Não há mais aulas neste semestre","copyLesson":"Copiar aula","teacherLessons":"Aulas do professor","commonLessons":"Aulas para toda a turma","selectedFilter":"{filter} + aulas comuns","effectHint":"O fundo fica atrás do texto e dos botões. A animação pausa nas abas ocultas.","motionLabel":"Transições suaves","motionDescription":"Transições de menus, dias e cartões. O movimento do fundo é controlado separadamente.","indicatorSaturationHint":"0% é cinza; 100% usa a cor escolhida. Se ela se confundir com os ícones, o tom do indicador é ajustado automaticamente.","sourceConflictShort":"Sobreposição na fonte","checkAhead":"Este arquivo é mais recente que o site publicado"}};
+for(const [code,values] of Object.entries(UPGRADE_I18N))Object.assign(I18N[code],values);
 function uiIcon(name){
  const aliases={'🎯':'today','🗓':'week','↗':'share','☰':'menu','👨‍🏫':'teachers','📌':'notes','🔔':'bells','📋':'copy','⬇':'download','◉':'offline'};
  const shapes={sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>',moon:'<path d="M21 13a9 9 0 0 1-10-10A9 9 0 1 0 21 13Z"/>',verified:'<path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/><path d="m8 12 3 3 5-6"/>',flag:'<path d="M5 21V3m0 1c5-4 9 4 14 0v10c-5 4-9-4-14 0"/>',refresh:'<path d="M20 7v5h-5M4 17v-5h5M5.5 7a7 7 0 0 1 11.6-2L20 8M4 16l2.9 3A7 7 0 0 0 18.5 17"/>',snow:'<path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7M9 4l3 3 3-3M9 20l3-3 3 3M4 10l4-1-1-4m13 9-4 1 1 4M4 14l4 1-1 4M20 10l-4-1 1-4"/>',wheat:'<path d="M12 22V7m0 0c-4 0-6-3-6-5 4 0 6 2 6 5Zm0 5c-4 0-7-3-7-5 4 0 7 2 7 5Zm0 5c-4 0-7-3-7-5 4 0 7 2 7 5Zm0-10c4 0 6-3 6-5-4 0-6 2-6 5Zm0 5c4 0 7-3 7-5-4 0-7 2-7 5Zm0 5c4 0 7-3 7-5-4 0-7 2-7 5Z"/>',none:'<circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/>',star:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>',bookmark:'<path d="M6 3h12v18l-6-4-6 4V3Z"/>',support:'<path d="M4 14v-3a8 8 0 0 1 16 0v3M4 11H3v6h4v-6H4Zm16 0h1v6h-4v-6h3Zm0 6c0 3-3 4-8 4"/>',schedule:'<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 9v12m5-7h3m-3 3h3"/>',groups:'<path d="m3 8 9-5 9 5-9 5-9-5Zm4 3v6l5 3 5-3v-6m4-3v9"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',chevronRight:'<path d="m9 5 7 7-7 7"/>',chevronLeft:'<path d="m15 5-7 7 7 7"/>',chevronDown:'<path d="m5 9 7 7 7-7"/>',arrowUpRight:'<path d="M6 18 18 6M6 6h12v12"/>',person:'<circle cx="12" cy="7" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',pin:'<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2"/>',globe:'<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>',palette:'<path d="M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-4c-1-1 0-2 1-2h2a4 4 0 0 0 4-4 9 9 0 0 0-9-8Z"/><path d="M7 10h.01M10 6.5h.01M15 7h.01M18 11h.01" stroke-width="3"/>',settings:'<path d="M3 6h18M3 12h18M3 18h18"/><circle cx="8" cy="6" r="2" fill="var(--bg)"/><circle cx="16" cy="12" r="2" fill="var(--bg)"/><circle cx="10" cy="18" r="2" fill="var(--bg)"/>',today:'<circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>',week:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 10h18m-13 4h1m6 0h1m-8 3h1m6 0h1"/>',share:'<path d="M12 15V3m-4 4 4-4 4 4M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',teachers:'<circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2m3-15a3 3 0 0 1 0 6m0 3a5 5 0 0 1 3 4v2"/>',notes:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Zm0 0v6h6M8 13h8m-8 4h5"/>',bells:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-9 13h6"/>',copy:'<rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V3H3v13h5"/>',download:'<path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/>',offline:'<path d="M7 16a4 4 0 0 1-1-8 6 6 0 0 1 11-1 4.5 4.5 0 0 1 1 9m-10 3 3 3 6-7"/>'};
@@ -739,7 +867,7 @@ function render(animate=false){
  $('dayNav').innerHTML=I18N[state.lang].shortDays.map((label,i)=>{const count=new Set(matchingRows(state.week,i+1,'').map(row=>row[1])).size,isToday=state.week===realWeek&&i+1===realDay;return `<button data-action="day" data-value="${i+1}" class="${state.day===i+1?'on':''} ${isToday?'is-today':''}" aria-pressed="${state.day===i+1}" ${isToday?'aria-current="date"':''} aria-label="${esc(I18N[state.lang].longDays[i])}, ${esc(t('dayClasses',{n:count}))}${isToday?', '+esc(t('today')):''}"><span>${esc(label)}</span><small>${dateOf(state.week,i+1).getUTCDate()}</small>${isToday?'<i class="today-beacon" aria-hidden="true"></i>':''}<span class="day-dots" aria-hidden="true">${'<i></i>'.repeat(count)}</span></button>`}).join('');
  $('summaryTitle').textContent=state.query?t('search'):localeDate(dateOf(state.week,state.day));
  $('lessonSearch').placeholder=t('searchPlaceholder');$('lessonSearch').setAttribute('aria-label',t('searchPlaceholder'));
- $('footer').innerHTML=[['today','schedule','today'],['week','week','weekOverview'],['share','share','share'],['menu','menu','menu']].map(([action,icon,label])=>`<button class="${action==='today'?'active':''}" data-action="${action}"><b>${uiIcon(icon)}</b><span>${esc(t(label))}</span></button>`).join('')+'<span class="credit">by csenchis</span>';
+ $('footer').innerHTML=[['today','schedule','today'],['week','week','weekOverview'],['share','share','share'],['menu','menu','menu']].map(([action,icon,label])=>`<button class="${action==='today'&&state.week===realWeek&&state.day===Math.min(realDay,6)&&!state.query?'active':''}" data-action="${action}"><b>${uiIcon(icon)}</b><span>${esc(t(label))}</span></button>`).join('')+'<span class="credit">by csenchis</span>';
  $('prevWeek').disabled=state.week===1;$('nextWeek').disabled=state.week===MAX_WEEK;
  $('prevWeek').setAttribute('aria-label',t('previousWeek'));$('nextWeek').setAttribute('aria-label',t('nextWeek'));$('weekLabel').setAttribute('aria-label',t('weekSelector'));
  $('dayNav').setAttribute('aria-label',t('weekNavigation'));$('clearSearchButton').setAttribute('aria-label',t('clearSearch'));$('closeModalButton').setAttribute('aria-label',t('closed'));
@@ -770,16 +898,18 @@ function renderCards(animate=false){
   const opened=state.openCard===rowId(row),actual=state.week===realWeek&&row[0]===realDay&&!state.query;
   const live=actual&&minutes>=toMinutes(row[9])&&minutes<toMinutes(row[10]);const past=actual&&minutes>=toMinutes(row[10]);
   const conflict=row[11]?.includes(state.week);
-  return `<article style="--stagger:${Math.min(index,5)*45}ms" class="card ${row[2]?'lec':'prac'} ${live?'live':''} ${past?'past':''}"><button class="card-button" data-action="expand" data-index="${index}" aria-expanded="${opened}"><span class="time-block"><b>${esc(row[9])}</b><small>${esc(row[10])}</small><span class="pair-no">${esc(t('pair',{n:row[1]}))}</span></span><span class="lesson-body"><span class="lesson-top"><span class="lesson-type">${esc(t(row[2]?'lecture':'practice'))}</span><span class="subgroup-label">${esc(row[7]?subgroupName(Number(row[7])):t('allGroups'))}</span>${state.query?`<span class="subgroup-label">${esc(I18N[state.lang].shortDays[row[0]-1])}</span>`:''}${live?`<span class="lesson-live">${esc(t('now'))}</span>`:''}${conflict?`<span title="${esc(t('sourceConflict'))}">⚠️</span>`:''}</span><span class="title">${esc(subject(row))}</span><span class="lesson-meta">${row[4]?`<span>${uiIcon('pin')}${esc(room(row[4]))}</span>`:''}<span>${uiIcon('person')}${esc(teacher(row)||t('noTeacher'))}</span></span></span><span class="card-chevron">${uiIcon('chevronRight')}</span></button>${opened?`<div class="detail"><p>${esc(t('teacher'))}: <b>${esc(teacher(row)||t('noTeacher'))}</b></p><p>${esc(t('weeks'))}: <b>${esc(formatWeek(row))}</b></p>${conflict?`<p>⚠️ ${esc(t('sourceConflict'))}</p>`:''}<label for="noteText">${esc(t('note'))}</label><input id="noteText" data-note-index="${index}" value="${esc(noteValue(row))}" placeholder="${esc(t('notePlaceholder'))}"><button class="report-issue" data-action="reportIssue" data-index="${index}">${uiIcon('flag')}${esc(t('reportIssue'))}</button></div>`:''}</article>`;
- }).join(''):`<div class="empty"><span class="empty-icon">${uiIcon('schedule')}</span><strong>${esc(t(state.query?'noSearch':'noLessons'))}</strong><span>${esc(t('noLessonsHint'))}</span><button class="report-issue" data-action="reportIssue">${uiIcon('flag')}${esc(t('reportIssue'))}</button></div>`;
+  return lessonGap(rows,index)+`<article style="--stagger:${Math.min(index,5)*45}ms" class="card ${row[2]?'lec':'prac'} ${live?'live':''} ${past?'past':''}"><button class="card-button" data-action="expand" data-index="${index}" aria-expanded="${opened}"><span class="time-block"><b>${esc(row[9])}</b><small>${esc(row[10])}</small><span class="pair-no">${esc(t('pair',{n:row[1]}))}</span></span><span class="lesson-body"><span class="lesson-top"><span class="lesson-type">${esc(t(row[2]?'lecture':'practice'))}</span><span class="subgroup-label">${esc(row[7]?subgroupName(Number(row[7])):t('allGroups'))}</span>${state.query?`<span class="subgroup-label">${esc(I18N[state.lang].shortDays[row[0]-1])}</span>`:''}${live?`<span class="lesson-live">${esc(t('now'))}</span>`:''}${conflict?`<span class="subgroup-label" title="${esc(t('sourceConflict'))}">⚠ ${esc(t('sourceConflictShort'))}</span>`:''}</span><span class="title">${esc(subject(row))}</span><span class="lesson-meta">${row[4]?`<span>${uiIcon('pin')}${esc(room(row[4]))}</span>`:''}<span>${uiIcon('person')}${esc(teacher(row)||t('noTeacher'))}</span></span></span><span class="card-chevron">${uiIcon('chevronRight')}</span></button>${opened?`<div class="detail"><p>${esc(t('teacher'))}: <b>${esc(teacher(row)||t('noTeacher'))}</b></p><p>${esc(t('weeks'))}: <b>${esc(formatWeek(row))}</b></p>${conflict?`<p>⚠️ ${esc(t('sourceConflict'))}</p>`:''}<label for="noteText">${esc(t('note'))}</label><input id="noteText" data-note-index="${index}" value="${esc(noteValue(row))}" placeholder="${esc(t('notePlaceholder'))}"><div class="lesson-tools"><button data-action="copyLesson" data-index="${index}">${uiIcon('copy')}${esc(t('copyLesson'))}</button></div><button class="report-issue" data-action="reportIssue" data-index="${index}">${uiIcon('flag')}${esc(t('reportIssue'))}</button></div>`:''}</article>`;
+ }).join(''):`<div class="empty"><span class="empty-icon">${uiIcon('schedule')}</span><strong>${esc(t(state.query?'noSearch':'noLessons'))}</strong><span>${esc(t('noLessonsHint'))}</span>${!state.query?`<button class="primary" data-action="nextTeachingDay">${esc(t('nextTeachingDay'))}</button>`:''}<button class="report-issue" data-action="reportIssue">${uiIcon('flag')}${esc(t('reportIssue'))}</button></div>`;
  const cards=$('cards');if(lastCardMarkup!==markup){lastCardMarkup=markup;cards.classList.toggle('is-changing',animate);cards.innerHTML=markup}
+ renderDaySummary(rows);syncJumpToCurrent();
 }
 let modalCloseTimer=0,returnFocus=null;
 const reducedMotion=()=>state.appearance?.motion===false||!!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-function syncOverlays(){const locked=!$('modal').hidden||!$('onboard').hidden;document.body.classList.toggle('modal-open',locked);$('appShell').inert=locked;$('footer').inert=locked}
+function syncOverlays(){const locked=!$('modal').hidden||!$('onboard').hidden;document.body.classList.toggle('modal-open',locked);$('appShell').inert=locked;$('footer').inert=locked;if($('jumpCurrent'))$('jumpCurrent').inert=locked;backgroundEffects.sync();syncJumpToCurrent()}
 function openModal(kind){
  clearTimeout(modalCloseTimer);const sheet=$('modal').querySelector('.panel');for(const property of ['transform','transition','animation','--sheet-offset'])sheet.style.removeProperty(property);const wasHidden=$('modal').hidden;
  if(wasHidden)returnFocus=document.activeElement;
+ if(['themes','accessibility'].includes(kind)&&!['themes','accessibility'].includes(state.modal))state.appearanceAtOpen={...state.appearance};
  state.modal=kind;$('modal').hidden=false;$('modal').classList.remove('is-closing');renderModal();$('modalBody').scrollTop=0;syncOverlays();
  if(!reducedMotion()&&$('modalBody').animate)$('modalBody').animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:300,easing:'cubic-bezier(.16,1,.3,1)'});
  $('modalTitle').focus({preventScroll:true});
@@ -810,7 +940,7 @@ function renderModal(){if(!state.modal)return;const body=$('modalBody'),title=$(
  renderAppearanceSettings();return;
  }
  if(state.modal==='week'){
- title.textContent=t('chooseWeek');body.innerHTML=`<div class="grid">${Array.from({length:MAX_WEEK},(_,i)=>`<button class="choice ${i+1===state.week?'on':''}" data-action="selectWeek" data-value="${i+1}"><strong>${esc(t('week',{n:i+1}))}</strong><small>${esc(t((i+1)%2?'odd':'even'))}</small></button>`).join('')}</div><button class="primary" data-action="currentWeek">${esc(t('returnCurrent'))}</button>`;return;
+ title.textContent=t('chooseWeek');body.innerHTML=`<div class="grid">${Array.from({length:MAX_WEEK},(_,i)=>`<button class="choice ${i+1===state.week?'on':''}" data-action="selectWeek" data-value="${i+1}"><strong>${esc(t('week',{n:i+1}))}</strong><small>${esc(t((i+1)%2?'odd':'even'))}</small><span class="week-choice-range">${esc(semesterDateRange(i+1))}</span></button>`).join('')}</div><button class="primary" data-action="currentWeek">${esc(t('returnCurrent'))}</button>`;return;
  }
  if(state.modal==='teachers'){
  title.textContent=t('teachers');state.teacherQuery='';
@@ -980,7 +1110,7 @@ function scheduleText(){const rows=matchingRows(),date=localeDate(dateOf(state.w
 function offlineSnapshot(){
  const copy=document.documentElement.cloneNode(true);copy.querySelector('body').classList.remove('modal-open','animations-paused');
  for(const id of ['modal','onboard'])copy.querySelector('#'+id).hidden=true;
- copy.querySelector('#modal').classList.remove('is-closing');copy.querySelector('#modalBody').innerHTML='';copy.querySelector('#appearanceEditorFooter')?.remove();
+ copy.querySelector('#modal').classList.remove('is-closing');copy.querySelector('#modalBody').innerHTML='';copy.querySelector('#jumpCurrent').hidden=true;copy.querySelector('#appearanceEditorFooter')?.remove();
  for(const id of ['appShell','footer'])copy.querySelector('#'+id).removeAttribute('inert');
  return '<!DOCTYPE html>\n'+copy.outerHTML;
 }
@@ -1033,6 +1163,12 @@ document.addEventListener('click',async event=>{const target=event.target.closes
  case 'appearanceMode':updateAppearance('mode',value);break;
  case 'appearanceColor':updateAppearance(target.dataset.key,value);break;
  case 'effectMotion':updateAppearance('effectMotion',value);break;
+ case 'density':updateAppearance('density',value);break;
+ case 'undoAppearance':undoAppearance();break;
+ case 'toggleBackgroundMotion':updateAppearance('effectMotion',state.appearance.effectMotion==='still'||state.appearance.effectMotion==='auto'&&matchMedia('(prefers-reduced-motion: reduce)').matches?'animated':'still');break;
+ case 'jumpCurrent':goToday(true);break;
+ case 'nextTeachingDay':nextTeachingDay();break;
+ case 'copyLesson':{const row=matchingRows()[Number(target.dataset.index)];if(row)await copyText([DATA.labels[state.group],localeDate(dateOf(state.week,row[0])),row[9]+'–'+row[10],subject(row),room(row[4]),teacher(row)].filter(Boolean).join(' · '));break}
  case 'notifications':await toggleNotifications();break;
  case 'dismissUpdate':state.updateDismissed=true;if(state.changeDate)save('bash_changes_dismissed_v1',state.changeDate);state.newVersion=false;renderUpdateBanner();break;
  case 'reloadVersion':reloadVersion();break;
@@ -1040,7 +1176,7 @@ document.addEventListener('click',async event=>{const target=event.target.closes
  case 'prevWeek':setWeek(state.week-1);break;case 'nextWeek':setWeek(state.week+1);break;
  case 'day':setDay(value);break;case 'subgroup':setSubgroup(value);break;
  case 'week':openModal('week');break;case 'selectWeek':setWeek(value);closeModal();break;case 'currentWeek':setWeek(currentWeek());closeModal();break;
- case 'today':state.query='';$('lessonSearch').value='';setWeek(currentWeek());setDay(Math.min(today(),6));break;
+ case 'today':goToday();break;
  case 'search':$('searchBox').hidden=!$('searchBox').hidden;if(!$('searchBox').hidden)$('lessonSearch').focus();break;
  case 'clearSearch':state.query='';$('lessonSearch').value='';renderCards(true);$('summaryTitle').textContent=localeDate(dateOf(state.week,state.day));renderFilterSummary();break;
  case 'expand':{const rows=matchingRows();const row=rows[+target.dataset.index];state.openCard=row&&state.openCard!==rowId(row)?rowId(row):-1;renderCards();$('cards').querySelector(`[data-index="${target.dataset.index}"]`)?.focus({preventScroll:true});break}
@@ -1075,7 +1211,7 @@ document.addEventListener('keydown',event=>{
  if(event.key==='Escape'&&overlay===$('modal')){event.preventDefault();closeModal();return}
  if(event.key==='Tab'){const items=[...overlay.querySelectorAll('button:not([disabled]),input,select,textarea,a[href],[tabindex="0"]')].filter(el=>!el.hidden&&el.getClientRects().length);if(!items.length)return;const first=items[0],last=items[items.length-1];if(event.shiftKey&&(document.activeElement===first||!items.includes(document.activeElement))){event.preventDefault();last.focus()}else if(!event.shiftKey&&(document.activeElement===last||!items.includes(document.activeElement))){event.preventDefault();first.focus()}}
 });
-const APP_RELEASE='2026-10-25.6';
+const APP_RELEASE='2026-10-26.1';
 const SCHEDULE_RELEASE='2026-10-25';
 const SUPPORT_LINKS={telegram:'https://t.me/csenchis',max:'https://max.ru/u/f9LHodD0cOLBig0ncSmZu-eTLwPD-Hm-RjLt9f2f7IFpYJJtNziGpqJPshc'};
 const jsonRead=(key,fallback)=>{try{return JSON.parse(read(key))??fallback}catch{return fallback}};
@@ -1091,14 +1227,14 @@ if(!state.subgroupPrefs||typeof state.subgroupPrefs!=='object'||Array.isArray(st
 if(!read('bash_subgroups_migrated_v2')&&state.subgroupLock){state.subgroupPrefs[state.group]=validSubgroup(state.subgroupLock);jsonSave('bash_subgroup_prefs_v2',state.subgroupPrefs);save('bash_subgroups_migrated_v2','1')}
 state.subgroup=Object.hasOwn(state.subgroupPrefs,state.group)?validSubgroup(state.subgroupPrefs[state.group]):validSubgroup(state.subgroup);
 state.textSize=read('bash_text_size_v1')==='large'?'large':'comfortable';
-const APPEARANCE_DEFAULTS={fontSize:100,background:'#171a1f',iconColor:'#a8bdd8',calendarColor:'#a8bdd8',indicatorSaturation:100,indicatorColor:'#ffb454',mode:'system',motion:true,glass:false,shadows:true,backgroundEffect:'none',effectIntensity:60,effectSpeed:100,effectMotion:'auto'};
+const APPEARANCE_DEFAULTS={density:'comfortable',paletteSaturation:100,fontSize:100,background:'#171a1f',iconColor:'#a8bdd8',calendarColor:'#a8bdd8',indicatorSaturation:100,indicatorColor:'#ffb454',mode:'system',motion:true,glass:false,shadows:true,backgroundEffect:'none',effectIntensity:60,effectSpeed:100,effectMotion:'auto'};
 const deviceTheme=window.matchMedia?.('(prefers-color-scheme: dark)');
 function appearanceBackground(p=state.appearance){return p.mode==='custom'?p.background:(p.mode==='dark'||p.mode==='system'&&(deviceTheme?.matches??true))?'#171a1f':'#f3f4f6'}
 function normalizeAppearance(value){
  const v=value&&typeof value==='object'&&!Array.isArray(value)?value:{};
  const color=(key)=>/^#[0-9a-f]{6}$/i.test(v[key]||'')?v[key].toLowerCase():APPEARANCE_DEFAULTS[key];
  const n=Number(v.fontSize),saturation=Number(v.indicatorSaturation),density=Number(v.effectIntensity),speed=Number(v.effectSpeed);
- return {effectSpeed:Number.isFinite(speed)?Math.max(50,Math.min(150,Math.round(speed/10)*10)):100,effectMotion:['auto','animated','still'].includes(v.effectMotion)?v.effectMotion:'auto',backgroundEffect:['none','snow','wheat'].includes(v.backgroundEffect)?v.backgroundEffect:'none',effectIntensity:Number.isFinite(density)?Math.max(20,Math.min(100,Math.round(density/10)*10)):60,fontSize:Number.isFinite(n)?Math.max(100,Math.min(130,Math.round(n/5)*5)):100,indicatorSaturation:Number.isFinite(saturation)?Math.max(0,Math.min(200,Math.round(saturation/10)*10)):100,background:color('background'),iconColor:color('iconColor'),calendarColor:color('calendarColor'),indicatorColor:color('indicatorColor'),mode:['system','light','dark','custom'].includes(v.mode)?v.mode:color('background')!==APPEARANCE_DEFAULTS.background?'custom':'system',...Object.fromEntries(['motion','glass','shadows'].map(key=>[key,typeof v[key]==='boolean'?v[key]:APPEARANCE_DEFAULTS[key]]))};
+ return {density:['comfortable','compact'].includes(v.density)?v.density:'comfortable',paletteSaturation:Number.isFinite(Number(v.paletteSaturation))?Math.max(0,Math.min(150,Math.round(Number(v.paletteSaturation)/10)*10)):100,effectSpeed:Number.isFinite(speed)?Math.max(50,Math.min(150,Math.round(speed/10)*10)):100,effectMotion:['auto','animated','still'].includes(v.effectMotion)?v.effectMotion:'auto',backgroundEffect:['none','snow','wheat','aurora','waves','stars'].includes(v.backgroundEffect)?v.backgroundEffect:'none',effectIntensity:Number.isFinite(density)?Math.max(20,Math.min(100,Math.round(density/10)*10)):60,fontSize:Number.isFinite(n)?Math.max(100,Math.min(130,Math.round(n/5)*5)):100,indicatorSaturation:Number.isFinite(saturation)?Math.max(0,Math.min(200,Math.round(saturation/10)*10)):100,background:color('background'),iconColor:color('iconColor'),calendarColor:color('calendarColor'),indicatorColor:color('indicatorColor'),mode:['system','light','dark','custom'].includes(v.mode)?v.mode:color('background')!==APPEARANCE_DEFAULTS.background?'custom':'system',...Object.fromEntries(['motion','glass','shadows'].map(key=>[key,typeof v[key]==='boolean'?v[key]:APPEARANCE_DEFAULTS[key]]))};
 }
 function rgbColor(hex){return [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16))}
 function mixColor(first,second,amount){return '#'+rgbColor(first).map((n,i)=>Math.round(n*(1-amount)+rgbColor(second)[i]*amount).toString(16).padStart(2,'0')).join('')}
@@ -1119,11 +1255,12 @@ function applyAppearance(){
  const light=colorContrast('#000000',bg)>colorContrast('#ffffff',bg),toward=light?'#000000':'#ffffff',ink=contrastColor(light?'#15181d':'#f5f6f8',bg,4.5);
  const safeSurface=amount=>{const c=mixColor(bg,toward,amount);return colorContrast(ink,c)>=4.5?c:bg};
  const surface=safeSurface(.04),surface2=safeSurface(.085),accent=contrastColor(light?'#365e8b':'#a8bdd8',surface2,3);
- const calendarSurface=mixColor(bg,p.calendarColor,light ? .12 : .16),calendarInk=contrastColor(ink,calendarSurface,4.5);
- const iconColor=contrastColor(p.iconColor,surface2,3),indicatorColor=contrastColor(saturateIndicator(p.indicatorColor,p.indicatorSaturation),surface2,3);
- const values={'--indicator-strength':String(.25+.75*p.indicatorSaturation/200),'--indicator-width':(3+3*p.indicatorSaturation/200)+'px','--indicator-color':indicatorColor,'--indicator-text':contrastColor(indicatorColor,surface,4.5),'--indicator-calendar':contrastColor(indicatorColor,calendarSurface,3),'--indicator-calendar-active':contrastColor(indicatorColor,p.calendarColor,3),'--calendar-bg':calendarSurface,'--calendar-text':calendarInk,'--calendar-border':contrastColor(mixColor(p.calendarColor,bg,.35),calendarSurface,1.5),'--calendar-active':p.calendarColor,'--calendar-active-text':contrastColor(light?'#15181d':'#f5f6f8',p.calendarColor,4.5),'--bg':bg,'--s':surface,'--s2':surface2,'--t':ink,'--m':contrastColor(mixColor(ink,bg,.27),surface2,4.5),'--l':mixColor(bg,toward,.22),'--a':accent,'--ao':colorContrast('#000000',accent)>colorContrast('#ffffff',accent)?'#000000':'#ffffff','--lec':contrastColor(light?'#365e8b':'#a8bdd8',surface2,3),'--prac':contrastColor(light?'#356d5e':'#a8c5ba',surface2,3),'--icon-color':iconColor,'--text-scale':String(p.fontSize/100)};
+ const calendarColor=saturateIndicator(p.calendarColor,p.paletteSaturation),iconBase=saturateIndicator(p.iconColor,p.paletteSaturation);
+ const calendarSurface=mixColor(bg,calendarColor,light ? .12 : .16),calendarInk=contrastColor(ink,calendarSurface,4.5);
+ const iconColor=contrastColor(iconBase,surface2,3),indicatorColor=indicatorForPalette(p.indicatorColor,iconColor,surface2,p.indicatorSaturation);
+ const values={'--indicator-strength':String(.25+.75*p.indicatorSaturation/200),'--indicator-width':(3+3*p.indicatorSaturation/200)+'px','--indicator-color':indicatorColor,'--indicator-text':contrastColor(indicatorColor,surface,4.5),'--indicator-calendar':contrastColor(indicatorColor,calendarSurface,3),'--indicator-calendar-active':contrastColor(indicatorColor,calendarColor,3),'--calendar-bg':calendarSurface,'--calendar-text':calendarInk,'--calendar-border':contrastColor(mixColor(calendarColor,bg,.35),calendarSurface,1.5),'--calendar-active':calendarColor,'--calendar-active-text':contrastColor(light?'#15181d':'#f5f6f8',calendarColor,4.5),'--bg':bg,'--s':surface,'--s2':surface2,'--t':ink,'--m':contrastColor(mixColor(ink,bg,.27),surface2,4.5),'--l':mixColor(bg,toward,.22),'--a':accent,'--ao':colorContrast('#000000',accent)>colorContrast('#ffffff',accent)?'#000000':'#ffffff','--lec':contrastColor(light?'#365e8b':'#a8bdd8',surface2,3),'--prac':contrastColor(light?'#356d5e':'#a8c5ba',surface2,3),'--icon-color':iconColor,'--text-scale':String(p.fontSize/100)};
  for(const [key,value] of Object.entries(values))root.style.setProperty(key,value);
- root.style.colorScheme=light?'light':'dark';root.dataset.colorMode=p.mode;root.dataset.motion=p.motion?'on':'off';root.dataset.glass=p.glass?'on':'off';root.dataset.shadows=p.shadows?'on':'off';
+ root.style.colorScheme=light?'light':'dark';root.dataset.density=p.density;root.dataset.colorMode=p.mode;root.dataset.motion=p.motion?'on':'off';root.dataset.glass=p.glass?'on':'off';root.dataset.shadows=p.shadows?'on':'off';
  document.querySelector('meta[name="theme-color"]').content=bg;
  backgroundEffects.sync();
 }
@@ -1135,11 +1272,12 @@ function updateAppearance(key,value){
 }
 function syncAppearanceControls(){
  const p=state.appearance;
- for(const [id,key] of [['fontSizeValue','fontSize'],['indicatorSaturationValue','indicatorSaturation'],['effectIntensityValue','effectIntensity'],['effectSpeedValue','effectSpeed']])if($(id))$(id).textContent=p[key]+'%';
+ const undo=$('appearanceUndoButton');if(undo)undo.disabled=!state.appearanceAtOpen||Object.keys(APPEARANCE_DEFAULTS).every(key=>p[key]===state.appearanceAtOpen[key]);
+ for(const [id,key] of [['paletteSaturationValue','paletteSaturation'],['fontSizeValue','fontSize'],['indicatorSaturationValue','indicatorSaturation'],['effectIntensityValue','effectIntensity'],['effectSpeedValue','effectSpeed']])if($(id))$(id).textContent=p[key]+'%';
  for(const id of ['effectIntensity','effectSpeed'])if($(id))$(id).disabled=p.backgroundEffect==='none';
  if($('effectControls'))$('effectControls').setAttribute('aria-disabled',String(p.backgroundEffect==='none'));
  if($('themeModeHint')){$('themeModeHint').textContent=t(p.mode==='custom'?'modeCustomHint':'systemThemeHint');$('themeModeHint').hidden=p.mode==='light'||p.mode==='dark'}
- for(const [action,key] of [['backgroundEffect','backgroundEffect'],['appearanceMode','mode'],['effectMotion','effectMotion']])document.querySelectorAll('[data-action="'+action+'"]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.value===p[key])));
+ for(const [action,key] of [['density','density'],['backgroundEffect','backgroundEffect'],['appearanceMode','mode'],['effectMotion','effectMotion']])document.querySelectorAll('[data-action="'+action+'"]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.value===p[key])));
  for(const [key,id,out] of [['background','appearanceBackground','backgroundValue'],['iconColor','appearanceIcons','iconColorValue'],['calendarColor','appearanceCalendar','calendarColorValue'],['indicatorColor','appearanceIndicatorColor','indicatorColorValue']]){
   const value=key==='background'?appearanceBackground(p):p[key];
   if($(id))$(id).value=value;if($(out))$(out).value=value.toUpperCase();
@@ -1148,7 +1286,7 @@ function syncAppearanceControls(){
 }
 function setAppearanceTab(tab){
  if(!['view','colors','effects'].includes(tab))return;
- state.appearanceTab=tab;
+ state.appearanceTab=tab;$('modal').dataset.appearanceTab=tab;
  for(const key of ['view','colors','effects']){
   const button=$('appearanceTab-'+key),pane=$('appearancePane-'+key);if(!button||!pane)continue;
   button.setAttribute('aria-selected',String(key===tab));button.tabIndex=key===tab?0:-1;pane.hidden=key!==tab;
@@ -1172,23 +1310,24 @@ function renderAppearanceSettings(){
  const p=state.appearance,colors={...p,background:appearanceBackground(p)};$('modalTitle').textContent=t('themeSettings');
  const scale=(key,id,label,min,max,step,lo,hi)=>`<div><label class="appearance-label" for="${id}">${esc(t(label))}<output id="${key==='fontSize'?'fontSizeValue':key==='indicatorSaturation'?'indicatorSaturationValue':key+'Value'}" for="${id}">${p[key]}%</output></label><input id="${id}" class="appearance-range" data-appearance="${key}" type="range" min="${min}" max="${max}" step="${step}" value="${p[key]}"><div class="appearance-range-labels"><span>${lo}</span><span>${hi}</span></div></div>`;
  $('modalBody').innerHTML=`<div class="appearance-editor">
- <div class="theme-demo" id="appearanceLivePreview" role="group" aria-label="${esc(t('effectPreview'))}"><canvas id="effectPreview" aria-hidden="true"></canvas><div class="theme-demo-top"><span>${esc(t('effectPreview'))}</span><span id="effectPreviewCaption"></span></div><div class="theme-demo-calendar" aria-hidden="true">${I18N[state.lang].shortDays.slice(0,3).map((day,i)=>`<span class="${i===1?'on':''}">${esc(day)}</span>`).join('')}</div><div class="theme-sample"><span class="theme-sample-time">10:20<small>11:55</small></span><span class="theme-sample-copy"><small class="theme-sample-now">${esc(t('previewLive'))}</small><strong>${esc(t('previewSubject'))}</strong><small>${uiIcon('pin')}${esc(room('106/6'))}</small></span>${uiIcon('chevronRight')}</div></div>
+ <div class="theme-demo" id="appearanceLivePreview" role="group" aria-label="${esc(t('effectPreview'))}"><canvas id="effectPreview" aria-hidden="true"></canvas><div class="theme-demo-top"><span>${esc(t('effectPreview'))}</span><span id="effectPreviewCaption"></span></div><div class="theme-demo-calendar" aria-hidden="true">${I18N[state.lang].shortDays.slice(0,3).map((day,i)=>`<span class="${i===1?'on':''}">${esc(day)}</span>`).join('')}</div><div class="theme-sample"><span class="theme-sample-time">10:20<small>11:55</small></span><span class="theme-sample-copy"><small class="theme-sample-now">${esc(t('previewLive'))}</small><strong>${esc(t('previewSubject'))}</strong><small>${uiIcon('pin')}${esc(room('106/6'))}</small></span>${uiIcon('chevronRight')}</div><button class="theme-preview-pause" id="themePreviewPause" data-action="toggleBackgroundMotion" hidden></button></div>
  <div class="theme-tabbar" role="tablist" aria-label="${esc(t('themeSettings'))}">${[['view','appearanceView'],['colors','appearancePalette'],['effects','appearanceDecor']].map(([key,label])=>`<button class="theme-tab" id="appearanceTab-${key}" data-action="appearanceTab" data-value="${key}" role="tab" aria-controls="appearancePane-${key}" aria-selected="false" tabindex="-1">${esc(t(label))}</button>`).join('')}</div>
  <section class="theme-pane" id="appearancePane-view" role="tabpanel" aria-labelledby="appearanceTab-view">
  <div class="theme-control"><h3 class="theme-control-title">${esc(t('appearanceMode'))}</h3><div class="theme-modes">${[['system','modeDeviceShort','settings'],['light','modeLightShort','sun'],['dark','modeDarkShort','moon'],['custom','modeCustomShort','palette']].map(([value,label,icon])=>`<button class="theme-mode" data-action="appearanceMode" data-value="${value}" aria-pressed="${p.mode===value}">${uiIcon(icon)}<span>${esc(t(label))}</span></button>`).join('')}</div><p class="appearance-note" id="themeModeHint"></p></div>
+ <div class="theme-control"><h3 class="theme-control-title">${esc(t('cardDensity'))}</h3><div class="density-options">${[['comfortable','densityComfort'],['compact','densityCompact']].map(([value,label])=>`<button data-action="density" data-value="${value}" aria-pressed="${p.density===value}">${esc(t(label))}</button>`).join('')}</div></div>
  <div class="theme-control">${scale('fontSize','appearanceFont','textSize',100,130,5,'100%','130%')}</div>
  <div class="theme-control">${[['motion','motionLabel','motionDescription'],['glass','glassLabel','glassDescription'],['shadows','shadowsLabel','shadowsDescription']].map(([key,label,description])=>`<label class="appearance-toggle"><span><b>${esc(t(label))}</b><small>${esc(t(description))}</small></span><input type="checkbox" data-appearance="${key}" ${p[key]?'checked':''}></label>`).join('')}</div>
  </section>
- <section class="theme-pane" id="appearancePane-colors" role="tabpanel" aria-labelledby="appearanceTab-colors" hidden><p class="appearance-note">${esc(t('paletteHint'))}</p>
+ <section class="theme-pane" id="appearancePane-colors" role="tabpanel" aria-labelledby="appearanceTab-colors" hidden><div class="theme-control">${scale('paletteSaturation','appearancePaletteSaturation','paletteSaturation',0,150,10,'0%','150%')}<p class="appearance-note">${esc(t('paletteSaturationHint'))}</p></div><p class="appearance-note">${esc(t('paletteHint'))}</p>
  ${[['background','appearanceBackground','backgroundValue','backgroundColor'],['iconColor','appearanceIcons','iconColorValue','iconsColor'],['calendarColor','appearanceCalendar','calendarColorValue','calendarColor'],['indicatorColor','appearanceIndicatorColor','indicatorColorValue','indicatorColor']].map(([key,id,out,label])=>`<div class="theme-color-card"><div class="theme-color-top"><div><label for="${id}">${esc(t(label))}</label><input id="${out}" class="theme-hex" data-appearance-hex="${key}" value="${colors[key].toUpperCase()}" maxlength="7" spellcheck="false" autocapitalize="off" aria-label="${esc(t(label))} HEX"></div><input class="theme-color-picker" id="${id}" data-appearance="${key}" type="color" value="${colors[key]}"></div><div class="theme-swatches" role="group" aria-label="${esc(t(label))}">${THEME_SWATCHES[key].map(value=>`<button class="theme-swatch" style="--swatch:${value};--swatch-ink:${colorContrast('#000000',value)>colorContrast('#ffffff',value)?'#000000':'#ffffff'}" data-action="appearanceColor" data-key="${key}" data-value="${value}" aria-pressed="${colors[key]===value}" aria-label="${esc(t(label))} ${value.toUpperCase()}"></button>`).join('')}</div></div>`).join('')}
  <div class="theme-control">${scale('indicatorSaturation','appearanceIndicatorSaturation','indicatorSaturation',0,200,10,'0%','200%')}<p class="appearance-note">${esc(t('indicatorSaturationHint'))}</p></div></section>
  <section class="theme-pane" id="appearancePane-effects" role="tabpanel" aria-labelledby="appearanceTab-effects" hidden>
- <div class="theme-control"><h3 class="theme-control-title">${esc(t('backgroundEffect'))}</h3><div class="effect-options" role="group" aria-label="${esc(t('backgroundEffect'))}">${[['none','effectNone','none'],['snow','effectSnow','snow'],['wheat','effectWheat','wheat']].map(([value,label,icon])=>`<button class="effect-choice" data-action="backgroundEffect" data-value="${value}" aria-pressed="${p.backgroundEffect===value}">${uiIcon(icon)}<span>${esc(t(label))}</span></button>`).join('')}</div><p class="appearance-note" id="effectStatusText" role="status"></p></div>
+ <div class="theme-control"><h3 class="theme-control-title">${esc(t('backgroundEffect'))}</h3><div class="effect-options" role="group" aria-label="${esc(t('backgroundEffect'))}">${[['none','effectNone','none'],['aurora','effectAurora',''],['waves','effectWaves',''],['stars','effectStars',''],['snow','effectSnow',''],['wheat','effectWheat','wheat']].map(([value,label,icon])=>`<button class="effect-choice" data-action="backgroundEffect" data-value="${value}" aria-pressed="${p.backgroundEffect===value}"><span class="effect-art ${value}" aria-hidden="true">${icon?uiIcon(icon):''}</span><span>${esc(t(label))}</span></button>`).join('')}</div><p class="appearance-note" id="effectStatusText" role="status"></p></div>
  <div class="theme-control" id="effectControls"><div class="theme-effect-controls">${scale('effectIntensity','effectIntensity','effectIntensity',20,100,10,esc(t('effectLess')),esc(t('effectMore')))}${scale('effectSpeed','effectSpeed','effectSpeed',50,150,10,esc(t('effectSlow')),esc(t('effectFast')))}</div><h3 class="theme-control-title">${esc(t('effectMotionLabel'))}</h3><div class="theme-effect-motion" role="group" aria-label="${esc(t('effectMotionLabel'))}">${[['auto','effectMotionAuto'],['animated','effectMotionAnimated'],['still','effectMotionStill']].map(([value,label])=>`<button data-action="effectMotion" data-value="${value}" aria-pressed="${p.effectMotion===value}">${esc(t(label))}</button>`).join('')}</div><p class="appearance-note">${esc(t('effectHint'))}</p></div>
  </section>
  </div>`;
  const oldFooter=$('appearanceEditorFooter');if(oldFooter)oldFooter.remove();
- const footer=document.createElement('div');footer.id='appearanceEditorFooter';footer.innerHTML=`<div class="theme-editor-footer"><div class="theme-editor-buttons"><button class="theme-reset" data-action="resetAppearance">${esc(t('appearanceResetShort'))}</button><button class="primary" data-action="close">${esc(t('appearanceDone'))}</button></div><span class="theme-save-state">${esc(t('appearanceSavedShort'))}</span></div>`;
+ const footer=document.createElement('div');footer.id='appearanceEditorFooter';footer.innerHTML=`<div class="theme-editor-footer"><div class="theme-editor-buttons"><button class="theme-reset" id="appearanceUndoButton" data-action="undoAppearance">${esc(t('appearanceUndo'))}</button><button class="theme-reset" data-action="resetAppearance">${esc(t('appearanceResetShort'))}</button><button class="primary" data-action="close">${esc(t('appearanceDone'))}</button></div><span class="theme-save-state">${esc(t('appearanceSavedShort'))}</span></div>`;
  $('modal').querySelector('.panel').append(footer);
  syncAppearanceControls();setAppearanceTab(state.appearanceTab||'view');
 }
@@ -1205,7 +1344,7 @@ function publicationStatus(){
  if(state.newVersion||state.publicationStatus==='new')return 'new';
  return state.publicationStatus;
 }
-const publicationStatusKey=()=>({file:'checkFile',offline:'checkOffline',checking:'checkChecking',new:'checkNew',failed:'checkFailed',current:'checkCurrent',idle:'checkUnknown'})[publicationStatus()]||'checkUnknown';
+const publicationStatusKey=()=>({file:'checkFile',offline:'checkOffline',checking:'checkChecking',new:'checkNew',ahead:'checkAhead',failed:'checkFailed',current:'checkCurrent',idle:'checkUnknown'})[publicationStatus()]||'checkUnknown';
 function renderFreshnessShortcut(){
  const button=$('dataInfo');if(!button)return;
  button.dataset.freshness=publicationStatus();button.setAttribute('aria-label',t('freshnessTitle')+' · '+t(publicationStatusKey()));
@@ -1264,10 +1403,11 @@ async function copyReport(){
  toast(t(copied?'reportCopied':'reportCopyFailed'));
 }
 
-// Decoration uses a visible, pointer-transparent layer. Menu motion is independent.
+// One bounded canvas loop. All decoration stays behind protected reading areas.
 const backgroundEffects=(()=>{
  const canvas=$('backgroundEffects'),motion=window.matchMedia?.('(prefers-reduced-motion: reduce)');
- let frame=0,last=0,scenes=[],wheatSprite=null,snowSprites={},resizeTimer=0,maskFrame=0;
+ let frame=0,last=0,elapsed=0,scenes=[],wheatSprite=null,snowSprites={},resizeTimer=0,maskFrame=0;
+ const labels={none:'effectNone',snow:'effectSnow',wheat:'effectWheat',aurora:'effectAurora',waves:'effectWaves',stars:'effectStars'};
  const still=()=>state.appearance.effectMotion==='still'||state.appearance.effectMotion==='auto'&&!!motion?.matches;
  function stop(){cancelAnimationFrame(frame);cancelAnimationFrame(maskFrame);frame=0;maskFrame=0;last=0}
  function wheat(){
@@ -1285,57 +1425,87 @@ const backgroundEffects=(()=>{
   snowSprites[color]=sprite;return sprite;
  }
  function makeScene(element,preview=false){
-  const width=Math.max(1,preview?element.clientWidth:innerWidth),height=Math.max(1,preview?element.clientHeight:innerHeight),ratio=Math.min(devicePixelRatio||1,1.5);
-  const count=Math.max(8,Math.round((preview?24:innerWidth<761?64:100)*state.appearance.effectIntensity/100)),key=[width,height,ratio,count,state.appearance.backgroundEffect].join(':');
+  const width=Math.max(1,preview?element.clientWidth:innerWidth),height=Math.max(1,preview?element.clientHeight:innerHeight),ratio=Math.min(devicePixelRatio||1,1.25),p=state.appearance;
+  const count=Math.max(8,Math.round((preview?20:innerWidth<761?40:64)*p.effectIntensity/100)),key=[width,height,ratio,count,p.backgroundEffect].join(':');
   const previous=scenes.find(scene=>scene.canvas===element&&scene.key===key);if(previous)return previous;
   const ctx=element.getContext('2d');if(!ctx)return null;
   element.width=Math.round(width*ratio);element.height=Math.round(height*ratio);ctx.setTransform(ratio,0,0,ratio,0,0);
-  const isWheat=state.appearance.backgroundEffect==='wheat';
-  return {canvas:element,ctx,width,height,key,preview,particles:Array.from({length:count},()=>({x:Math.random()*width,y:Math.random()*height,size:isWheat?18+Math.random()*17:1.4+Math.random()*2.5,speed:(isWheat?18:25)+Math.random()*35,phase:Math.random()*Math.PI*2,rotation:Math.random()*Math.PI*2,spin:(Math.random()-.5)*.3,crystal:Math.random()<.27,opacity:.35+Math.random()*.5}))};
+  const isWheat=p.backgroundEffect==='wheat';
+  return {canvas:element,ctx,width,height,key,preview,particles:Array.from({length:count},(_,i)=>({x:((i*.6180339+.17)%1)*width,y:((i*.381966+.31)%1)*height,size:isWheat?19+(i%7)*2:1.3+(i%5)*.45,speed:18+(i%9)*4,phase:i*2.39,rotation:i*.6,spin:((i%5)-2)*.08,crystal:i%4===0,opacity:.35+(i%6)*.08}))};
  }
- // Particles belong to the empty background; protect text, cards and controls even in glass mode.
- const protectedSelectors='.header,.utility-strip,.update-banner,.toolbar-top,.quick-groups,.day-nav,.current-panel,.week-panel,.notes-cta,.agenda-heading,.filter-summary,.search-field,.card,.empty,.agenda-end,.workspace-foot,.sidebar,.footer';
+ const protectedSelectors='.header,.utility-strip,.update-banner,.toolbar-top,.quick-groups,.day-nav,.current-panel,.week-panel,.notes-cta,.agenda-heading,.filter-summary,.search-field,.card,.empty,.agenda-end,.workspace-foot,.sidebar,.footer,.lesson-gap,.jump-current';
  function protectedAreas(scene){
-  if(scene.mask&&!scene.preview)return scene.mask;
+  if(scene.mask)return scene.mask;
   const root=scene.preview?scene.canvas.closest('.theme-demo'):document,origin=scene.preview?scene.canvas.getBoundingClientRect():{left:0,top:0};
-  const nodes=root.querySelectorAll(scene.preview?'.theme-demo-top,.theme-demo-calendar,.theme-sample':protectedSelectors);
-  const inset=scene.preview?2:5;
-  scene.mask=[...nodes].filter(node=>node.getClientRects().length).map(node=>{
-   const r=node.getBoundingClientRect();return {x:r.left-origin.left-inset,y:r.top-origin.top-inset,w:r.width+inset*2,h:r.height+inset*2};
-  }).filter(r=>r.w>0&&r.h>0&&r.x<scene.width&&r.y<scene.height&&r.x+r.w>0&&r.y+r.h>0);
+  const nodes=root.querySelectorAll(scene.preview?'.theme-demo-top,.theme-demo-calendar,.theme-sample,.theme-preview-pause':protectedSelectors),inset=scene.preview?2:4;
+  scene.mask=[...nodes].filter(node=>node.getClientRects().length).map(node=>{const r=node.getBoundingClientRect();return {x:r.left-origin.left-inset,y:r.top-origin.top-inset,w:r.width+inset*2,h:r.height+inset*2}}).filter(r=>r.w>0&&r.h>0&&r.x<scene.width&&r.y<scene.height&&r.x+r.w>0&&r.y+r.h>0);
   return scene.mask;
  }
  function invalidateMasks(){
   for(const scene of scenes)scene.mask=null;
-  if(!frame&&!maskFrame&&scenes.length&&!document.hidden)maskFrame=requestAnimationFrame(now=>{maskFrame=0;paint(now,0)});
+  if(!frame&&!maskFrame&&scenes.length&&!document.hidden)maskFrame=requestAnimationFrame(()=>{maskFrame=0;paint(0)});
  }
- function paint(now,delta){
-  const p=state.appearance,isWheat=p.backgroundEffect==='wheat',bg=appearanceBackground(),light=colorContrast('#000000',bg)>colorContrast('#ffffff',bg),color=light?'#4f6d8d':'#f3f7ff',sprite=isWheat?wheat():snow(color),speed=p.effectSpeed/100;
-  scenes=scenes.filter(scene=>scene.canvas.isConnected&&(!scene.preview||!$('modal').hidden));
-  for(const scene of scenes){
-   const {ctx,width,height}=scene;ctx.clearRect(0,0,width,height);ctx.fillStyle=color;
-   for(const particle of scene.particles){
-    const q=particle;q.y+=q.speed*delta*speed;q.x+=(Math.sin(now/1800+q.phase)*10+5)*delta*speed;q.rotation+=q.spin*delta*speed;
-    if(q.y>height+q.size*2){q.y=-q.size*2;q.x=Math.random()*width}if(q.x>width+q.size*2)q.x=-q.size*2;if(q.x<-q.size*2)q.x=width+q.size*2;
-    ctx.globalAlpha=q.opacity*(scene.preview ? .95 : .75);
-    if(sprite&&(isWheat||q.crystal)){const w=q.size*(isWheat ? .72 : 3.6),h=q.size*(isWheat?1.2:3.6);ctx.save();ctx.translate(q.x,q.y);ctx.rotate(q.rotation);ctx.drawImage(sprite,-w/2,-h/2,w,h);ctx.restore()}
-    else{ctx.beginPath();ctx.arc(q.x,q.y,q.size,0,Math.PI*2);ctx.fill()}
+ function ambient(scene,kind,light){
+  const {ctx,width:w,height:h,preview}=scene,p=state.appearance,phase=elapsed*.13,amount=p.effectIntensity/100;
+  const primary=getComputedStyle(document.documentElement).getPropertyValue('--icon-color').trim()||'#a8bdd8',secondary=getComputedStyle(document.documentElement).getPropertyValue('--calendar-active').trim()||'#a8bdd8';
+  if(kind==='aurora'){
+   for(let i=0;i<3;i++){
+    const x=w*(.15+i*.36+.12*Math.sin(phase+i*2)),y=h*(.18+i*.28+.17*Math.cos(phase*.7+i)),radius=Math.max(w*.65,h*.4),g=ctx.createRadialGradient(x,y,0,x,y,radius);
+    g.addColorStop(0,(i===1?secondary:primary)+'a0');g.addColorStop(.45,(i===1?primary:secondary)+'48');g.addColorStop(1,primary+'00');
+    ctx.globalAlpha=(light?.28:.4)*amount*(preview?1.5:1);ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
    }
-   ctx.globalAlpha=1;
-   for(const r of protectedAreas(scene))ctx.clearRect(r.x,r.y,r.w,r.h);
+  }else if(kind==='waves'){
+   ctx.lineWidth=preview?1:1.5;
+   for(let i=0;i<9;i++){
+    const y=h*(.15+i*.095),drift=Math.sin(phase+i*.35)*h*.09;
+    ctx.beginPath();ctx.moveTo(-30,y);ctx.bezierCurveTo(w*.22,y-h*.24+drift,w*.65,y+h*.2+drift,w+30,y-h*.08);
+    ctx.strokeStyle=i%2?primary:secondary;ctx.globalAlpha=(light?.3:.42)*amount;ctx.stroke();
+   }
+  }else if(kind==='stars'){
+   const points=scene.particles.map(q=>({x:(q.x+Math.sin(phase+q.phase)*13+w)%w,y:(q.y+Math.cos(phase*.8+q.phase)*12+h)%h,q}));
+   for(let i=0;i<points.length;i++){
+    const a=points[i];ctx.fillStyle=primary;ctx.globalAlpha=(.4+.3*Math.sin(phase*2+a.q.phase)**2)*amount;ctx.beginPath();ctx.arc(a.x,a.y,a.q.size*.7,0,Math.PI*2);ctx.fill();
+    for(let j=i+1;j<points.length;j++){
+     const b=points[j],distance=Math.hypot(a.x-b.x,a.y-b.y),limit=preview?65:115;if(distance>limit)continue;
+     ctx.globalAlpha=(1-distance/limit)*.22*amount;ctx.strokeStyle=secondary;ctx.lineWidth=.8;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+    }
+   }
   }
  }
- function draw(now){
-  frame=requestAnimationFrame(draw);if(last&&now-last<33)return;const delta=last?Math.min((now-last)/1000,.07):0;last=now;paint(now,delta);
+ function paint(delta){
+  const p=state.appearance,kind=p.backgroundEffect,isWheat=kind==='wheat',bg=appearanceBackground(),light=colorContrast('#000000',bg)>colorContrast('#ffffff',bg),color=light?'#4f6d8d':'#edf5ff',sprite=isWheat?wheat():kind==='snow'?snow(color):null;
+  scenes=scenes.filter(scene=>scene.canvas.isConnected&&(!scene.preview||!$('modal').hidden));
+  for(const scene of scenes){
+   const {ctx,width,height}=scene;ctx.clearRect(0,0,width,height);
+   if(['aurora','waves','stars'].includes(kind))ambient(scene,kind,light);
+   else{ctx.fillStyle=color;for(const q of scene.particles){
+    q.y+=q.speed*delta*p.effectSpeed/100;q.x+=(Math.sin(elapsed+q.phase)*9+4)*delta*p.effectSpeed/100;q.rotation+=q.spin*delta*p.effectSpeed/100;
+    if(q.y>height+q.size*2){q.y=-q.size*2;q.x=(q.x+width*.381)%width}if(q.x>width+q.size*2)q.x=-q.size*2;if(q.x<-q.size*2)q.x=width+q.size*2;
+    ctx.globalAlpha=q.opacity*(scene.preview?.95:.7);
+    if(sprite&&(isWheat||q.crystal)){const w=q.size*(isWheat?.72:3.6),h=q.size*(isWheat?1.2:3.6);ctx.save();ctx.translate(q.x,q.y);ctx.rotate(q.rotation);ctx.drawImage(sprite,-w/2,-h/2,w,h);ctx.restore()}
+    else{ctx.beginPath();ctx.arc(q.x,q.y,q.size,0,Math.PI*2);ctx.fill()}
+   }}
+   ctx.globalAlpha=1;
+   // Smooth light fields do not cross in front of content. Only moving particles
+   // need cut-outs; feather these so no rectangular holes appear in the scene.
+   if(!['aurora','waves'].includes(kind)){
+    ctx.save();ctx.globalCompositeOperation='destination-out';ctx.fillStyle='#000';ctx.shadowColor='#000';ctx.shadowBlur=scene.preview?10:14;
+    for(const r of protectedAreas(scene)){ctx.beginPath();ctx.roundRect(r.x,r.y,r.w,r.h,Math.min(12,r.h/2,r.w/2));ctx.fill()}
+    ctx.restore();
+   }
+  }
  }
+ function draw(now){frame=requestAnimationFrame(draw);if(last&&now-last<33.3)return;const delta=last?Math.min((now-last)/1000,.07):0;last=now;elapsed+=delta*state.appearance.effectSpeed/100;paint(delta)}
  function sync(){
-  const p=state.appearance||APPEARANCE_DEFAULTS,enabled=p.backgroundEffect!=='none'&&!document.hidden,isStill=still();
-  const caption=$('effectPreviewCaption');if(caption)caption.textContent=t(p.backgroundEffect==='none'?'effectNone':p.backgroundEffect==='snow'?'effectSnow':'effectWheat');
-  if($('effectStatusText'))$('effectStatusText').textContent=t(p.backgroundEffect==='none'?'effectOffPreview':isStill?(p.effectMotion==='auto'?'effectSystemStaticHint':'effectStaticHint'):'effectAnimationHint');
-  canvas.hidden=!enabled;canvas.dataset.motion=isStill?'still':'animated';const preview=$('effectPreview');
+  const p=state.appearance||APPEARANCE_DEFAULTS,enabled=p.backgroundEffect!=='none'&&!document.hidden,isStill=still(),modalOpen=!$('modal').hidden||!$('onboard').hidden,preview=$('effectPreview');
+  if($('effectPreviewCaption'))$('effectPreviewCaption').textContent=t(labels[p.backgroundEffect]||'effectNone');
+  if($('effectStatusText'))$('effectStatusText').textContent=t(!enabled?'effectOffPreview':isStill?(p.effectMotion==='auto'?'effectSystemStaticHint':'effectStaticHint'):'effectAnimationHint');
+  const pause=$('themePreviewPause');if(pause){pause.hidden=p.backgroundEffect==='none';pause.textContent=t(isStill?'resumeBackground':'pauseBackground');pause.setAttribute('aria-pressed',String(isStill))}
+  canvas.hidden=!enabled;canvas.dataset.motion=isStill?'still':'animated';document.documentElement.dataset.backgroundMotion=enabled&&!isStill?'animated':'still';
   if(!enabled){stop();for(const scene of scenes)scene.ctx.clearRect(0,0,scene.width,scene.height);scenes=[];if(preview)preview.getContext('2d')?.clearRect(0,0,preview.width,preview.height);return}
-  scenes=[makeScene(canvas),preview&&!$('modal').hidden?makeScene(preview,true):null].filter(Boolean);for(const scene of scenes)scene.mask=null;paint(performance.now(),0);
-  if(isStill)stop();else if(scenes.length&&!frame)frame=requestAnimationFrame(draw);
+  scenes=[!modalOpen?makeScene(canvas):null,preview&&!$('modal').hidden&&state.modal==='themes'?makeScene(preview,true):null].filter(Boolean);
+  for(const scene of scenes)scene.mask=null;paint(0);
+  if(isStill||!scenes.length)stop();else if(!frame)frame=requestAnimationFrame(draw);
  }
  window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(sync,120)},{passive:true});
  window.addEventListener('scroll',invalidateMasks,{passive:true,capture:true});
@@ -1346,6 +1516,7 @@ const backgroundEffects=(()=>{
  if(motion?.addEventListener)motion.addEventListener('change',sync);else motion?.addListener?.(sync);
  return {sync};
 })();
+
 
 state.appearance=normalizeAppearance(jsonRead('bash_appearance_v1',{fontSize:state.textSize==='large'?115:100}));
 save('bash_theme','graphite');
@@ -1387,8 +1558,7 @@ function renderQuickGroups(){
 function renderFilterSummary(){
  const rows=matchingRows(),all=matchingRows(state.week,state.day,'',0),saved=subgroupSaved();
  const different=all.some(row=>row[7]!==0),hasSubgroups=DATA.groups[state.group].some(row=>row[7]!==0);
- const lines=[state.subgroup===0?t('filterAll'):t('filterSelected',{filter:subgroupName()})];
- if(!state.query&&!different)lines.push(t(hasSubgroups?'onlyCommonToday':'noSplitInSource'));
+ const lines=[!state.query&&!different?t('commonLessons'):state.subgroup===0?t('filterAll'):t('selectedFilter',{filter:subgroupName()})];
  if(state.subgroup&&all.length&&!rows.length)lines.push(t('noSubgroupToday'));
  if(saved)lines.push(t('savedForGroup'));
  $('filterSummary').textContent=lines.join(' · ');
@@ -1471,7 +1641,8 @@ async function checkNewVersion(force=false){
   const url=new URL('./index.html',location.href);url.searchParams.set('version-check',String(Date.now()));
   const response=await fetch(url,{cache:'no-store',signal:controller.signal});if(!response.ok)throw new Error('Publication unavailable');
   const source=await response.text(),version=source.match(/<meta name="app-version" content="([^"]+)"/);if(!version)throw new Error('Publication version missing');
-  state.newVersion=version[1]!==APP_RELEASE;state.publicationStatus=state.newVersion?'new':'current';state.publicationCheckedAt=new Date().toISOString();
+  const order=compareRelease(version[1],APP_RELEASE);if(order===null)throw new Error('Invalid publication version');
+  state.newVersion=order>0;state.publicationStatus=order>0?'new':order<0?'ahead':'current';state.publicationCheckedAt=new Date().toISOString();
   jsonSave('bash_publication_check_v1',{version:APP_RELEASE,checkedAt:state.publicationCheckedAt});renderUpdateBanner();
  }catch{state.publicationStatus='failed'}finally{versionChecking=false;clearTimeout(timeout);renderFreshnessShortcut()}
 }
@@ -1522,6 +1693,61 @@ function moveDay(direction){
  state.week=week;setDay(day);
 }
 
+function semesterDateRange(week){
+ const f=new Intl.DateTimeFormat(LOCALES[state.lang],{day:'numeric',month:'short',timeZone:'UTC'});
+ return f.format(dateOf(week,1))+' – '+f.format(dateOf(week,6));
+}
+function renderDaySummary(rows){
+ let el=$('daySummary');if(!el){el=document.createElement('div');el.id='daySummary';el.className='day-summary';$('summaryCount').after(el)}
+ el.hidden=!!state.query||!rows.length;if(el.hidden){el.innerHTML='';return}
+ const slots=[...new Map(rows.map(r=>[r[9]+r[10],{start:toMinutes(r[9]),end:toMinutes(r[10])}])).values()].sort((a,b)=>a.start-b.start);
+ let duration=0,end=0;for(const slot of slots){duration+=Math.max(0,slot.end-Math.max(slot.start,end));end=Math.max(end,slot.end)}
+ const first=rows.reduce((a,b)=>toMinutes(a[9])<toMinutes(b[9])?a:b),last=rows.reduce((a,b)=>toMinutes(a[10])>toMinutes(b[10])?a:b);
+ el.innerHTML=`<span>${esc(first[9])}–${esc(last[10])}</span><span>${esc(t('classMinutes',{n:duration}))}</span>`;
+}
+function lessonGap(rows,index){
+ if(state.query||!index)return '';
+ const row=rows[index],before=rows.slice(0,index).filter(x=>x[0]===row[0]);if(!before.length)return '';
+ const end=Math.max(...before.map(x=>toMinutes(x[10]))),gap=toMinutes(row[9])-end;if(gap<10)return '';
+ return `<div class="lesson-gap ${gap>=45?'long':''}">${uiIcon('clock')}<span>${esc(t(gap>=45?'freeWindow':'classBreak',{n:gap}))}</span></div>`;
+}
+function goToday(scrollToLesson=false){
+ state.query='';$('lessonSearch').value='';state.week=currentWeek();state.day=Math.min(today(),6);state.openCard=-1;render(true);
+ if(scrollToLesson)requestAnimationFrame(()=>{const card=$('cards').querySelector('.card.live')||$('cards').querySelector('.card');card?.scrollIntoView({behavior:reducedMotion()?'instant':'smooth',block:'center'})});
+}
+function nextTeachingDay(){
+ const from=(state.week-1)*6+state.day;
+ for(let slot=from;slot<MAX_WEEK*6;slot++){
+  const week=Math.floor(slot/6)+1,day=slot%6+1;if(!matchingRows(week,day,'').length)continue;
+  state.query='';$('lessonSearch').value='';state.week=week;state.day=day;state.openCard=-1;render(true);return;
+ }
+ toast(t('noFurtherLessons'));
+}
+function syncJumpToCurrent(){
+ const el=$('jumpCurrent');if(!el)return;const c=ufaClock(),day=ufaDay(c),minute=c.hour*60+c.minute;
+ const current=day?matchingRows(currentWeek(),day,'').find(r=>toMinutes(r[9])<=minute&&minute<toMinutes(r[10])):null;
+ if(!current||state.modal||!$('onboard').hidden){el.hidden=true;return}
+ const card=$('cards').querySelector('.card.live'),rect=card?.getBoundingClientRect();
+ el.hidden=!!(rect&&rect.top>=0&&rect.top<innerHeight-180);el.textContent=t('jumpCurrent');
+}
+let jumpFrame=0;
+window.addEventListener('scroll',()=>{if(!jumpFrame)jumpFrame=requestAnimationFrame(()=>{jumpFrame=0;syncJumpToCurrent()})},{passive:true});
+function undoAppearance(){
+ if(!state.appearanceAtOpen)return;
+ state.appearance=normalizeAppearance(state.appearanceAtOpen);jsonSave('bash_appearance_v1',state.appearance);themeApply();renderAppearanceSettings();toast(t('appearanceUndone'));
+}
+function indicatorForPalette(indicator,icon,bg,saturation){
+ const adjusted=contrastColor(saturateIndicator(indicator,saturation),bg,3);
+ // Keep a grey indicator at 0%. For near-identical accents, pick a visibly different marker.
+ if(saturation===0||Math.hypot(...rgbColor(adjusted).map((v,i)=>v-rgbColor(icon)[i]))>=85)return adjusted;
+ return ['#ffb454','#53c7a1','#ec81b3','#6cafff'].map(c=>contrastColor(c,bg,3)).sort((a,b)=>Math.hypot(...rgbColor(b).map((v,i)=>v-rgbColor(icon)[i]))-Math.hypot(...rgbColor(a).map((v,i)=>v-rgbColor(icon)[i])))[0];
+}
+function compareRelease(a,b){
+ const parse=value=>/^\d{4}-\d{2}-\d{2}(?:\.\d+)?$/.test(value)?value.split(/[-.]/).map(Number):null;
+ const x=parse(a),y=parse(b);if(!x||!y)return null;
+ for(let i=0;i<4;i++){if((x[i]||0)!==(y[i]||0))return (x[i]||0)>(y[i]||0)?1:-1}return 0;
+}
+
 const initialChanges=inspectScheduleChanges();
 initializeGestures();
 setInterval(checkNewVersion,300000);
@@ -1538,7 +1764,7 @@ checkNewVersion();
 let lastScheduleMinute='',lastCalendarDay='',trackedWeek=currentWeek(),trackedDay=today();
 function tick(){
  if(document.hidden)return;
- renderStatus();refreshTeacherLive();const c=ufaClock(),calendar=`${c.year}-${c.month}-${c.day}`,stamp=`${calendar} ${c.hour}:${c.minute}`;
+ renderStatus();refreshTeacherLive();syncJumpToCurrent();const c=ufaClock(),calendar=`${c.year}-${c.month}-${c.day}`,stamp=`${calendar} ${c.hour}:${c.minute}`;
  if(lastCalendarDay&&calendar!==lastCalendarDay){if(state.week===trackedWeek&&state.day===Math.min(trackedDay,6)){state.week=currentWeek();state.day=Math.min(today(),6)}trackedWeek=currentWeek();trackedDay=today();render()}
  if(stamp!==lastScheduleMinute){lastScheduleMinute=stamp;if(document.activeElement?.id!=='noteText')renderCards()}
  lastCalendarDay=calendar;
